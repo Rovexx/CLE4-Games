@@ -7,8 +7,12 @@
  - [Drive folder](https://drive.google.com/drive/u/0/folders/1CBWKw8xUrXrxSSKhhPlxkEoxX3peRsiw)
 
 Doel:		Maak een educatieve game.
+
 Doelgroep:	Basisschoolkinderen van 4 tot 12 jaar.
 
+
 Onderwerp: 	Evolutie.
-Leermethode:	Scarcity.
-X-factor:	Katten.
+
+Leermethode:	Scarcity. 
+
+X-factor:	Katten. 
