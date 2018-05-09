@@ -16,4 +16,3 @@
 **Leermethode**:	Scarcity. 
 
 **X-factor**:	Katten. 
-
