@@ -25,20 +25,18 @@ var gameOver = false;
 var AIs = []
 
 function preload() {
-    this.load.image("sky", "assets/sky.png");
+    this.load.image("background_1", "assets/Background_1.png");
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
 }
 
 function create() {
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "sky");
+    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
     this.repeatingBackground.setOrigin(0.5);
 
     // Create the player:
     player = new Player(this, 200, 100);
-  
-    var ground = player;
   
     AIs.push(new Ai(this, 500, 400))
 

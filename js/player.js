@@ -7,7 +7,6 @@ class Player{
         this.sprite.body.allowGravity = false;
         this.sprite.scaleX = 0.5;
         this.sprite.scaleY = 0.5;
-        console.log(this.sprite);
 
         //default speed:
         this.speed = 400;
@@ -22,7 +21,6 @@ class Player{
         initializer.input.on('pointerdown', this.swim, this);
         initializer.input.on('pointermove', this.swim, this);
 
-        console.log(this);
     }
 
     swim(pointer){

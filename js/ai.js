@@ -20,8 +20,8 @@ class Ai {
 
 	update() {
 		// Calculate the difference between the position of the player and the ai
-		var dx = this.sprite.x - ground.x;
-		var dy = this.sprite.y - ground.y;
+		var dx = this.sprite.x - player.sprite.x;
+		var dy = this.sprite.y - player.sprite.y;
 
 		// Calculate the total angle and distance
 		var playerAngle = Math.atan2(dy, dx) * (180 / Math.PI)
@@ -34,7 +34,7 @@ class Ai {
 		speed = speed * (speed / playerDist)
 
 		// Move to a target that's away from the player
-		var moveTarget = this.context.physics.velocityFromAngle(playerAngle, speed, this.velocity)
+		var moveTarget = this.context.physics.velocityFromAngle(playerAngle, speed, this.sprite.velocity)
 		// Set the velocity towards the target with 20% of randomness
 		this.sprite.setVelocity(moveTarget.x * (Math.random() * (1.2 - 0.8) + 0.8), moveTarget.y * (Math.random() * (1.2 - 0.8) + 0.8))
 
