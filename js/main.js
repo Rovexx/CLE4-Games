@@ -16,16 +16,16 @@ var config = {
     }
 };
 
+
 var game = new Phaser.Game(config);
 
 var ground;
+var player;
 var gameOver = false;
-
-var AIs = []
 
 function preload() {
     this.load.image("sky", "assets/sky.png");
-    this.load.image("ai", "assets/ai.png");
+    this.load.image("fish_tmp", "assets/fish_tmp.png");
 }
 
 function create() {
@@ -34,17 +34,11 @@ function create() {
     this.repeatingBackground.setOrigin(0.5);
 
     // Create the ground
-    ground = this.add.sprite(200, 100, "ground").setInteractive();
+    ground = this.physics.add.staticGroup();
+    ground.create(400, 568, "ground").setScale(2, 2).refreshBody();
 
-    this.input.setDraggable(ground);
-    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-
-        ground.x = dragX;
-        ground.y = dragY;
-
-    });
-
-    AIs.push(new Ai(this))
+    // Create the player:
+    player = new Player(this, 200, 100);
 }
 
 function update() {
@@ -52,11 +46,5 @@ function update() {
         return;
     }
 
-    // ground.y -= 1
-    // ground.x -= 0.3
-
-
-    for (var ai of AIs) {
-        ai.update()
-    }
+    player.update(this);
 }
