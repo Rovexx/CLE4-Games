@@ -20,10 +20,12 @@ var config = {
 var game = new Phaser.Game(config);
 
 var ground;
+var player;
 var gameOver = false;
 
 function preload() {
     this.load.image("sky", "assets/sky.png");
+    this.load.image("fish_tmp", "assets/fish_tmp.png");
 }
 
 function create() {
@@ -34,10 +36,15 @@ function create() {
     // Create the ground
     ground = this.physics.add.staticGroup();
     ground.create(400, 568, "ground").setScale(2, 2).refreshBody();
+
+    // Create the player:
+    player = new Player(this, 200, 100);
 }
 
 function update() {
     if (gameOver) {
         return;
     }
+
+    player.update(this);
 }
