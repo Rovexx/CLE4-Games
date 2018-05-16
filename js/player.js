@@ -28,7 +28,6 @@ class Player{
     swim(pointer){
 
         if(pointer.isDown){
-            //console.log(pointer);
 
             this.dest.x = pointer.x;
             this.dest.y = pointer.y;
@@ -44,7 +43,6 @@ class Player{
 
             let dir;
 
-            //console.log(dif);
 
             if(dif > 0){
                 //right
