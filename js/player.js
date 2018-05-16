@@ -92,81 +92,6 @@ class Player{
         }
     }
 
-    toRotation(facing, angle){
-        //convert angle to rotation:
-        if(angle == 0){
-            return 0;
-        }
-        else if(facing >= 0){
-            //facing right
-            if(angle < 0){
-                //rotate to top right
-                return  (Math.PI * 2) + angle;
-            }
-            else if(angle > 0){
-                //rotate to bottom right
-                return angle;
-            }
-        }
-        else if(facing < 0){
-            //facing left
-            return Math.PI + angle;
-        }
-    }
-
-    toAngle(dir, rotation){
-        let result = {
-            angle: 0,
-            dir: dir
-        }
-        //convert rotation to angle
-        if(rotation >= Math.PI * 1.5 && rotation < Math.PI * 2){
-            //facing top right:
-            result.angle = -1 * ( (Math.PI * 0.5) - (rotation - Math.PI * 1.5) );
-        }
-        else if(rotation >= Math.PI && rotation < Math.PI * 1.5 ){
-            //facing top left:
-            result.angle = rotation - Math.PI;
-            result.dir = -1 * Math.abs(dir);
-        }
-        else if(rotation >= Math.PI * 0.5 && rotation < Math.PI){
-            //facing bottom left:
-            result.angle = -1 * ( (Math.PI * 0.5) - (rotation - Math.PI * 0.5) );
-            result.dir = -1 * Math.abs(dir);
-        }
-        else if(rotation >= 0 && rotation < Math.PI * 0.5 ){
-            //facing bottom right:
-            result.angle = rotation;
-        }
-        return result;
-    }
-
-    setRotation(rotation){
-        //sets the rotation of the fish
-        let angle = this.toAngle(this.sprite.scaleX, rotation);
-
-        this.sprite.rotation = angle.angle;
-        this.sprite.scaleX = angle.dir;
-    }
-
-    rotateStep(from, to){
-        let dif = to - from;
-        let step = 0.1;
-        if(Math.abs(dif) < step){
-            return dif;
-        }
-        else if(dif > Math.PI || dif < 0 && dif > -Math.PI){
-            //turn counter clockwise
-            return -step;
-        }
-        else if(dif < Math.PI && dif > 0){
-            //turn clockwise
-            return step;
-        }
-        return 0;
-
-    }
-
     update(initializer){
         //delta in seconds:
         let delta = initializer.sys.game.loop.delta/1000;
@@ -179,13 +104,14 @@ class Player{
         let difTotal = absDifX + absDifY;
 
         
-
+        //calculate horizontal and vertical speed:
         let speedX = this.calcSpeed(absDifX, difTotal, this.speed);
         let speedY = this.calcSpeed(absDifY, difTotal, this.speed);
 
         this.stepAxis("x", delta, speedX);
         this.stepAxis("y", delta, speedY);
 
+        //set direction of the sprite
         if(difX > 0){
         this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
@@ -193,11 +119,9 @@ class Player{
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
-        
-        let rotation = this.toRotation(this.sprite.scaleX, this.calcAngle(difY, difX) );
-    
+        //set rotation of fish        
 
-        this.setRotation(rotation);
+        this.sprite.rotation = this.calcAngle(difY, difX);
     }
 
 }
