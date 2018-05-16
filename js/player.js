@@ -7,7 +7,9 @@ class Player{
         this.sprite.body.allowGravity = false;
         this.sprite.scaleX = 0.5;
         this.sprite.scaleY = 0.5;
-        console.log(this.sprite);
+
+        //default speed:
+        this.speed = 400;
 
         //destination coords:
         this.dest = {
@@ -19,13 +21,11 @@ class Player{
         initializer.input.on('pointerdown', this.swim, this);
         initializer.input.on('pointermove', this.swim, this);
 
-        console.log(this);
     }
 
     swim(pointer){
 
         if(pointer.isDown){
-            //console.log(pointer);
 
             this.dest.x = pointer.x;
             this.dest.y = pointer.y;
@@ -41,7 +41,6 @@ class Player{
 
             let dir;
 
-            //console.log(dif);
 
             if(dif > 0){
                 //right
@@ -79,7 +78,7 @@ class Player{
         return (part/total) * speed;
     }
 
-    calcAngle(opposite, adjacent) {
+   calcAngle(opposite, adjacent) {
         let angle = Math.atan(opposite / adjacent);
         if(isNaN(angle)){
             return 0;
@@ -93,8 +92,6 @@ class Player{
         //delta in seconds:
         let delta = initializer.sys.game.loop.delta/1000;
 
-        let speed = 400;
-
         //calculate speed:
         let difX = this.dif(this.dest.x, this.sprite.x);
         let difY = this.dif(this.dest.y, this.sprite.y);
@@ -102,27 +99,25 @@ class Player{
         let absDifY = Math.abs(difY);
         let difTotal = absDifX + absDifY;
 
-
-
-        let speedX = this.calcSpeed(absDifX, difTotal, speed);
-        let speedY = this.calcSpeed(absDifY, difTotal, speed);
+        
+        //calculate horizontal and vertical speed:
+        let speedX = this.calcSpeed(absDifX, difTotal, this.speed);
+        let speedY = this.calcSpeed(absDifY, difTotal, this.speed);
 
         this.stepAxis("x", delta, speedX);
         this.stepAxis("y", delta, speedY);
 
-        //set rotation:
-        let angle = this.calcAngle(difY, -difX);
-        console.log(angle);
-        this.sprite.rotation = -1 * angle;
-        if(difX >= 0){
-            this.sprite.scaleX = Math.abs(this.sprite.scaleX);
+        //set direction of the sprite
+        if(difX > 0){
+        this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
-        else{
+        else if(difX < 0){
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
-        
 
+        //set rotation of fish        
 
+        this.sprite.rotation = this.calcAngle(difY, difX);
     }
 
 }

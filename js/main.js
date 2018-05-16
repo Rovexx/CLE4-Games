@@ -16,29 +16,31 @@ var config = {
     }
 };
 
-
 var game = new Phaser.Game(config);
 
 var ground;
 var player;
 var gameOver = false;
 
+var AIs = []
+
 function preload() {
-    this.load.image("sky", "assets/sky.png");
+    this.load.image("background_1", "assets/Background_1.png");
+    this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
 }
 
 function create() {
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "sky");
+    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
     this.repeatingBackground.setOrigin(0.5);
-
-    // Create the ground
-    ground = this.physics.add.staticGroup();
-    ground.create(400, 568, "ground").setScale(2, 2).refreshBody();
 
     // Create the player:
     player = new Player(this, 200, 100);
+  
+    AIs.push(new Ai(this, 500, 400))
+
+    
 }
 
 function update() {
@@ -46,5 +48,11 @@ function update() {
         return;
     }
 
+
+    for (var ai of AIs) {
+        ai.update()
+    }
+
     player.update(this);
+
 }
