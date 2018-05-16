@@ -16,14 +16,16 @@ var config = {
     }
 };
 
-
 var game = new Phaser.Game(config);
 
 var ground;
 var gameOver = false;
 
+var AIs = []
+
 function preload() {
     this.load.image("sky", "assets/sky.png");
+    this.load.image("ai", "assets/ai.png");
 }
 
 function create() {
@@ -32,12 +34,29 @@ function create() {
     this.repeatingBackground.setOrigin(0.5);
 
     // Create the ground
-    ground = this.physics.add.staticGroup();
-    ground.create(400, 568, "ground").setScale(2, 2).refreshBody();
+    ground = this.add.sprite(200, 100, "ground").setInteractive();
+
+    this.input.setDraggable(ground);
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+
+        ground.x = dragX;
+        ground.y = dragY;
+
+    });
+
+    AIs.push(new Ai(this))
 }
 
 function update() {
     if (gameOver) {
         return;
+    }
+
+    // ground.y -= 1
+    // ground.x -= 0.3
+
+
+    for (var ai of AIs) {
+        ai.update()
     }
 }
