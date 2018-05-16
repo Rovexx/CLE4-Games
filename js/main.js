@@ -44,7 +44,7 @@ function create() {
 
     });
 
-    AIs.push(new Ai(this))
+    AIs.push(new Ai(this, 500, 400))
 }
 
 function update() {

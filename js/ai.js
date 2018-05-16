@@ -1,9 +1,11 @@
 class Ai {
 	/**
 	 * Spawn a new AI fish
-	 * @param {Obj} context The game context
+	 * @param {Object} context The game context
+	 * @param {Int} top The y position to spawn a fish
+	 * @param {Int} left The x position to spawn a fish
 	 */
-	constructor(context) {
+	constructor(context, top, left) {
 		// Set default values
 		this.angle = 0;
 		this.anistep = 0;
@@ -11,7 +13,7 @@ class Ai {
 		this.context = context
 
 		// Spawn the fish and set the origin
-		this.sprite = context.physics.add.sprite(400, 300, "ai");
+		this.sprite = context.physics.add.sprite(top, left, "ai");
 		this.sprite.body.allowGravity = false;
 		this.sprite.setOrigin(0.5, 0.5)
 	}
@@ -29,32 +31,12 @@ class Ai {
 		this.sprite.angle = playerAngle
 
 		var speed = 100
-		speed = -speed * (speed / playerDist)
+		speed = speed * (speed / playerDist)
 
-		var vector = {x: 0, y: 0}
-
-		if (playerAngle < -90) {
-			vector.x = (playerAngle - 90) / 90 * -1;
-			vector.y = (playerAngle - 90) / 90 * -1;
-		}
-
-		else if (playerAngle > -90 && playerAngle < 0) {
-			vector.x = playerAngle / 90;
-			vector.y = playerAngle / 90 * -1;
-		}
-
-		else if (playerAngle > 0 && playerAngle < 90) {
-			vector.x = playerAngle / 90 * -1;
-			vector.y = playerAngle / 90 + 1 * -1;
-		}
-
-		else if (playerAngle > 90) {
-			vector.x = (playerAngle - 90) / 90;
-			vector.y = (playerAngle - 90) / 90 * -1;
-		}
-
-		this.sprite.setVelocity(speed * vector.x, speed * vector.y)
-
+		// Move to a target that's away from the player
+		var moveTarget = this.context.physics.velocityFromAngle(playerAngle, speed, this.velocity)
+		// Set the velocity towards the target with 20% of randomness
+		this.sprite.setVelocity(moveTarget.x * (Math.random() * (1.2 - 0.8) + 0.8), moveTarget.y * (Math.random() * (1.2 - 0.8) + 0.8))
 
 		// The gradual swiming angle changes
 		const stepChanges = [5, 3, 1, 0.5, 0]
