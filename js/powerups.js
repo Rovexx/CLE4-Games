@@ -6,7 +6,7 @@ class Powerup {
         this.sprite = init.physics.add.group({
             key: 'powerup_icon',
             repeat: aantal,
-            setXY: { x: 80, y: 30, stepX: 200 , stepY: 160 }
+            setXY: { x: xPos, y: yPos, stepX: 200 , stepY: 160 }
         });
 
         this.sprite.children.iterate(function (child) {
@@ -14,13 +14,5 @@ class Powerup {
             child.setScale(0.2);
             child.body.allowGravity = false;
         });
-	}
-
-	update() {
-
-	}
-
-	collectPowerup() {
-		console.log('powerup collected!');
 	}
 }

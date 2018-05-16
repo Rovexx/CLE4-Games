@@ -6,7 +6,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -39,10 +39,10 @@ function create() {
 
     // Create the player:
     player = new Player(this, 200, 100);
-    powerup = new Powerup(this, 300, 500, 4);
+    powerup = new Powerup(this, 80, 30, 4);
 
     this.physics.add.overlap(player, powerup, collectPowerup, null, this);
-  
+
     AIs.push(new Ai(this, 500, 400))
 }
 
@@ -58,6 +58,6 @@ function update() {
     player.update(this);
 }
 
-function collectPowerup() {
+function collectPowerup(player, powerup) {
     console.log('Powerup collected');
 }
