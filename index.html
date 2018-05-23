@@ -6,10 +6,40 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-  <script src="js/phaser.min.js"></script>
-  <script src="js/ai.js"></script>
-  <script src="js/player.js"></script>
-  <script src="js/powerups.js"></script>
-  <script src="js/main.js"></script>
+    <div id="game" class="container">
+        <!-- start menu overlay -->
+        <div id="startMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content">
+                <img src="assets/logo.png" alt="katvis Evolutie">
+                <a id="buttonStartGame" class="btn">Start Game</a>
+            </div>
+        </div>
+        <!-- game menu overlay -->
+        <div id="gameMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content">
+                <a id="buttonTerugNaarSpel" class="btn">Terug naar het spel</a><br>
+                <a id="buttonStoppen" class="btn">Stoppen</a>
+            </div>
+        </div>
+
+        <!-- UI overlay -->
+        <div id="UI" class="overlay">
+            <!-- UI elementen -->
+            <a id="buttonGameMenu">Menu</a>
+            <a id="healthBar"></a>
+            <a id="scoreBar"></a>
+            <a id="foodBar"></a>
+        </div>
+
+
+        <script src="js/menus.js"></script>
+        <script src="js/phaser.min.js"></script>
+        <script src="js/ai.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/powerups.js"></script>
+        <script src="js/main.js"></script>
+    </div>
 </body>
 </html>

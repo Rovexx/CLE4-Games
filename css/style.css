@@ -1,3 +1,9 @@
+.container {
+    display:flex;
+    position: relative;
+    z-index: 1;
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -6,4 +12,66 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Menu overlay background */
+.overlay {
+    height: 600px;
+    width: 800px;
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2); /* Black w/opacity */
+}
+
+
+#UI {
+    z-index: 2;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    display: inline-block;
+}
+
+/* menu buttons */
+.btn {
+    cursor: pointer;
+    width: 350px;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #ffffff;
+    background-color: rgba(69, 53, 255, 0.8);
+    display: inline-block;
+    transition: 0.3s; /* Transition effects on hover (color) */
+    transform: translateY(-6px);
+    animation-name: hover;
+    animation-duration: 1.5s;
+    animation-delay: 0.3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* on hover and click of button */
+.btn:hover, .btn:focus {
+    color: rgba(255, 255, 255, 0.57);
+}
+
+@keyframes hover {
+    50% {
+        transform: translateY(-3px);
+    }
+
+    100% {
+        transform: translateY(-6px);
+    }
 }
