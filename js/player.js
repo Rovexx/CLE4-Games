@@ -123,7 +123,14 @@ class Player{
     }
 
     increaseSpeed() {
-        player.speed = (player.speed * 1.1)
+        player.speed = (player.speed * 1.1);
+
+        // speed count aanpassen
+        speedCount++;
+
+        tempScoreText = tempScoreText + 'O';
+
+        scoreTextBar.setText(tempScoreText);
 
         // niet de max speed overschreiden
         if (player.speed >= player.maxSpeed) {

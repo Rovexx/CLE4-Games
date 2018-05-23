@@ -20,6 +20,9 @@ var game = new Phaser.Game(config);
 
 var ground;
 var player;
+var scoreText, scoreTextBar;
+var tempScoreText = 'O';
+var speedCount = 1;
 var gameOver = false;
 var powerupsCount = 4;
 var aiCount = 4;
@@ -49,6 +52,9 @@ function create() {
     }
 
     AIs.push(new Ai(this, 500, 200));
+
+    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
+    scoreTextBar = this.add.text(640, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 }
 
 function update() {
