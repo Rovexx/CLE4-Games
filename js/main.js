@@ -39,12 +39,18 @@ function create() {
 
     // Create the player:
     player = new Player(this, 200, 100);
-    // powerup = new Powerup(this, 80, 30, 4);
+    powerup = new Powerup(this, 80, 30, 4);
 
-    // click event aan de button toevoegen
-    document.getElementById('increasePlayerSpeed').addEventListener('click', player.increaseSpeed);
+    // this.physics.add.collider(powerup, player)
 
-    AIs.push(new Ai(this, 500, 400))
+    // collision tut:
+    // https://phaser.io/tutorials/making-your-first-phaser-3-game/part8
+
+
+    AIs.push(new Ai(this, 500, 200))
+
+
+    // console.log(this.physics)
 }
 
 function update() {
@@ -53,8 +59,35 @@ function update() {
     }
 
     for (var ai of AIs) {
-        ai.update()
+        // ai.update()
     }
 
     player.update(this);
+
+    console.warn(coll(player, AIs[0]))
+}
+
+function collectPowerup(player, powerup) {
+    console.log('Powerup collected');
+}
+
+/**
+ * Detect collision between 2 objects
+ * @param  {object} n1 The first sprite object
+ * @param  {object} n2 The second sprite object
+ * @return {bool}      If the objects are colliding
+ */
+function coll(n1, n2) {
+    // Get the raw sprites from the objects
+    s1 = n1.sprite
+    s2 = n2.sprite
+
+    // Do the maths
+    if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
+		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        return true
+    }
+
+    // Return false if collision has been detected
+    return false
 }
