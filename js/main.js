@@ -39,11 +39,10 @@ function create() {
 
     // Create the player:
     player = new Player(this, 200, 100);
-    powerup = new Powerup(this, 80, 30, 4);
+    // powerup = new Powerup(this, 80, 30, 4);
 
-    // collision tut:
-    // https://phaser.io/tutorials/making-your-first-phaser-3-game/part8
-    this.physics.world.overlap(player, powerup, collectPowerup, null, this);
+    // click event aan de button toevoegen
+    document.getElementById('increasePlayerSpeed').addEventListener('click', player.increaseSpeed);
 
     AIs.push(new Ai(this, 500, 400))
 }
@@ -58,8 +57,4 @@ function update() {
     }
 
     player.update(this);
-}
-
-function collectPowerup(player, powerup) {
-    console.log('Powerup collected');
 }
