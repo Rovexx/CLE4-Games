@@ -41,7 +41,7 @@ function create() {
     player = new Player(this, 200, 100);
     powerup = new Powerup(this, 80, 30, 4);
 
-    this.physics.add.overlap(player, powerup, collectPowerup, null, this);
+    this.physics.world.overlap(player, powerup, collectPowerup, null, this);
 
     AIs.push(new Ai(this, 500, 400))
 }
