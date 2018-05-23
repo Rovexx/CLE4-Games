@@ -20,23 +20,33 @@ var game = new Phaser.Game(config);
 
 var ground;
 var player;
+var camera;
 var gameOver = false;
+var background;
 
 var AIs = []
 
 function preload() {
-    this.load.image("background_1", "assets/Background_1.png");
+    //set the world size:
+    this.worldSize = {
+        width: 3200,
+        height: 3600
+    }
+
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
+    background = new Background(this);
 }
 
 function create() {
+    console.log(this)
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
-    this.repeatingBackground.setOrigin(0.5);
+    background.create(this);
 
     // Create the player:
     player = new Player(this, 200, 100);
+
+    camera = new Camera(this);
   
     AIs.push(new Ai(this, 500, 400))
 
@@ -44,10 +54,13 @@ function create() {
 }
 
 function update() {
+
+    background.update(this);
+
+
     if (gameOver) {
         return;
     }
-
 
     for (var ai of AIs) {
         ai.update()
