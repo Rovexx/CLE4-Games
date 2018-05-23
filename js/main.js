@@ -54,7 +54,7 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
-    scoreTextBar = this.add.text(640, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
+    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 }
 
 function update() {
