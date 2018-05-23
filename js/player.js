@@ -11,6 +11,9 @@ class Player{
         //default speed:
         this.speed = 400;
 
+        //default speed:
+        this.maxspeed = 700;
+
         //destination coords:
         this.dest = {
             x : posX,
@@ -116,5 +119,14 @@ class Player{
 
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(difY, difX);
+    }
+
+    increaseSpeed() {
+        player.speed = (player.speed * 1.1)
+
+        // niet de max speed overschreiden
+        if (player.speed >= player.maxspeed) {
+            player.speed = player.maxspeed;
+        }
     }
 }
