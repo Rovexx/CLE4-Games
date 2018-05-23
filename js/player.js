@@ -31,12 +31,12 @@ class Player{
             this.dest.y = pointer.y;
         }
 
-        
+
     }
 
     stepAxis(axis, delta, speed){
         if(this.sprite[axis] != this.dest[axis]){
-            
+
             let dif = this.dest[axis] - this.sprite[axis];
 
             let dir;
@@ -60,7 +60,7 @@ class Player{
                 this.sprite[axis] += step;
             }
 
-            
+
 
         }
     }
@@ -99,7 +99,6 @@ class Player{
         let absDifY = Math.abs(difY);
         let difTotal = absDifX + absDifY;
 
-        
         //calculate horizontal and vertical speed:
         let speedX = this.calcSpeed(absDifX, difTotal, this.speed);
         let speedY = this.calcSpeed(absDifY, difTotal, this.speed);
@@ -109,15 +108,13 @@ class Player{
 
         //set direction of the sprite
         if(difX > 0){
-        this.sprite.scaleX = Math.abs(this.sprite.scaleX);
+        // this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
         else if(difX < 0){
-            this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
+            // this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
-        //set rotation of fish        
-
+        //set rotation of fish
         this.sprite.rotation = this.calcAngle(difY, difX);
     }
-
 }
