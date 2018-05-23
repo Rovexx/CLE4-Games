@@ -41,6 +41,8 @@ function create() {
     player = new Player(this, 200, 100);
     powerup = new Powerup(this, 80, 30, 4);
 
+    // collision tut:
+    // https://phaser.io/tutorials/making-your-first-phaser-3-game/part8
     this.physics.world.overlap(player, powerup, collectPowerup, null, this);
 
     AIs.push(new Ai(this, 500, 400))
