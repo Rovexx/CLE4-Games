@@ -22,6 +22,7 @@ var ground;
 var player;
 var gameOver = false;
 var powerupsCount = 4;
+var aiCount = 4;
 
 var AIs = [];
 var powerups = [];
@@ -55,13 +56,30 @@ function update() {
         return;
     }
 
-    for (var ai of AIs) {
-        ai.update()
-    }
-
+    // player update
     player.update(this);
 
-    /* loopen door de powerups om collission te detecten */
+    /* loopen door de AIs om te updaten 
+     en dolission te detecten */
+    for (var ai of AIs) {
+        // Eerst checken of er nog AIs over zijn
+        if (AIs.length >= 1) {
+            ai.update();
+
+            // colission
+            if (coll(player, ai)) {
+                // destroy spri;e
+                ai.sprite.destroy(true);
+                ai = null;
+
+                // snelheid toevoegen aan player
+                player.increaseSize();
+            }
+        }
+    }
+
+    /* loopen door de powerups om 
+     collission te detecten */
     for (var powerup of powerups) {
         if (coll(player, powerup)) {
             // destroy sprite

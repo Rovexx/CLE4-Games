@@ -11,8 +11,9 @@ class Player{
         //default speed:
         this.speed = 400;
 
-        //default speed:
-        this.maxspeed = 700;
+        // max variabelen:
+        this.maxSpeed = 700;
+        this.maxSize = 1;
 
         //destination coords:
         this.dest = {
@@ -125,8 +126,19 @@ class Player{
         player.speed = (player.speed * 1.1)
 
         // niet de max speed overschreiden
-        if (player.speed >= player.maxspeed) {
-            player.speed = player.maxspeed;
+        if (player.speed >= player.maxSpeed) {
+            player.speed = player.maxSpeed;
+        }
+    }
+
+    increaseSize() {
+        // groote van de player aanpassen
+        player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+        player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+
+        if (player.sprite.scaleY > this.maxSize) {
+             player.sprite.scaleX = this.maxSize;
+             player.sprite.scaleY = this.maxSize;
         }
     }
 }
