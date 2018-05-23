@@ -9,7 +9,7 @@
 
 **Doel**: Maak een educatieve game.
 
-**Doelgroep**:	Basisschoolkinderen van 4 tot 12 jaar.
+**Doelgroep**:	Basisschoolkinderen van 8 tot 10 jaar.
 
 **Onderwerp**: 	Evolutie.
 
