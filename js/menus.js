@@ -1,9 +1,7 @@
 // on start of game
-openStartMenu();
-closeUI();
-closeGameMenu();
+stopGame();
 
-document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", startGame);
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
     document.getElementById("buttonStoppen").addEventListener("click", stopGame);
@@ -33,24 +31,24 @@ function gameMenu(){
 
 // start menu
 function openStartMenu() {
-    document.getElementById("startMenu").style.display = "block";
+    document.getElementById("startMenu").classList.remove("hide");
 }
 function closeStartMenu() {
-    document.getElementById("startMenu").style.display = "none";
+    document.getElementById("startMenu").classList.add("hide");
 }
 
 // UI
 function showUI() {
-    document.getElementById("UI").style.display = "block";
+    document.getElementById("UI").classList.remove("hide");
 }
 function closeUI() {
-    document.getElementById("UI").style.display = "none";
+    document.getElementById("UI").classList.add("hide");
 }
 
 // game menu
 function openGameMenu() {
-    document.getElementById("gameMenu").style.display = "block";
+    document.getElementById("gameMenu").classList.remove("hide");
 }
 function closeGameMenu() {
-    document.getElementById("gameMenu").style.display = "none";
+    document.getElementById("gameMenu").classList.add("hide");
 }

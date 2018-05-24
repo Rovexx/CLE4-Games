@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Game</title>
+	<title>Katvis Evolutie</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -24,15 +24,14 @@
             </div>
         </div>
 
-        <!-- UI overlay -->
-        <div id="UI" class="overlay">
+        <!-- UI -->
+        <div id="UI">
             <!-- UI elementen -->
             <a id="buttonGameMenu">Menu</a>
             <a id="healthBar"></a>
             <a id="scoreBar"></a>
-            <a id="foodBar"></a>
+            <progress id="foodBar" value="70" max="100"></progress>
         </div>
-
 
         <script src="js/menus.js"></script>
         <script src="js/phaser.min.js"></script>

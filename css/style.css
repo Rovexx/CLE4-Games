@@ -28,6 +28,7 @@ body {
 
 #UI {
     z-index: 2;
+    position: absolute;
 }
 
 .overlay-content {
@@ -62,8 +63,8 @@ body {
 }
 
 /* on hover and click of button */
-.btn:hover, .btn:focus {
-    color: rgba(255, 255, 255, 0.57);
+.btn:hover {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 @keyframes hover {
@@ -74,4 +75,8 @@ body {
     100% {
         transform: translateY(-6px);
     }
+}
+
+.hide {
+    display: none;
 }
