@@ -99,7 +99,7 @@ function update() {
             ai.sprite.destroy(true);
             ai = null;
 
-            // snelheid toevoegen aan player
+            // evolution points bijhouden
             player.eatFish();
         }
     }
@@ -130,12 +130,12 @@ function coll(n1, n2) {
     s2 = n2.sprite
 
     // als de sprite er nog is
-    if (s2.active !== false) {
+    if (s1.active == true && s2.active == true) {
         // Do the maths
-        if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
-    		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX === true &&
+    		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY === true) {
             return true
-        }        
+        }
     }
 
     // Return false if collision has been detected
