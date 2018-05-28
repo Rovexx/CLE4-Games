@@ -30,14 +30,19 @@ class Player{
         initializer.input.on('pointerdown', this.swim, this);
         initializer.input.on('pointermove', this.swim, this);
 
+        //camera offset:
+        this.cameraX = 0;
+        this.cameraY = 0;
+
     }
 
     swim(pointer){
 
         if(pointer.isDown){
+            //console.log("x: " + pointer.x + " y: " + pointer.y);
 
-            this.dest.x = pointer.x;
-            this.dest.y = pointer.y;
+            this.dest.x = pointer.x + this.cameraX;
+            this.dest.y = pointer.y + this.cameraY;
         }
 
 
@@ -125,6 +130,10 @@ class Player{
 
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(difY, difX);
+
+        //offset for pointer input:
+        this.cameraX = initializer.cameras.main.scrollX;
+        this.cameraY = initializer.cameras.main.scrollY;
     }
 
     increaseSpeed() {

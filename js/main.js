@@ -21,6 +21,14 @@ var game = new Phaser.Game(config);
 
 var ground;
 var player;
+
+var camera;
+var gameOver = false;
+var background;
+
+var scoreText, scoreTextBar;
+var tempScoreText = 'O';
+var speedCount = 1;
 var gameOver = false;
 var powerupsCount = 4;
 var aiCount = 4;
@@ -29,19 +37,29 @@ var AIs = [];
 var powerups = [];
 
 function preload() {
-    this.load.image("background_1", "assets/Background_1.png");
+    //set the world size:
+    this.worldSize = {
+        width: 3200,
+        height: 3600
+    }
+
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
+    background = new Background(this);
 }
 
 function create() {
+    console.log(this)
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
-    this.repeatingBackground.setOrigin(0.5);
+    background.create(this);
 
     // Create the player:
-    player = new Player(this, 150, 60);
+    player = new Player(this, 200, 100);
+    // Create the camera
+    camera = new Camera(this);
+    // Create AI fish
+    AIs.push(new Ai(this, 500, 400))
 
     /* powerups maken met een loop 
      ivm collission detection */
@@ -49,43 +67,37 @@ function create() {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
     }
 
-    AIs.push(new Ai(this, 200, 200));
-    AIs.push(new Ai(this, 300, 200));
-    AIs.push(new Ai(this, 400, 200));
     AIs.push(new Ai(this, 500, 200));
-    AIs.push(new Ai(this, 600, 200));
-    AIs.push(new Ai(this, 200, 300));
-    AIs.push(new Ai(this, 300, 300));
-    AIs.push(new Ai(this, 400, 300));
-    AIs.push(new Ai(this, 500, 300));
-    AIs.push(new Ai(this, 600, 300));
-    AIs.push(new Ai(this, 700, 300));
-    AIs.push(new Ai(this, 200, 400));
-    AIs.push(new Ai(this, 300, 400));
-    AIs.push(new Ai(this, 400, 400));
+
+    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
+    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 }
 
 function update() {
+    background.update(this);
     if (gameOver) {
         return;
     }
 
     // player update
     player.update(this);
-
+  
     /* loopen door de AIs om te updaten 
      en dolission te detecten */
     for (var ai of AIs) {
-        ai.update();
+        // Eerst checken of er nog AIs over zijn
+        if (AIs.length >= 1) {
+            ai.update();
 
-        // colission
-        if (coll(player, ai)) {
-            // destroy spri;e
-            ai.sprite.destroy(true);
-            ai = null;
+            // colission
+            if (coll(player, ai)) {
+                // destroy spri;e
+                ai.sprite.destroy(true);
+                ai = null;
 
-            // eatFish
-            player.eatFish();
+                // snelheid toevoegen aan player
+                player.increaseSize();
+            }
         }
     }
 
@@ -115,7 +127,7 @@ function coll(n1, n2) {
     s2 = n2.sprite
 
     // als de sprite er nog is
-    if (s2.active === true && s1.active === true) {
+    if (s2.active !== false) {
         // Do the maths
         if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
     		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
