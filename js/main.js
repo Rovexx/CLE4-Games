@@ -26,9 +26,6 @@ var camera;
 var gameOver = false;
 var background;
 
-var scoreText, scoreTextBar;
-var tempScoreText = 'O';
-var speedCount = 1;
 var gameOver = false;
 var powerupsCount = 4;
 var aiCount = 4;
@@ -50,7 +47,6 @@ function preload() {
 }
 
 function create() {
-    console.log(this)
     // Background
     background.create(this);
 
@@ -68,9 +64,6 @@ function create() {
     }
 
     AIs.push(new Ai(this, 500, 200));
-
-    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
-    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 }
 
 function update() {
@@ -85,19 +78,16 @@ function update() {
     /* loopen door de AIs om te updaten 
      en dolission te detecten */
     for (var ai of AIs) {
-        // Eerst checken of er nog AIs over zijn
-        if (AIs.length >= 1) {
-            ai.update();
+        ai.update();
 
-            // colission
-            if (coll(player, ai)) {
-                // destroy spri;e
-                ai.sprite.destroy(true);
-                ai = null;
+        // colission
+        if (coll(player, ai)) {
+            // destroy spri;e
+            ai.sprite.destroy(true);
+            ai = null;
 
-                // snelheid toevoegen aan player
-                player.increaseSize();
-            }
+            // snelheid toevoegen aan player
+            player.eatFish();
         }
     }
 
