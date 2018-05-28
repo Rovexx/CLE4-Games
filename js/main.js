@@ -52,18 +52,31 @@ function create() {
 
     // Create the player:
     player = new Player(this, 200, 100);
+
     // Create the camera
     camera = new Camera(this);
+
     // Create AI fish
-    AIs.push(new Ai(this, 500, 400))
+    AIs.push(new Ai(this, 100, 400));
+    AIs.push(new Ai(this, 200, 400));
+    AIs.push(new Ai(this, 300, 400));
+    AIs.push(new Ai(this, 400, 400));
+    AIs.push(new Ai(this, 500, 400));
+    AIs.push(new Ai(this, 600, 400));
+    AIs.push(new Ai(this, 700, 400));
+    AIs.push(new Ai(this, 800, 400));
+    AIs.push(new Ai(this, 800, 400));
+    AIs.push(new Ai(this, 900, 400));
+    AIs.push(new Ai(this, 1000, 400));
+    AIs.push(new Ai(this, 1100, 400));
+    AIs.push(new Ai(this, 1200, 400));
+    AIs.push(new Ai(this, 1300, 400));
 
     /* powerups maken met een loop 
      ivm collission detection */
     for (let i = 1; i <= powerupsCount; i++) {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
     }
-
-    AIs.push(new Ai(this, 500, 200));
 }
 
 function update() {

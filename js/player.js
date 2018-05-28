@@ -146,20 +146,23 @@ class Player{
     }
 
     eatFish() {
-        // evolution point verhogen
+        // fish eat verhogen
         this.fishEat++;
 
+        // als de fisheat gelijk is aan 5,10,15,20 etc
         if ((this.fishEat % this.evolutionPointDivider) == 0) {
+            // aantal puntne bijhouden
             this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
-            console.log("evPoint: " + this.evolutionPoints);
-        }
-        // // groote van de player aanpassen
-        // player.sprite.scaleX = (player.sprite.scaleX * 1.1);
-        // player.sprite.scaleY = (player.sprite.scaleY * 1.1);
 
-        // if (player.sprite.scaleY > this.maxSize) {
-        //      player.sprite.scaleX = this.maxSize;
-        //      player.sprite.scaleY = this.maxSize;
-        // }
+            // groote van de player aanpassen
+            player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+            player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+
+            // zorgen dat hij niet tegroot kan worden
+            if (player.sprite.scaleY > this.maxSize) {
+                 player.sprite.scaleX = this.maxSize;
+                 player.sprite.scaleY = this.maxSize;
+            }
+        }
     }
 }
