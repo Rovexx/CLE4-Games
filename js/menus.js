@@ -1,13 +1,13 @@
 // on start of game
 stopGame();
-
-    document.addEventListener("DOMContentLoaded", function(event) {
+// if scripts are loaded start UI code
+document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", startGame);
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
     document.getElementById("buttonStoppen").addEventListener("click", stopGame);
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
 })
-
+// Menu actions (opening and closing menus)
 function startGame(){
     console.log("game start!");
     closeStartMenu();

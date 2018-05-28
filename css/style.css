@@ -13,7 +13,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 /* Menu overlay background */
 .overlay {
     height: 600px;
@@ -22,15 +21,9 @@ body {
     z-index: 3;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.2); /* Black w/opacity */
+    background-color: rgba(0, 0, 0, 0.2);
 }
-
-
-#UI {
-    z-index: 2;
-    position: absolute;
-}
-
+/* all content inside the overlay */
 .overlay-content {
     position: relative;
     top: 25%;
@@ -39,8 +32,7 @@ body {
     margin-top: 30px;
     display: inline-block;
 }
-
-/* menu buttons */
+/* Menu buttons */
 .btn {
     cursor: pointer;
     width: 350px;
@@ -52,7 +44,7 @@ body {
     color: #ffffff;
     background-color: rgba(69, 53, 255, 0.8);
     display: inline-block;
-    transition: 0.3s; /* Transition effects on hover (color) */
+    transition: 0.3s;
     transform: translateY(-6px);
     animation-name: hover;
     animation-duration: 1.5s;
@@ -62,7 +54,6 @@ body {
     animation-direction: alternate;
 }
 
-/* on hover and click of button */
 .btn:hover {
     color: rgba(255, 255, 255, 0.6);
 }
@@ -76,7 +67,61 @@ body {
         transform: translateY(-6px);
     }
 }
-
+/* class to hide a menu */
 .hide {
     display: none;
+}
+
+/* The UI elements */
+#UI {
+    z-index: 2;
+    position: absolute;
+    height: 600px;
+    width: 800px;
+    pointer-events: none;
+}
+/* Healt/food bars background */
+.barContainer {
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    position: absolute;
+    display: inline-block;
+    bottom: 5px;
+}
+/* inside bar style */
+.bar {
+    font-family: Verdana,sans-serif;
+    text-align: right;
+    padding-right: 20px;
+    line-height: 40px;
+    color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+/* food bar value */
+#food {
+    width: 10%;
+    background-color: rgba(20, 188, 3, 0.9);
+}
+#foodBar {
+    right: 5px;
+}
+
+/* health bar value */
+#health {
+    width: 80%;
+    background-color: rgba(255, 0, 0, 0.9);
+}
+#healthBar {
+    left: 5px;
+}
+
+/* in-game menu button */
+#buttonGameMenu {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 50, 255, 0.9);
+    position: absolute;
+    pointer-events: all;
 }
