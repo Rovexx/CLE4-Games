@@ -79,7 +79,6 @@ function spawnRandomFish(initializer){
 }
 
 function create() {
-    console.log(this)
     // Background
     background.create(this);
 
@@ -93,10 +92,6 @@ function create() {
     for (let i = 1; i <= powerupsCount; i++) {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
     }
-
-
-    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
-    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 
 }
 
