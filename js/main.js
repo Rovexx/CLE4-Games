@@ -69,19 +69,16 @@ function update() {
     /* loopen door de AIs om te updaten 
      en dolission te detecten */
     for (var ai of AIs) {
-        // Eerst checken of er nog AIs over zijn
-        if (AIs.length >= 1) {
-            ai.update();
+        ai.update();
 
-            // colission
-            if (coll(player, ai)) {
-                // destroy spri;e
-                ai.sprite.destroy(true);
-                ai = null;
+        // colission
+        if (coll(player, ai)) {
+            // destroy spri;e
+            ai.sprite.destroy(true);
+            ai = null;
 
-                // snelheid toevoegen aan player
-                player.increaseSize();
-            }
+            // snelheid toevoegen aan player
+            player.increaseSize();
         }
     }
 
@@ -111,7 +108,7 @@ function coll(n1, n2) {
     s2 = n2.sprite
 
     // als de sprite er nog is
-    if (s2.active !== false) {
+    if (s2.active === true && s1.active === true) {
         // Do the maths
         if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
     		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {

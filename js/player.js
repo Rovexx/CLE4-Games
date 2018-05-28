@@ -12,7 +12,7 @@ class Player{
         this.speed = 400;
 
         // max variabelen:
-        this.maxSpeed = 700;
+        this.maxSpeed = 1000;
         this.maxSize = 1;
 
         //destination coords:
@@ -123,7 +123,7 @@ class Player{
     }
 
     increaseSpeed() {
-        player.speed = (player.speed * 1.1);
+        player.speed = (player.speed * 1.2);
 
         // speed count aanpassen
         speedCount++;
