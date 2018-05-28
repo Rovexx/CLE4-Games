@@ -1,7 +1,9 @@
 class Player{
 
     constructor(initializer, posX, posY){
-        //setup player sprite:'
+        this.init = initializer;
+
+        // setup player sprite:'
         this.sprite = initializer.physics.add.sprite(posX, posY, 'fish_tmp');
         this.sprite.setCollideWorldBounds(true);
         this.sprite.body.allowGravity = false;
@@ -183,7 +185,7 @@ class Player{
                 }
 
                 player.sprite.scaleY = this.maxSize;
-            }            
+            }
         }
     }
 
@@ -191,7 +193,14 @@ class Player{
         // fish eat verhogen
         this.fishEat++;
 
-        console.log("Points: " + this.evolutionPoints);
+        /* +1 op het scherm als indicatie
+         dat je iets goeds hebt gedaan */
+        let scoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
+
+        /* delete text na 3 seconden */
+        setTimeout(function(){
+            scoreText.setText("");
+        }, 3000);
 
         // als de fisheat gelijk is aan 5,10,15,20 etc
         if ((this.fishEat % this.evolutionPointDivider) == 0) {
