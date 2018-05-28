@@ -28,6 +28,11 @@ class Ai {
 			var playerAngle = Math.atan2(dy, dx) * (180 / Math.PI)
 			var playerDist = Math.sqrt(dx * dx + dy * dy)
 
+			// Set the sound distance if this is the closest fish yet
+			if (sound.distance > playerDist) {
+				sound.distance = playerDist
+			}
+
 			// Angle the fish away from the plaer
 			this.sprite.angle = playerAngle
 

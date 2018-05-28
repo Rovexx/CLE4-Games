@@ -64,12 +64,12 @@ class Background{
                 let bgSprite = initializer.add.sprite(this.size.maxX, 0, part);
                 bgSprite.setOrigin(0);
                 this.sprites.push( bgSprite );
-    
+
                 //add width of this background to total width:
                 this.size.maxX += bgSprite.width;
             }
-        
-            
+
+
 
         }
 
@@ -77,12 +77,12 @@ class Background{
 
     update(initializer){
 
-        
+
 
         if(player.sprite.x > this.size.maxX - 3200){
             //take the left most background and move it to the right most position:
             this.sprites.push(this.sprites[0]);
-            
+
             let lastNum = this.sprites.length - 1;
             this.sprites[ lastNum ].x = this.size.maxX;
             this.sprites.splice(0,1);
@@ -93,7 +93,7 @@ class Background{
         }
         else if(player.sprite.x < this.size.minX + 3200){
             //take the right most background and move it to the left most position:
-            
+
             let lastNum = this.sprites.length - 1;
             let lastItem = this.sprites[ lastNum ];
             this.sprites.splice(0 , 0, lastItem);
