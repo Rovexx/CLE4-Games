@@ -60,7 +60,7 @@ function spawnRandomFish(initializer){
 
     let minPosX = playerX + minDistanceX;
     let maxPosX = playerX + maxDistanceX;
-    
+
     //minimum and maximum y spawn coordinates:
     let minPosY = 0;
     let maxPosY = 1800;
@@ -73,7 +73,7 @@ function spawnRandomFish(initializer){
             numOfFish++;
         }
     }
-    
+
     if (numOfFish < 2){
         //generate random spawn coordinates:
         let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
@@ -102,9 +102,6 @@ function create() {
     }
 
     AIs.push(new Ai(this, 500, 200));
-
-    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
-    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 
     sound.create(this)
 }
