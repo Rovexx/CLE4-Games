@@ -18,6 +18,7 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+var sound = new SoundEngine(game)
 
 var ground;
 var player;
@@ -44,6 +45,8 @@ function preload() {
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
     background = new Background(this);
+
+    sound.load(this)
 }
 
 function spawnRandomFish(initializer){
@@ -57,7 +60,7 @@ function spawnRandomFish(initializer){
 
     let minPosX = playerX + minDistanceX;
     let maxPosX = playerX + maxDistanceX;
-    
+
     //minimum and maximum y spawn coordinates:
     let minPosY = 0;
     let maxPosY = 1800;
@@ -70,7 +73,7 @@ function spawnRandomFish(initializer){
             numOfFish++;
         }
     }
-    
+
     if (numOfFish < 2){
         //generate random spawn coordinates:
         let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
@@ -92,15 +95,22 @@ function create() {
     // Create the camera
     camera = new Camera(this);
 
-    /* powerups maken met een loop 
+    /* powerups maken met een loop
      ivm collission detection */
     for (let i = 1; i <= powerupsCount; i++) {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
     }
+
+    AIs.push(new Ai(this, 500, 200));
+
+    sound.create(this)
 }
 
 function update() {
     background.update(this);
+
+  // Reset the sound distance
+    sound.distance = Infinity
 
     spawnRandomFish(this);
 
@@ -110,24 +120,29 @@ function update() {
 
     // player update
     player.update(this);
-  
-    /* loopen door de AIs om te updaten 
+
+    /* loopen door de AIs om te updaten
      en dolission te detecten */
     for (var ai of AIs) {
-        ai.update();
+        // Eerst checken of er nog AIs over zijn
+        if (AIs.length >= 1) {
+            ai.update();
 
-        // colission
-        if (coll(player, ai)) {
-            // destroy spri;e
-            ai.sprite.destroy(true);
-            ai = null;
+            // colission
+            if (coll(player, ai)) {
+                // destroy spri;e
+                ai.sprite.destroy(true);
+                ai = null;
 
-            // snelheid toevoegen aan player
-            player.eatFish();
+                sound.play("eat")
+
+                // snelheid toevoegen aan player
+                player.eatFish();
+            }
         }
     }
 
-    /* loopen door de powerups om 
+    /* loopen door de powerups om
      collission te detecten */
     for (var powerup of powerups) {
         if (coll(player, powerup)) {
@@ -139,6 +154,8 @@ function update() {
             player.increaseSpeed();
         }
     }
+
+    sound.update()
 }
 
 /**
@@ -156,7 +173,7 @@ function coll(n1, n2) {
     if (s1.active == true && s2.active == true) {
         // Do the maths
         if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
-            s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+    		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
             return true
         }
     }
