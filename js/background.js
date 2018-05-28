@@ -80,7 +80,6 @@ class Background{
 
 
         if(player.sprite.x > this.size.maxX - 3200){
-            //add a new background:
             //take the left most background and move it to the right most position:
             this.sprites.push(this.sprites[0]);
 
@@ -93,7 +92,6 @@ class Background{
 
         }
         else if(player.sprite.x < this.size.minX + 3200){
-            //add a new background:
             //take the right most background and move it to the left most position:
 
             let lastNum = this.sprites.length - 1;
@@ -108,8 +106,6 @@ class Background{
             this.size.maxX -= this.sprites[0].width;
 
         }
-
-        //console.log(this.size);
 
         //set world bounds to match the background:
         initializer.physics.world.bounds.left = this.size.minX;
