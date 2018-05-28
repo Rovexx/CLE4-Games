@@ -13,8 +13,13 @@ class Player{
         this.pointerX = 0;
         this.pointerY = 0;
 
-        //default speed:
+        // default player speed
         this.speed = 400;
+
+        // evolutie punten
+        this.evolutionPointDivider = 5;
+        this.evolutionPoints = 0;
+        this.fishEat = 0;
 
         // max variabelen:
         this.maxSpeed = 700;
@@ -155,13 +160,6 @@ class Player{
     increaseSpeed() {
         player.speed = (player.speed * 1.1);
 
-        // speed count aanpassen
-        speedCount++;
-
-        tempScoreText = tempScoreText + 'O';
-
-        scoreTextBar.setText(tempScoreText);
-
         // niet de max speed overschreiden
         if (player.speed >= player.maxSpeed) {
             player.speed = player.maxSpeed;
@@ -169,20 +167,36 @@ class Player{
     }
 
     increaseSize() {
-        // groote van de player aanpassen
-        player.sprite.scaleX = (player.sprite.scaleX * 1.1);
-        player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+        // Als je minimaal 1 evolution punt hebt
+        if (this.evolutionPoints > 0) {
+            // groote van de player aanpassen
+            player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+            player.sprite.scaleY = (player.sprite.scaleY * 1.1);
 
-        if (player.sprite.scaleY > this.maxSize) {
-            if(player.sprite.scaleX < 0){
-                //swimming to hte left:
-                player.sprite.scaleX = -this.maxSize;
-            }
-            else{
-                //swimming to the right:
-                player.sprite.scaleX = this.maxSize;
-            }
-            player.sprite.scaleY = this.maxSize;
+            if (player.sprite.scaleY > this.maxSize) {
+                if (player.sprite.scaleX < 0){
+                    //swimming to hte left:
+                    player.sprite.scaleX = -this.maxSize;
+                } else {
+                    //swimming to the right:
+                    player.sprite.scaleX = this.maxSize;
+                }
+
+                player.sprite.scaleY = this.maxSize;
+            }            
+        }
+    }
+
+    eatFish() {
+        // fish eat verhogen
+        this.fishEat++;
+
+        console.log("Points: " + this.evolutionPoints);
+
+        // als de fisheat gelijk is aan 5,10,15,20 etc
+        if ((this.fishEat % this.evolutionPointDivider) == 0) {
+            // aantal puntne bijhouden
+            this.evolutionPoints++;
         }
     }
 }
