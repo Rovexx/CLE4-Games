@@ -16,8 +16,13 @@ class Player{
         //default speed:
         this.speed = 400;
 
+        // evolutie punten
+        this.evolutionPointDivider = 5;
+        this.evolutionPoints = 0;
+        this.fishEat = 0;
+
         // max variabelen:
-        this.maxSpeed = 700;
+        this.maxSpeed = 1000;
         this.maxSize = 1;
 
         //destination coords:
@@ -153,14 +158,7 @@ class Player{
     }
 
     increaseSpeed() {
-        player.speed = (player.speed * 1.1);
-
-        // speed count aanpassen
-        speedCount++;
-
-        tempScoreText = tempScoreText + 'O';
-
-        scoreTextBar.setText(tempScoreText);
+        player.speed = (player.speed * 1.2);
 
         // niet de max speed overschreiden
         if (player.speed >= player.maxSpeed) {
@@ -168,7 +166,15 @@ class Player{
         }
     }
 
-    increaseSize() {
+    eatFish() {
+        // evolution point verhogen
+        this.fishEat++;
+
+        if ((this.fishEat % this.evolutionPointDivider) == 0) {
+            this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
+            console.log("evPoint: " + this.evolutionPoints);
+        }
+        
         // groote van de player aanpassen
         player.sprite.scaleX = (player.sprite.scaleX * 1.1);
         player.sprite.scaleY = (player.sprite.scaleY * 1.1);
