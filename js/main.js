@@ -46,6 +46,38 @@ function preload() {
     background = new Background(this);
 }
 
+function spawnRandomFish(initializer){
+    //get the position of the player:
+    let playerX = player.sprite.x;
+    let playerY = player.sprite.y;
+    //minimum and maximum x distance a fish can spawn from the player:
+    let minDistanceX = 400;
+    let maxDistanceX = 2000;
+
+    let minPosX = playerX + minDistanceX;
+    let maxPosX = playerX + maxDistanceX;
+    
+    //minimum and maximum y spawn coordinates:
+    let minPosY = 0;
+    let maxPosY = 1800;
+
+    //check the number of ai fishes in this area:
+    let numOfFish = 0;
+    for(let ai of AIs){
+        if(ai.sprite.x > minPosX && ai.sprite.x < maxPosX){
+            numOfFish++;
+        }
+    }
+    
+    if(numOfFish < 2){
+        //generate random spawn coordinates:
+        let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
+        let spawnY = Math.random() * (maxPosY - minPosY) + minPosY;
+
+        AIs.push(new Ai(initializer, spawnX, spawnY))
+    }
+}
+
 function create() {
     // Background
     background.create(this);
@@ -54,8 +86,6 @@ function create() {
     player = new Player(this, 200, 100);
     // Create the camera
     camera = new Camera(this);
-    // Create AI fish
-    AIs.push(new Ai(this, 500, 400))
 
     /* powerups maken met een loop 
      ivm collission detection */
@@ -63,11 +93,13 @@ function create() {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
     }
 
-    AIs.push(new Ai(this, 500, 200));
 }
 
 function update() {
     background.update(this);
+
+    spawnRandomFish(this);
+
     if (gameOver) {
         return;
     }

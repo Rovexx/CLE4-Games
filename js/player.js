@@ -8,7 +8,12 @@ class Player{
         this.sprite.scaleX = 0.5;
         this.sprite.scaleY = 0.5;
 
-        // default snelheid
+        //mouse variables used to determine if the swim function has to be fired every update loop:
+        this.pointerDown = false;
+        this.pointerX = 0;
+        this.pointerY = 0;
+
+        //default speed:
         this.speed = 400;
 
         // evolutie punten
@@ -27,8 +32,11 @@ class Player{
         }
 
         //setup input:
-        initializer.input.on('pointerdown', this.swim, this);
-        initializer.input.on('pointermove', this.swim, this);
+        initializer.input.on('pointerdown', this.pointerDownHandler, this);
+        initializer.input.on('pointermove', this.pointerMovehandler, this);
+        initializer.input.on('pointerup', this.pointerUpHandler, this);
+        document.getElementsByTagName("canvas")[0].addEventListener('mouseleave', () => this.pointerUpHandler() );
+        window.addEventListener('mouseup', () => this.pointerUpHandler() );
 
         //camera offset:
         this.cameraX = 0;
@@ -36,13 +44,23 @@ class Player{
 
     }
 
-    swim(pointer){
+    pointerDownHandler(pointer){
+        this.pointerDown = true;
+        this.pointerMovehandler(pointer);
+    }
+    pointerMovehandler(pointer){
+        this.pointerX = pointer.x;
+        this.pointerY = pointer.y;
+    }
+    pointerUpHandler(){
+        this.pointerDown = false;
+    }
 
-        if(pointer.isDown){
-            //console.log("x: " + pointer.x + " y: " + pointer.y);
+    swim(){
 
-            this.dest.x = pointer.x + this.cameraX;
-            this.dest.y = pointer.y + this.cameraY;
+        if(this.pointerDown){
+            this.dest.x = this.pointerX + this.cameraX;
+            this.dest.y = this.pointerY + this.cameraY;
         }
 
 
@@ -122,14 +140,17 @@ class Player{
 
         //set direction of the sprite
         if(difX > 0){
-        // this.sprite.scaleX = Math.abs(this.sprite.scaleX);
+        this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
         else if(difX < 0){
-            // this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
+            this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(difY, difX);
+
+        //move the fish:
+        this.swim();
 
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
@@ -153,13 +174,21 @@ class Player{
             this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
             console.log("evPoint: " + this.evolutionPoints);
         }
-        // // groote van de player aanpassen
-        // player.sprite.scaleX = (player.sprite.scaleX * 1.1);
-        // player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+        
+        // groote van de player aanpassen
+        player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+        player.sprite.scaleY = (player.sprite.scaleY * 1.1);
 
-        // if (player.sprite.scaleY > this.maxSize) {
-        //      player.sprite.scaleX = this.maxSize;
-        //      player.sprite.scaleY = this.maxSize;
-        // }
+        if (player.sprite.scaleY > this.maxSize) {
+            if(player.sprite.scaleX < 0){
+                //swimming to hte left:
+                player.sprite.scaleX = -this.maxSize;
+            }
+            else{
+                //swimming to the right:
+                player.sprite.scaleX = this.maxSize;
+            }
+            player.sprite.scaleY = this.maxSize;
+        }
     }
 }
