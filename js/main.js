@@ -18,6 +18,7 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+var sound = new SoundEngine(game)
 
 var ground;
 var player;
@@ -47,6 +48,8 @@ function preload() {
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
     background = new Background(this);
+
+    sound.load(this)
 }
 
 function create() {
@@ -61,7 +64,7 @@ function create() {
     // Create AI fish
     AIs.push(new Ai(this, 500, 400))
 
-    /* powerups maken met een loop 
+    /* powerups maken met een loop
      ivm collission detection */
     for (let i = 1; i <= powerupsCount; i++) {
         powerups.push(new Powerup(this, 180 * i, 140 * i));
@@ -71,18 +74,23 @@ function create() {
 
     scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
     scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
+
+    sound.create(this)
 }
 
 function update() {
     background.update(this);
+    // Reset the sound distance
+    sound.distance = Infinity
+
     if (gameOver) {
         return;
     }
 
     // player update
     player.update(this);
-  
-    /* loopen door de AIs om te updaten 
+
+    /* loopen door de AIs om te updaten
      en dolission te detecten */
     for (var ai of AIs) {
         // Eerst checken of er nog AIs over zijn
@@ -95,13 +103,15 @@ function update() {
                 ai.sprite.destroy(true);
                 ai = null;
 
+                sound.play("eat")
+
                 // snelheid toevoegen aan player
                 player.increaseSize();
             }
         }
     }
 
-    /* loopen door de powerups om 
+    /* loopen door de powerups om
      collission te detecten */
     for (var powerup of powerups) {
         if (coll(player, powerup)) {
@@ -113,6 +123,8 @@ function update() {
             player.increaseSpeed();
         }
     }
+
+    sound.update()
 }
 
 /**
@@ -132,7 +144,7 @@ function coll(n1, n2) {
         if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
     		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
             return true
-        }        
+        }
     }
 
     // Return false if collision has been detected
