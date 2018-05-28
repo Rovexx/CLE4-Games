@@ -145,6 +145,14 @@ class Player{
         }
     }
 
+    increaseSize() {
+        // checken of die genoeg evolutiepunten heeft
+        if (this.evolutionPoints > 0) {
+            // 1 punt eraf halen
+            this.evolutionPoints--;
+        }
+    }
+
     eatFish() {
         // fish eat verhogen
         this.fishEat++;
@@ -152,7 +160,7 @@ class Player{
         // als de fisheat gelijk is aan 5,10,15,20 etc
         if ((this.fishEat % this.evolutionPointDivider) == 0) {
             // aantal puntne bijhouden
-            this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
+            this.evolutionPoints++;
 
             // groote van de player aanpassen
             player.sprite.scaleX = (player.sprite.scaleX * 1.1);
