@@ -44,6 +44,7 @@ function preload() {
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
+    this.load.image("net", "assets/net.png");
     background = new Background(this);
 
     sound.load(this)
@@ -104,6 +105,8 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
+
+    new Net(this)
 }
 
 function update() {
