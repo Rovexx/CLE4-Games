@@ -1,7 +1,9 @@
 class Player{
 
     constructor(initializer, posX, posY){
-        //setup player sprite:'
+        this.init = initializer;
+
+        // setup player sprite:'
         this.sprite = initializer.physics.add.sprite(posX, posY, 'fish_tmp');
         this.sprite.setCollideWorldBounds(true);
         this.sprite.body.allowGravity = false;
@@ -13,7 +15,7 @@ class Player{
         this.pointerX = 0;
         this.pointerY = 0;
 
-        //default speed:
+        // default player speed
         this.speed = 400;
 
         // evolutie punten
@@ -22,7 +24,7 @@ class Player{
         this.fishEat = 0;
 
         // max variabelen:
-        this.maxSpeed = 1000;
+        this.maxSpeed = 700;
         this.maxSize = 1;
 
         //destination coords:
@@ -158,7 +160,7 @@ class Player{
     }
 
     increaseSpeed() {
-        player.speed = (player.speed * 1.2);
+        player.speed = (player.speed * 1.1);
 
         // niet de max speed overschreiden
         if (player.speed >= player.maxSpeed) {
@@ -166,29 +168,44 @@ class Player{
         }
     }
 
+    increaseSize() {
+        // Als je minimaal 1 evolution punt hebt
+        if (this.evolutionPoints > 0) {
+            // groote van de player aanpassen
+            player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+            player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+
+            if (player.sprite.scaleY > this.maxSize) {
+                if (player.sprite.scaleX < 0){
+                    //swimming to hte left:
+                    player.sprite.scaleX = -this.maxSize;
+                } else {
+                    //swimming to the right:
+                    player.sprite.scaleX = this.maxSize;
+                }
+
+                player.sprite.scaleY = this.maxSize;
+            }
+        }
+    }
+
     eatFish() {
-        // evolution point verhogen
+        // fish eat verhogen
         this.fishEat++;
 
-        if ((this.fishEat % this.evolutionPointDivider) == 0) {
-            this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
-            console.log("evPoint: " + this.evolutionPoints);
-        }
-        
-        // groote van de player aanpassen
-        player.sprite.scaleX = (player.sprite.scaleX * 1.1);
-        player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+        /* +1 op het scherm als indicatie
+         dat je iets goeds hebt gedaan */
+        let scoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
 
-        if (player.sprite.scaleY > this.maxSize) {
-            if(player.sprite.scaleX < 0){
-                //swimming to hte left:
-                player.sprite.scaleX = -this.maxSize;
-            }
-            else{
-                //swimming to the right:
-                player.sprite.scaleX = this.maxSize;
-            }
-            player.sprite.scaleY = this.maxSize;
+        /* delete text na 3 seconden */
+        setTimeout(function(){
+            scoreText.setText("");
+        }, 3000);
+
+        // als de fisheat gelijk is aan 5,10,15,20 etc
+        if ((this.fishEat % this.evolutionPointDivider) == 0) {
+            // aantal puntne bijhouden
+            this.evolutionPoints++;
         }
     }
 }
