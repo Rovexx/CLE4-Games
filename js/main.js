@@ -6,7 +6,8 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 300 },
-            debug: true
+            debug: false
+            // debug: true
         }
     },
     scene: {
@@ -20,9 +21,11 @@ var game = new Phaser.Game(config);
 
 var ground;
 var player;
-var scoreText, scoreTextBar;
-var tempScoreText = 'O';
-var speedCount = 1;
+
+var camera;
+var gameOver = false;
+var background;
+
 var gameOver = false;
 var powerupsCount = 4;
 var aiCount = 4;
@@ -31,19 +34,28 @@ var AIs = [];
 var powerups = [];
 
 function preload() {
-    this.load.image("background_1", "assets/Background_1.png");
+    //set the world size:
+    this.worldSize = {
+        width: 3200,
+        height: 3600
+    }
+
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
+    background = new Background(this);
 }
 
 function create() {
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
-    this.repeatingBackground.setOrigin(0.5);
+    background.create(this);
 
     // Create the player:
-    player = new Player(this, 150, 60);
+    player = new Player(this, 200, 100);
+    // Create the camera
+    camera = new Camera(this);
+    // Create AI fish
+    AIs.push(new Ai(this, 500, 400))
 
     /* powerups maken met een loop 
      ivm collission detection */
@@ -52,35 +64,30 @@ function create() {
     }
 
     AIs.push(new Ai(this, 500, 200));
-
-    scoreText = this.add.text(620, 16, 'SNELHEID', { fontSize: '32px', fill: '#000' });
-    scoreTextBar = this.add.text(620, 50, tempScoreText, { fontSize: '30px', fill: 'green' });
 }
 
 function update() {
+    background.update(this);
     if (gameOver) {
         return;
     }
 
     // player update
     player.update(this);
-
+  
     /* loopen door de AIs om te updaten 
      en dolission te detecten */
     for (var ai of AIs) {
-        // Eerst checken of er nog AIs over zijn
-        if (AIs.length >= 1) {
-            ai.update();
+        ai.update();
 
-            // colission
-            if (coll(player, ai)) {
-                // destroy spri;e
-                ai.sprite.destroy(true);
-                ai = null;
+        // colission
+        if (coll(player, ai)) {
+            // destroy spri;e
+            ai.sprite.destroy(true);
+            ai = null;
 
-                // snelheid toevoegen aan player
-                player.increaseSize();
-            }
+            // snelheid toevoegen aan player
+            player.eatFish();
         }
     }
 

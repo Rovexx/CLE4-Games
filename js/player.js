@@ -8,11 +8,16 @@ class Player{
         this.sprite.scaleX = 0.5;
         this.sprite.scaleY = 0.5;
 
-        //default speed:
+        // default snelheid
         this.speed = 400;
 
+        // evolutie punten
+        this.evolutionPointDivider = 5;
+        this.evolutionPoints = 0;
+        this.fishEat = 0;
+
         // max variabelen:
-        this.maxSpeed = 700;
+        this.maxSpeed = 1000;
         this.maxSize = 1;
 
         //destination coords:
@@ -25,14 +30,19 @@ class Player{
         initializer.input.on('pointerdown', this.swim, this);
         initializer.input.on('pointermove', this.swim, this);
 
+        //camera offset:
+        this.cameraX = 0;
+        this.cameraY = 0;
+
     }
 
     swim(pointer){
 
         if(pointer.isDown){
+            //console.log("x: " + pointer.x + " y: " + pointer.y);
 
-            this.dest.x = pointer.x;
-            this.dest.y = pointer.y;
+            this.dest.x = pointer.x + this.cameraX;
+            this.dest.y = pointer.y + this.cameraY;
         }
 
 
@@ -120,17 +130,14 @@ class Player{
 
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(difY, difX);
+
+        //offset for pointer input:
+        this.cameraX = initializer.cameras.main.scrollX;
+        this.cameraY = initializer.cameras.main.scrollY;
     }
 
     increaseSpeed() {
-        player.speed = (player.speed * 1.1);
-
-        // speed count aanpassen
-        speedCount++;
-
-        tempScoreText = tempScoreText + 'O';
-
-        scoreTextBar.setText(tempScoreText);
+        player.speed = (player.speed * 1.2);
 
         // niet de max speed overschreiden
         if (player.speed >= player.maxSpeed) {
@@ -138,14 +145,21 @@ class Player{
         }
     }
 
-    increaseSize() {
-        // groote van de player aanpassen
-        player.sprite.scaleX = (player.sprite.scaleX * 1.1);
-        player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+    eatFish() {
+        // evolution point verhogen
+        this.fishEat++;
 
-        if (player.sprite.scaleY > this.maxSize) {
-             player.sprite.scaleX = this.maxSize;
-             player.sprite.scaleY = this.maxSize;
+        if ((this.fishEat % this.evolutionPointDivider) == 0) {
+            this.evolutionPoints = this.fishEat / this.evolutionPointDivider;
+            console.log("evPoint: " + this.evolutionPoints);
         }
+        // // groote van de player aanpassen
+        // player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+        // player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+
+        // if (player.sprite.scaleY > this.maxSize) {
+        //      player.sprite.scaleX = this.maxSize;
+        //      player.sprite.scaleY = this.maxSize;
+        // }
     }
 }
