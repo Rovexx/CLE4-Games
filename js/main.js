@@ -124,21 +124,18 @@ function update() {
     /* loopen door de AIs om te updaten
      en dolission te detecten */
     for (var ai of AIs) {
-        // Eerst checken of er nog AIs over zijn
-        if (AIs.length >= 1) {
-            ai.update();
+        ai.update();
 
-            // colission
-            if (coll(player, ai)) {
-                // destroy spri;e
-                ai.sprite.destroy(true);
-                ai = null;
+        // colission
+        if (coll(player, ai)) {
+            // destroy spri;e
+            ai.sprite.destroy(true);
+            ai = null;
 
-                sound.play("eat")
+            sound.play("eat")
 
-                // snelheid toevoegen aan player
-                player.eatFish();
-            }
+            // snelheid toevoegen aan player
+            player.eatFish();
         }
     }
 
