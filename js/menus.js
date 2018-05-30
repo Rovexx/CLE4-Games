@@ -1,3 +1,5 @@
+let hasStarted = false
+
 // on start of game
 stopGame();
 // if scripts are loaded start UI code
@@ -17,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function startGame(){
     closeStartMenu();
     showUI();
+
+    console.log("s")
+    hasStarted = true
 }
 function backToGame(){
     closeGameMenu();

@@ -106,12 +106,19 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
-
-    net.spawn(this)
 }
 
+let tmpNet = false
 function update() {
+    if (!hasStarted) return
+
     background.update(this);
+
+    if (!tmpNet) {
+        setTimeout(() => {
+            net.spawn(this)
+        }, 7000)
+    }
 
   // Reset the sound distance
     sound.distance = Infinity
@@ -136,6 +143,7 @@ function update() {
             ai.sprite.destroy(true);
             ai = null;
 
+            increaseFood()
             sound.play("eat")
 
             // snelheid toevoegen aan player
