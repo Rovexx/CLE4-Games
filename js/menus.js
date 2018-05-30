@@ -1,4 +1,3 @@
-let hasStarted = false;
 let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -26,6 +25,7 @@ function stopGame(){
     closeGameMenu();
     closeEvolveMenu();
     openStartMenu();
+    location.reload()
 }
 function gameMenu(){
     openGameMenu();
@@ -113,11 +113,11 @@ function evolveDepth(el){
 // Opening and closing menu's
 function openStartMenu() {
     document.getElementById("startMenu").classList.remove("hide");
-    hasStarted = false;
+    game.loop.sleep()
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
-    hasStarted = true;
+    game.loop.wake()
 }
 
 function showUI() {
@@ -129,18 +129,18 @@ function closeUI() {
 
 function openGameMenu() {
     document.getElementById("gameMenu").classList.remove("hide");
-    hasStarted = false;
+    game.loop.sleep()
 }
 function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide");
-    hasStarted = true;
+    game.loop.wake()
 }
 
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
-    hasStarted = false;
+    game.loop.sleep()
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
-    hasStarted = true;
+    game.loop.wake()
 }
