@@ -1,7 +1,5 @@
-let hasStarted = false
-
-// on start of game
-stopGame();
+let hasStarted = false;
+let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", startGame);
@@ -19,9 +17,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function startGame(){
     closeStartMenu();
     showUI();
-
-    console.log("s")
-    hasStarted = true
 }
 function backToGame(){
     closeGameMenu();
@@ -31,7 +26,6 @@ function stopGame(){
     closeGameMenu();
     closeEvolveMenu();
     openStartMenu();
-
 }
 function gameMenu(){
     openGameMenu();
@@ -77,9 +71,17 @@ function increaseFood(){
 
 // Evolving actions
 function evolveSpeed(el){
-    el.srcElement.value ++;
-    player.speed += 100;
+    clicked = true
+    if (clicked) {
+        el.srcElement.value++;
+        player.speed += 100;
+        // Dont go faster then the max speed
+        if (player.speed >= player.maxSpeed) {
+            player.speed = player.maxSpeed;
+        }
+    }
     setTimeout(closeEvolveMenu, 1000);
+    clicked = false;
 }
 function evolveSight(el){
     el.srcElement.value ++;
@@ -111,9 +113,11 @@ function evolveDepth(el){
 // Opening and closing menu's
 function openStartMenu() {
     document.getElementById("startMenu").classList.remove("hide");
+    hasStarted = false;
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
+    hasStarted = true;
 }
 
 function showUI() {
@@ -125,14 +129,18 @@ function closeUI() {
 
 function openGameMenu() {
     document.getElementById("gameMenu").classList.remove("hide");
+    hasStarted = false;
 }
 function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide");
+    hasStarted = true;
 }
 
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
+    hasStarted = false;
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
+    hasStarted = true;
 }
