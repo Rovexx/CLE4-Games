@@ -2,6 +2,7 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    parent: "game",
     physics: {
         default: 'arcade',
         arcade: {
@@ -44,6 +45,7 @@ function preload() {
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
+    this.load.image("net", "assets/net.png");
     background = new Background(this);
 
     sound.load(this)
@@ -103,7 +105,9 @@ function create() {
 
     AIs.push(new Ai(this, 500, 200));
 
-    sound.create(this);
+    sound.create(this)
+
+    net.spawn(this)
 }
 
 function update() {
@@ -127,12 +131,12 @@ function update() {
         ai.update();
 
         // colission
-        if (coll(player, ai)) {
+        if (coll(player, ai, 40)) {
             // destroy spri;e
             ai.sprite.destroy(true);
             ai = null;
 
-            sound.play("eat");
+            sound.play("eat")
 
             // snelheid toevoegen aan player
             player.eatFish();
@@ -142,7 +146,7 @@ function update() {
     /* loopen door de powerups om
      collission te detecten */
     for (var powerup of powerups) {
-        if (coll(player, powerup)) {
+        if (coll(player, powerup, 30)) {
             // destroy sprite
             powerup.sprite.destroy(true);
             powerup = null;
@@ -153,15 +157,13 @@ function update() {
     }
 
     sound.update()
+    net.update(this)
 }
 
 /**
  * Detect collision between 2 objects
- * @param  {object} n1 The first sprite object
- * @param  {object} n2 The second sprite object
- * @return {bool}      If the objects are colliding
  */
-function coll(n1, n2) {
+function coll(n1, n2, collisionWidth) {
     // Get the raw sprites from the objects
     s1 = n1.sprite
     s2 = n2.sprite
@@ -173,8 +175,8 @@ function coll(n1, n2) {
         //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
         //     return true
         // }
-        if (s1.x <= s2.x + 40 && s1.x >= s2.x - 40 
-         && s1.y <= s2.y + 40 && s1.y >= s2.y - 40) {
+        if (s1.x <= s2.x + collisionWidth && s1.x >= s2.x - collisionWidth 
+         && s1.y <= s2.y + collisionWidth && s1.y >= s2.y - collisionWidth) {
             return true
         }
     }

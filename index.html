@@ -1,18 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Game</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<title>Katvis Evolutie</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-   <script src="js/phaser.min.js"></script>
-   <script src="js/sound.js"></script>
-   <script src="js/background.js"></script>
-   <script src="js/player.js"></script>
-   <script src="js/ai.js"></script>
-   <script src="js/camera.js"></script>
-   <script src="js/powerups.js"></script>
-   <script src="js/main.js"></script>
+    <div id="game" class="container">
+        <!-- start menu overlay -->
+        <div id="startMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content">
+                <img src="assets/logo.png" alt="katvis Evolutie">
+                <a id="buttonStartGame" class="btn">Start Game</a>
+            </div>
+        </div>
+        <!-- game menu overlay -->
+        <div id="gameMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content">
+                <a id="buttonTerugNaarSpel" class="btn">Terug naar het spel</a><br>
+                <a id="buttonStoppen" class="btn">Stoppen</a>
+            </div>
+        </div>
+        <!-- evolve menu overlay -->
+        <div id="evolveMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content evolveBars">
+                <a>Snelheid</a>
+                <progress id="speed" value="1" max="5"></progress>
+                <a>Zicht</a>
+                <progress id="sight" value="1" max="5"></progress>
+                <a>Camouflage</a>
+                <progress id="camouflage" value="1" max="5"></progress>
+                <a>grootte</a>
+                <progress id="size" value="1" max="5"></progress>
+                <a>Weerstand</a>
+                <progress id="temperature" value="1" max="5"></progress>
+                <a>Max Diepte</a>
+                <progress id="depth" value="1" max="5"></progress>
+            </div>
+        </div>
+
+        <!-- UI -->
+        <div id="UI">
+            <!-- UI elementen -->
+            <a id="buttonGameMenu">Menu</a>
+            <div class="barContainer" id="foodBar" >
+                <div class="bar" id="food">Voedsel</div>
+            </div>
+
+            <div class="barContainer" id="healthBar">
+                <div class="bar" id="health">Levens</div>
+            </div>
+        </div>
+        <script src="js/phaser.min.js"></script>
+        <script src="js/sound.js"></script>
+        <script src="js/menus.js"></script>
+  	    <script src="js/net.js"></script>
+  	    <script src="js/background.js"></script>
+  	    <script src="js/player.js"></script>
+  	    <script src="js/ai.js"></script>
+  	    <script src="js/camera.js"></script>
+	      <script src="js/powerups.js"></script>
+  	    <script src="js/main.js"></script>
+    </div> 	
 </body>
 </html>
