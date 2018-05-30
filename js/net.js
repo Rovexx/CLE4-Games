@@ -68,7 +68,7 @@ let net = {
 
 		// Game over if the player is 600px in the net
 		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 600) {
-			console.log("Je bent dood")
+			alert("Je bent dood");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 class Background{
     constructor(initializer){
         //areas by immage:
-        let assetsDir = "assets";
+        let assetsDir = "assets/pictures";
         let imageFiles = [
             "Background_1.png",
             "Background_1-2.png",

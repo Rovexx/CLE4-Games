@@ -28,12 +28,9 @@ var camera;
 var gameOver = false;
 var background;
 
-var gameOver = false;
-var powerupsCount = 4;
 var aiCount = 4;
 
 var AIs = [];
-var powerups = [];
 
 function preload() {
     //set the world size:
@@ -42,10 +39,9 @@ function preload() {
         height: 3600
     }
 
-    this.load.image("ai", "assets/ai.png");
-    this.load.image("fish_tmp", "assets/fish_tmp.png");
-    this.load.image("powerup_icon", "assets/powerup.png");
-    this.load.image("net", "assets/net.png");
+    this.load.image("ai", "assets/pictures/ai.png");
+    this.load.image("fish_tmp", "assets/pictures/fish_tmp.png");
+    this.load.image("net", "assets/pictures/net.png");
     background = new Background(this);
 
     sound.load(this)
@@ -97,12 +93,6 @@ function create() {
     // Create the camera
     camera = new Camera(this);
 
-    /* powerups maken met een loop
-     ivm collission detection */
-    for (let i = 1; i <= powerupsCount; i++) {
-        powerups.push(new Powerup(this, 180 * i, 140 * i));
-    }
-
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
@@ -149,19 +139,6 @@ function update() {
 
             // snelheid toevoegen aan player
             player.eatFish();
-        }
-    }
-
-    /* loopen door de powerups om
-     collission te detecten */
-    for (var powerup of powerups) {
-        if (coll(player, powerup, 30)) {
-            // destroy sprite
-            powerup.sprite.destroy(true);
-            powerup = null;
-
-            // snelheid toevoegen aan player
-            player.increaseSpeed();
         }
     }
 
