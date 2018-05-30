@@ -106,7 +106,7 @@ function create() {
 
     sound.create(this)
 
-    new Net(this)
+    net.spawn(this)
 }
 
 function update() {
@@ -156,6 +156,7 @@ function update() {
     }
 
     sound.update()
+    net.update(this)
 }
 
 /**
