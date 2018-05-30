@@ -40,6 +40,7 @@ class SoundEngine {
 		context.load.audio("pitch", ["assets/sound/pitch.mp3"])
 		context.load.audio("eat", ["assets/sound/eat.mp3"])
 		context.load.audio("net", ["assets/sound/net.mp3"])
+		context.load.audio("upgrade", ["assets/sound/upgrade.mp3"])
 	}
 
 	create(context) {
@@ -64,15 +65,16 @@ class SoundEngine {
 		this.pitch = context.sound.add("pitch")
 		this.eat = context.sound.add("eat")
 		this.net = context.sound.add("net")
+		this.upgrade = context.sound.add("upgrade")
 	}
 
 	update(context) {
 		// If we can play the pitch effect and an ai is close enough to do se
-		if (!this.pitch.isPlaying && this.distance < 500) {
+		if (!this.pitch.isPlaying && this.distance < 750) {
 			// Set the rate and pitch depending on the distance
-			this.pitch.rate = Math.pow(500 - this.distance, 2) / 250000 + 1.2
+			this.pitch.rate = Math.pow(750 - this.distance, 2) / 200000 + 0.6
 			// Do the same for the volume but on a linear scale
-			this.pitch.volume = (500 - this.distance) / 500 * 0.6
+			this.pitch.volume = (750 - this.distance) / 750 * 2.6
 			this.pitch.play()
 		}
 	}

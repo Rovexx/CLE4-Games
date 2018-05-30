@@ -145,8 +145,13 @@ function closeGameMenu() {
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
     game.loop.sleep()
+
+    sound.music.volume = 0.3
+    sound.play("upgrade")
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     game.loop.wake()
+
+    sound.music.volume = 0.5
 }
