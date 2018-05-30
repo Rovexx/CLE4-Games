@@ -3,6 +3,8 @@ var config = {
     width: 800,
     height: 600,
     parent: "game",
+    disableContextMenu: true,
+    transparent: true,
     physics: {
         default: 'arcade',
         arcade: {
@@ -96,12 +98,13 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
+
+    // Sleep on start
+    game.loop.sleep()
 }
 
 let tmpNet = false
 function update() {
-    if (!hasStarted) return
-
     background.update(this);
 
     if (!tmpNet) {
@@ -161,8 +164,8 @@ function coll(n1, n2, collisionWidth) {
         //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
         //     return true
         // }
-        if (s1.x <= s2.x + collisionWidth && s1.x >= s2.x - collisionWidth 
-         && s1.y <= s2.y + collisionWidth && s1.y >= s2.y - collisionWidth) {
+        if (s1.x <= s2.x + collisionWidth && s1.x >= s2.x - collisionWidth &&
+            s1.y <= s2.y + collisionWidth && s1.y >= s2.y - collisionWidth) {
             return true
         }
     }
