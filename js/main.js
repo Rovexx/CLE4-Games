@@ -39,9 +39,9 @@ function preload() {
         height: 3600
     }
 
-    this.load.image("ai", "assets/pictures/ai.png");
-    this.load.image("fish_tmp", "assets/pictures/fish_tmp.png");
-    this.load.image("net", "assets/pictures/net.png");
+    this.load.image("ai", "assets/img/ai.png");
+    this.load.image("fish_tmp", "assets/img/fish_tmp.png");
+    this.load.image("net", "assets/img/net.png");
     background = new Background(this);
 
     sound.load(this)
