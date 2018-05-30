@@ -118,28 +118,30 @@ class Player{
         let delta = initializer.sys.game.loop.delta/1000;
 
         //calculate speed:
-        let difX = this.dif(this.dest.x, this.sprite.x);
-        let difY = this.dif(this.dest.y, this.sprite.y);
-        let absDifX = Math.abs(difX);
-        let absDifY = Math.abs(difY);
+        this.difX = this.dif(this.dest.x, this.sprite.x);
+        this.difY = this.dif(this.dest.y, this.sprite.y);
+        let absDifX = Math.abs(this.difX);
+        let absDifY = Math.abs(this.difY);
         let difTotal = absDifX + absDifY;
 
         //calculate horizontal and vertical speed:
-        let speedX = this.calcSpeed(absDifX, difTotal, this.speed);
-        let speedY = this.calcSpeed(absDifY, difTotal, this.speed);
+        this.speedX = this.calcSpeed(absDifX, difTotal, this.speed);
+        this.speedY = this.calcSpeed(absDifY, difTotal, this.speed);
 
-        this.stepAxis("x", delta, speedX);
-        this.stepAxis("y", delta, speedY);
+
+        this.stepAxis("x", delta, this.speedX);
+        this.stepAxis("y", delta, this.speedY);
 
         //set direction of the sprite
-        if (difX > 0) {
+        if (this.difX > 0) {
             this.sprite.scaleX = Math.abs(this.sprite.scaleX);
-        } else if(difX < 0) {
+        }
+        else if (this.difX < 0) {
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
         //set rotation of fish
-        this.sprite.rotation = this.calcAngle(difY, difX);
+        this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
         //move the fish:
         this.swim();

@@ -39,6 +39,7 @@ class SoundEngine {
 		context.load.audio("music", ["assets/sound/music.mp3"])
 		context.load.audio("pitch", ["assets/sound/pitch.mp3"])
 		context.load.audio("eat", ["assets/sound/eat.mp3"])
+		context.load.audio("net", ["assets/sound/net.mp3"])
 	}
 
 	create(context) {
@@ -62,6 +63,7 @@ class SoundEngine {
 		// Ready putch and eat effects
 		this.pitch = context.sound.add("pitch")
 		this.eat = context.sound.add("eat")
+		this.net = context.sound.add("net")
 	}
 
 	update(context) {
