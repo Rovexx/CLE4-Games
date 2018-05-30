@@ -106,12 +106,19 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
-
-    net.spawn(this)
 }
 
+let tmpNet = false
 function update() {
+    if (!hasStarted) return
+
     background.update(this);
+
+    if (!tmpNet) {
+        setTimeout(() => {
+            net.spawn(this)
+        }, 7000)
+    }
 
   // Reset the sound distance
     sound.distance = Infinity
@@ -136,6 +143,7 @@ function update() {
             ai.sprite.destroy(true);
             ai = null;
 
+            increaseFood()
             sound.play("eat")
 
             // snelheid toevoegen aan player
@@ -178,7 +186,7 @@ function coll(n1, n2) {
         //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
         //     return true
         // }
-        if (s1.x <= s2.x + 40 && s1.x >= s2.x - 40 
+        if (s1.x <= s2.x + 40 && s1.x >= s2.x - 40
          && s1.y <= s2.y + 40 && s1.y >= s2.y - 40) {
             return true
         }
