@@ -178,12 +178,15 @@ class Player{
             player.sprite.scaleX = (player.sprite.scaleX * 1.1);
             player.sprite.scaleY = (player.sprite.scaleY * 1.1);
 
+            // evolutie punten -1
+            this.evolutionPoints--;
+
             if (player.sprite.scaleY > this.maxSize) {
                 if (player.sprite.scaleX < 0){
-                    //swimming to hte left:
+                    // naar links zwemmen
                     player.sprite.scaleX = -this.maxSize;
                 } else {
-                    //swimming to the right:
+                    // naar rechts zwemmen
                     player.sprite.scaleX = this.maxSize;
                 }
 
@@ -207,8 +210,30 @@ class Player{
 
         // als de fisheat gelijk is aan 5,10,15,20 etc
         if ((this.fishEat % this.evolutionPointDivider) == 0) {
-            // aantal puntne bijhouden
+            // aantal punten bijhouden
             this.evolutionPoints++;
+        }
+
+        // Als je minimaal 1 evolution punt hebt
+        if (this.evolutionPoints > 0) {
+            // groote van de player aanpassen
+            player.sprite.scaleX = (player.sprite.scaleX * 1.1);
+            player.sprite.scaleY = (player.sprite.scaleY * 1.1);
+
+            // evolutie punten -1
+            this.evolutionPoints--;
+
+            if (player.sprite.scaleY > this.maxSize) {
+                if (player.sprite.scaleX < 0){
+                    // naar links zwemmen
+                    player.sprite.scaleX = -this.maxSize;
+                } else {
+                    // naar rechts zwemmen
+                    player.sprite.scaleX = this.maxSize;
+                }
+
+                player.sprite.scaleY = this.maxSize;
+            }
         }
     }
 }
