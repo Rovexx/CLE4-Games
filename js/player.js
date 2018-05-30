@@ -50,22 +50,21 @@ class Player{
         this.pointerDown = true;
         this.pointerMovehandler(pointer);
     }
+
     pointerMovehandler(pointer){
         this.pointerX = pointer.x;
         this.pointerY = pointer.y;
     }
+
     pointerUpHandler(){
         this.pointerDown = false;
     }
 
     swim(){
-
-        if(this.pointerDown){
+        if (this.pointerDown){
             this.dest.x = this.pointerX + this.cameraX;
             this.dest.y = this.pointerY + this.cameraY;
         }
-
-
     }
 
     stepAxis(axis, delta, speed){
@@ -75,54 +74,46 @@ class Player{
 
             let dir;
 
-
-            if(dif > 0){
+            if (dif > 0) {
                 //right
                 dir = 1;
-            }
-            else{
+            } else {
                 //left
                 dir = -1;
             }
 
             let step = delta * dir * speed
 
-            if(Math.abs(dif) < Math.abs(step)){
+            if (Math.abs(dif) < Math.abs(step)) {
                 this.sprite[axis] = this.dest[axis];
-            }
-            else{
+            } else {
                 this.sprite[axis] += step;
             }
-
-
-
         }
     }
 
-    dif(numA, numB, abs = false){
-        if(abs){
+    dif(numA, numB, abs = false) {
+        if (abs) {
             return Math.abs(numA - numB);
-        }
-        else{
+        } else {
             return numA - numB;
         }
     }
 
-    calcSpeed(part, total, speed){
+    calcSpeed(part, total, speed) {
         return (part/total) * speed;
     }
 
    calcAngle(opposite, adjacent) {
         let angle = Math.atan(opposite / adjacent);
-        if(isNaN(angle)){
+        if (isNaN(angle)) {
             return 0;
-        }
-        else{
+        } else {
             return angle;
         }
     }
 
-    update(initializer){
+    update(initializer) {
         //delta in seconds:
         let delta = initializer.sys.game.loop.delta/1000;
 
@@ -143,7 +134,7 @@ class Player{
 
         //set direction of the sprite
         if (this.difX > 0) {
-        this.sprite.scaleX = Math.abs(this.sprite.scaleX);
+            this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
         else if (this.difX < 0) {
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
