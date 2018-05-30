@@ -199,6 +199,9 @@ class Player{
         // fish eat verhogen
         this.fishEat++;
 
+        // food verhogen 
+        increaseFood();
+
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
         let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
