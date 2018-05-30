@@ -5,8 +5,8 @@
 }
 
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -93,7 +93,6 @@ body {
 .bar {
     font-family: Verdana,sans-serif;
     text-align: right;
-    padding-right: 20px;
     line-height: 40px;
     color: white;
     border-radius: 10px;
@@ -110,7 +109,7 @@ body {
 
 /* health bar value */
 #health {
-    width: 80%;
+    width: 100%;
     background-color: rgba(255, 0, 0, 0.9);
 }
 #healthBar {
@@ -124,4 +123,40 @@ body {
     background-color: rgba(0, 50, 255, 0.9);
     position: absolute;
     pointer-events: all;
+}
+/* Positioning of evolve bars */
+.evolveBars {
+    width: 100px;
+    left: 50%;
+}
+/* evolve menu bars */
+progress {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+progress[value]::-webkit-progress-value {
+    background-color: red;
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+/* individual styling */
+#speed {
+
+}
+#sight {
+
+}
+#camouflage {
+
+}
+#size {
+
+}
+#temperature {
+
+}
+#depth {
+
 }

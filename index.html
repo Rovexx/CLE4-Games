@@ -23,12 +23,29 @@
                 <a id="buttonStoppen" class="btn">Stoppen</a>
             </div>
         </div>
+        <!-- evolve menu overlay -->
+        <div id="evolveMenu" class="overlay">
+            <!-- Buttons -->
+            <div class="overlay-content evolveBars">
+                <a>Snelheid</a>
+                <progress id="speed" value="1" max="5"></progress>
+                <a>Zicht</a>
+                <progress id="sight" value="1" max="5"></progress>
+                <a>Camouflage</a>
+                <progress id="camouflage" value="1" max="5"></progress>
+                <a>grootte</a>
+                <progress id="size" value="1" max="5"></progress>
+                <a>Weerstand</a>
+                <progress id="temperature" value="1" max="5"></progress>
+                <a>Max Diepte</a>
+                <progress id="depth" value="1" max="5"></progress>
+            </div>
+        </div>
 
         <!-- UI -->
         <div id="UI">
             <!-- UI elementen -->
             <a id="buttonGameMenu">Menu</a>
-
             <div class="barContainer" id="foodBar" >
                 <div class="bar" id="food">Voedsel</div>
             </div>
@@ -36,10 +53,6 @@
             <div class="barContainer" id="healthBar">
                 <div class="bar" id="health">Levens</div>
             </div>
-            <!-- old bars
-            <progress id="foodBar" value="70" max="100"></progress>
-            <progress id="healthBar" value="70" max="100"></progress>
-             -->
         </div>
 
         <script src="js/menus.js"></script>
