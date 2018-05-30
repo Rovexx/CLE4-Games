@@ -8,6 +8,7 @@ var config = {
         arcade: {
             gravity: { y: 300 },
             debug: false
+            // debug: true
         }
     },
     scene: {
@@ -18,47 +19,171 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+var sound = new SoundEngine(game)
 
 var ground;
-var powerup;
 var player;
-var gameOver = false;
 
-var AIs = []
+var camera;
+var gameOver = false;
+var background;
+
+var gameOver = false;
+var powerupsCount = 4;
+var aiCount = 4;
+
+var AIs = [];
+var powerups = [];
 
 function preload() {
-    this.load.image("background_1", "assets/Background_1.png");
+    //set the world size:
+    this.worldSize = {
+        width: 3200,
+        height: 3600
+    }
+
     this.load.image("ai", "assets/ai.png");
     this.load.image("fish_tmp", "assets/fish_tmp.png");
     this.load.image("powerup_icon", "assets/powerup.png");
+    this.load.image("net", "assets/net.png");
+    background = new Background(this);
+
+    sound.load(this)
+}
+
+function spawnRandomFish(initializer){
+    //get the position of the player:
+    let playerX = player.sprite.x;
+    let playerY = player.sprite.y;
+
+    //minimum and maximum x distance a fish can spawn from the player:
+    let minDistanceX = 400;
+    let maxDistanceX = 2000;
+
+    let minPosX = playerX + minDistanceX;
+    let maxPosX = playerX + maxDistanceX;
+
+    //minimum and maximum y spawn coordinates:
+    let minPosY = 0;
+    let maxPosY = 1800;
+
+    //check the number of ai fishes in this area:
+    let numOfFish = 0;
+
+    for (let ai of AIs){
+        if (ai.sprite.x > minPosX && ai.sprite.x < maxPosX){
+            numOfFish++;
+        }
+    }
+
+    if (numOfFish < 2){
+        //generate random spawn coordinates:
+        let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
+        let spawnY = Math.random() * (maxPosY - minPosY) + minPosY;
+
+        AIs.push(new Ai(initializer, spawnX, spawnY))
+    }
 }
 
 function create() {
+    this.input.setPollAlways();
+
     // Background
-    this.repeatingBackground = this.add.tileSprite(1600, 300, 3200, 600, "background_1");
-    this.repeatingBackground.setOrigin(0.5);
+    background.create(this);
 
     // Create the player:
     player = new Player(this, 200, 100);
-    powerup = new Powerup(this, 300, 500, 4);
 
-    this.physics.add.overlap(player, powerup, collectPowerup, null, this);
-  
-    AIs.push(new Ai(this, 500, 400))
+    // Create the camera
+    camera = new Camera(this);
+
+    /* powerups maken met een loop
+     ivm collission detection */
+    for (let i = 1; i <= powerupsCount; i++) {
+        powerups.push(new Powerup(this, 180 * i, 140 * i));
+    }
+
+    AIs.push(new Ai(this, 500, 200));
+
+    sound.create(this)
+
+    net.spawn(this)
 }
 
 function update() {
+    background.update(this);
+
+  // Reset the sound distance
+    sound.distance = Infinity
+
+    spawnRandomFish(this);
+
     if (gameOver) {
         return;
     }
 
+    // player update
+    player.update(this);
+
+    /* loopen door de AIs om te updaten
+     en dolission te detecten */
     for (var ai of AIs) {
-        ai.update()
+        ai.update();
+
+        // colission
+        if (coll(player, ai)) {
+            // destroy spri;e
+            ai.sprite.destroy(true);
+            ai = null;
+
+            sound.play("eat")
+
+            // snelheid toevoegen aan player
+            player.eatFish();
+        }
     }
 
-    player.update(this);
+    /* loopen door de powerups om
+     collission te detecten */
+    for (var powerup of powerups) {
+        if (coll(player, powerup)) {
+            // destroy sprite
+            powerup.sprite.destroy(true);
+            powerup = null;
+
+            // snelheid toevoegen aan player
+            player.increaseSpeed();
+        }
+    }
+
+    sound.update()
+    net.update(this)
 }
 
-function collectPowerup() {
-    console.log('Powerup collected');
+/**
+ * Detect collision between 2 objects
+ * @param  {object} n1 The first sprite object
+ * @param  {object} n2 The second sprite object
+ * @return {bool}      If the objects are colliding
+ */
+function coll(n1, n2) {
+    // Get the raw sprites from the objects
+    s1 = n1.sprite
+    s2 = n2.sprite
+
+    // checken of de sprite nog levend is
+    if (s1.active == true && s2.active == true) {
+        // Do the maths
+        // if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
+        //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        //     return true
+        // }
+        if (s1.x <= s2.x + 40 && s1.x >= s2.x - 40 
+         && s1.y <= s2.y + 40 && s1.y >= s2.y - 40) {
+            return true
+        }
+    }
+
+    // Return false if collision has not been detected
+    return false
 }
