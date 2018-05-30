@@ -103,7 +103,7 @@ function create() {
 
     AIs.push(new Ai(this, 500, 200));
 
-    sound.create(this)
+    sound.create(this);
 }
 
 function update() {
@@ -132,7 +132,7 @@ function update() {
             ai.sprite.destroy(true);
             ai = null;
 
-            sound.play("eat")
+            sound.play("eat");
 
             // snelheid toevoegen aan player
             player.eatFish();
