@@ -162,15 +162,6 @@ class Player{
         this.cameraY = initializer.cameras.main.scrollY;
     }
 
-    increaseSpeed() {
-        player.speed = (player.speed * 1.1);
-
-        // niet de max speed overschreiden
-        if (player.speed >= player.maxSpeed) {
-            player.speed = player.maxSpeed;
-        }
-    }
-
     increaseSize() {
         // Als je minimaal 1 evolution punt hebt
         if (this.evolutionPoints > 0) {
@@ -198,6 +189,9 @@ class Player{
     eatFish() {
         // fish eat verhogen
         this.fishEat++;
+
+        // food verhogen 
+        increaseFood();
 
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
