@@ -1,11 +1,13 @@
 class Background{
     constructor(initializer){
         //areas by immage:
-        let assetsDir = "assets";
+        let assetsDir = "assets/img";
         let imageFiles = [
             "Background_1.png",
             "Background_1-2.png",
-            "Background_2.png"
+            "Background_2.png",
+            "Background_3.png",
+            "Background_4.png"
         ]
 
         //load images:
