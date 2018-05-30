@@ -115,6 +115,7 @@ function update() {
     background.update(this);
 
     if (!tmpNet) {
+        tmpNet = true
         setTimeout(() => {
             net.spawn(this)
         }, 7000)
