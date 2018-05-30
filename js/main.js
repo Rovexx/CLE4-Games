@@ -3,6 +3,8 @@ var config = {
     width: 800,
     height: 600,
     parent: "game",
+    disableContextMenu: true,
+    transparent: true,
     physics: {
         default: 'arcade',
         arcade: {
