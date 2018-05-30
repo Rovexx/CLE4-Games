@@ -29,11 +29,9 @@ function stopGame(){
 }
 function gameMenu(){
     openGameMenu();
-    console.log(hasStarted);
 }
 function evolveMenu(){
     openEvolveMenu();
-    console.log(hasStarted);
 }
 
 // health bar
