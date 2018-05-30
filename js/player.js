@@ -28,6 +28,8 @@ class Player{
         //default max Depth
         this.maxDepth = 1;
 
+        this.dead = false // player default status is niet dood
+
         // evolutie punten
         this.evolutionPointDivider = 5;
         this.evolutionPoints = 0;
@@ -227,6 +229,19 @@ class Player{
 
         //         this.sprite.scaleY = this.maxSize;
         //     }
+        // }
+    }
+
+    die() {
+        // if (this.dead === false) {
+        //     // sprite veranderen naar dead sprite
+        //     this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
+        //     this.sprite.setCollideWorldBounds(true);
+        //     this.sprite.body.allowGravity = false;
+
+        //     /* Ervoor zorgen dat de player sprite
+        //      niet de heletijd verandert */
+        //     this.dead = true;
         // }
     }
 }

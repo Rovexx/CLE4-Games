@@ -51,7 +51,7 @@ let net = {
 	 * Update the net opsition
 	 * @param  {object} context The game context
 	 */
-	update: (context) => {
+	update: (context, player) => {
 		// Don't update if no net is spawned
 		if (net._sprite === false || net._baseSpeed == 0) return
 
@@ -68,7 +68,7 @@ let net = {
 
 		// Game over if the player is 600px in the net
 		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 600) {
-			console.log("Je bent dood");
+			player.die();
 		}
 	}
 }
