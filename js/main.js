@@ -166,15 +166,19 @@ function coll(n1, n2) {
     s1 = n1.sprite
     s2 = n2.sprite
 
-    // als de sprite er nog is
+    // checken of de sprite nog levend is
     if (s1.active == true && s2.active == true) {
         // Do the maths
-        if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
-    		s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        // if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
+        //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        //     return true
+        // }
+        if (s1.x <= s2.x + 40 && s1.x >= s2.x - 40 
+         && s1.y <= s2.y + 40 && s1.y >= s2.y - 40) {
             return true
         }
     }
 
-    // Return false if collision has been detected
+    // Return false if collision has not been detected
     return false
 }
