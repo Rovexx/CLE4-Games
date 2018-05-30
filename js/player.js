@@ -3,7 +3,7 @@ class Player{
     constructor(initializer, posX, posY){
         this.init = initializer;
 
-        // setup player sprite:'
+        // setup player sprite:
         this.sprite = initializer.physics.add.sprite(posX, posY, 'fish_tmp');
         this.sprite.setCollideWorldBounds(true);
         this.sprite.body.allowGravity = false;
@@ -17,6 +17,17 @@ class Player{
 
         // default player speed
         this.speed = 400;
+        //default sight:
+        this.sight = 1;
+        //default camouflage
+        this.camouflage = 1;
+        //default size
+        this.bodySize = 1;
+        //default temperature Resistance
+        this.temperatureResistance = 1;
+        //default max Depth
+        this.maxDepth = 1;
+
 
         // evolutie punten
         this.evolutionPointDivider = 5;
