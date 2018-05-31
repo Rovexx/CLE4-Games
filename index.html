@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Katvis Evolutie</title>
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -27,18 +28,33 @@
         <div id="evolveMenu" class="overlay hide">
             <!-- Buttons -->
             <div class="overlay-content evolveBars">
-                <a>Snelheid</a>
-                <progress id="speed" value="1" max="5"></progress>
-                <a>Zicht</a>
-                <progress id="sight" value="1" max="5"></progress>
-                <a>Camouflage</a>
-                <progress id="camouflage" value="1" max="5"></progress>
-                <a>grootte</a>
-                <progress id="size" value="1" max="5"></progress>
-                <a>Weerstand</a>
-                <progress id="temperature" value="1" max="5"></progress>
-                <a>Max Diepte</a>
-                <progress id="depth" value="1" max="5"></progress>
+                <div>
+                    <a class="menuTitle">Evolutie punten</a>
+                </div>
+                <div class="evolveBar">
+                    <a>Snelheid</a>
+                    <progress id="speed" value="1" max="5"></progress>
+                </div>
+                <div class="evolveBar">
+                    <a>Zicht</a>
+                    <progress id="sight" value="1" max="5"></progress>
+                </div>
+                <div class="evolveBar">
+                    <a>Camouflage</a>
+                    <progress id="camouflage" value="1" max="5"></progress>
+                </div>
+                <div class="evolveBar">
+                    <a>grootte</a>
+                    <progress id="size" value="1" max="5"></progress>
+                </div>
+                <div class="evolveBar">
+                    <a>Weerstand</a>
+                    <progress id="temperature" value="1" max="5"></progress>
+                </div>
+                <div class="evolveBar">
+                    <a>Max Diepte</a>
+                    <progress id="depth" value="1" max="5"></progress>
+                </div>
             </div>
         </div>
 
@@ -46,6 +62,7 @@
         <div id="UI" class="hide">
             <!-- UI elementen -->
             <a id="buttonGameMenu">Menu</a>
+            <a id="buttonEvolveMenu">Evolve</a>
             <div class="barContainer" id="foodBar" >
                 <div class="bar" id="food">Voedsel</div>
             </div>
