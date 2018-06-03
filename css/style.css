@@ -22,7 +22,7 @@ canvas {
 /* Menu overlay background */
 .overlay {
     height: 100vh;
-    width: 133.333vw;
+    width: 133.333vh;
     position: absolute;
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.2);
@@ -30,21 +30,19 @@ canvas {
 /* all content inside the overlay */
 .overlay-content {
     position: relative;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
     display: inline-block;
+    width: 100vh;
+    top: 30vh;
 }
 /* Menu buttons */
 .btn {
     cursor: pointer;
-    width: 350px;
-    padding: 8px;
-    margin-bottom: 20px;
+    width: 50vh;
+    padding: 1vh;
+    margin-bottom: 2vh;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 36px;
+    font-size: 2.4em;
     color: white;
     background-color: rgba(56, 199, 255, 0.8);
     box-shadow: 10px 10px 100px 0px rgba(0,0,0,0.5);
@@ -81,8 +79,8 @@ canvas {
 #UI {
     z-index: 2;
     position: absolute;
-    height: 600px;
-    width: 800px;
+    height: 100vh;
+    width: 133.333vh;
     pointer-events: none;
 }
 /* Healt/food bars background */

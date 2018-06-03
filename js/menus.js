@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
     document.getElementById("speed").addEventListener("click", evolveSpeed);
     document.getElementById("sight").addEventListener("click", evolveSight);
-    document.getElementById("camouflage").addEventListener("click", evolveCamouflage);
-    document.getElementById("size").addEventListener("click", evolveBodySize);
+    document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
 
@@ -76,35 +75,22 @@ function increaseFood(){
 // Evolving actions
 function evolveSpeed(el){
     if (!clicked) {
-        el.srcElement.value++;
-        player.speed += 100;
-        // Dont go further then the max speed
-        if (player.speed >= player.maxSpeed) {
-            player.speed = player.maxSpeed;
+        clicked = true;
+        // current value not more then the max
+        if (player.speed <= player.maxSpeed){
+            el.srcElement.value ++;
+            player.speed += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
 }
 function evolveSight(el){
     if (!clicked) {
-        el.srcElement.value++;
-        player.sight += 1;
-        // Dont go further then the max sight
-        if (player.sight >= player.maxSight) {
-            player.sight = player.maxSight;
-        }
-    }
-    setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
-}
-function evolveCamouflage(el){
-    if (!clicked) {
-        el.srcElement.value++;
-        player.camouflage += 1;
-        // Dont go further then the max camouflage
-        if (player.camouflage >= player.maxCamouflage) {
-            player.camouflage = player.maxCamouflage;
+        console.log("sight")
+        // current value not more then the max
+        if (player.sight <= player.maxSight){
+            el.srcElement.value ++;
+            player.sight += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -112,11 +98,10 @@ function evolveCamouflage(el){
 }
 function evolveBodySize(el){
     if (!clicked) {
-        el.srcElement.value++;
-        player.bodySize += 100;
-        // Dont go further then the max body size
-        if (player.bodySize >= player.maxBodySize) {
-            player.bodySize = player.maxBodySize;
+        // current value not more then the max
+        if (player.bodySize <= player.maxBodySize){
+            el.srcElement.value ++;
+            player.bodySize += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -124,11 +109,10 @@ function evolveBodySize(el){
 }
 function evolveTemperature(el){
     if (!clicked) {
-        el.srcElement.value++;
-        player.temperature += 100;
-        // Dont go further then the max temperature
-        if (player.temperature >= player.maxTemperature) {
-            player.temperature = player.maxTemperature;
+        // current value not more then the max
+        if (player.temperature <= player.maxTemperature){
+            el.srcElement.value ++;
+            player.temperature += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -136,15 +120,14 @@ function evolveTemperature(el){
 }
 function evolveDepth(el){
     if (!clicked) {
-        el.srcElement.value++;
-        player.depth += 100;
-        // Dont go further then the max depth
-        if (player.depth >= player.maxDepth) {
-            player.depth = player.maxDepth;
+        clicked = true;
+        // current value not more then the max
+        if (player.depth <= player.maxDepth){
+            el.srcElement.value ++;
+            player.depth += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
 }
 
 
@@ -181,4 +164,5 @@ function openEvolveMenu() {
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     hasStarted = true;
+    clicked = false;
 }

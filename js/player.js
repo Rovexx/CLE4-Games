@@ -19,8 +19,6 @@ class Player{
         this.speed = 400;
         //default sight:
         this.sight = 1;
-        //default camouflage
-        this.camouflage = 1;
         //default size
         this.bodySize = 1;
         //default temperature Resistance
@@ -30,8 +28,7 @@ class Player{
 
         // max variabelen:
         this.maxSpeed = 800;
-        this.magSight = 5;
-        this.maxCamouflage = 5;
+        this.maxSight = 5;
         this.maxBodySize = 5;
         this.maxTemperature = 5;
         this.maxDepth = 5;
