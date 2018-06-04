@@ -136,8 +136,7 @@ function update() {
             ai.sprite.destroy(true);
             ai = null;
 
-            increaseFood()
-            sound.play("eat")
+            sound.play("eat");
 
             // snelheid toevoegen aan player
             player.eatFish();
