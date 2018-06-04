@@ -23,7 +23,7 @@ class Player{
         //default sight:
         this.sight = 1;
         //default size
-        this.bodySize = 1;
+        this.bodySize = this.sprite.scaleX;
         //default temperature Resistance
         this.temperature = 1;
         //default max Depth
@@ -164,6 +164,7 @@ class Player{
     increaseSize() {
         this.sprite.scaleX = (this.sprite.scaleX * 1.1);
         this.sprite.scaleY = (this.sprite.scaleY * 1.1);
+        this.bodySize = this.sprite.scaleX;
 
         if (this.sprite.scaleY > this.maxSize) {
             if (this.sprite.scaleX < 0){
@@ -199,6 +200,8 @@ class Player{
             this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
             this.sprite.setCollideWorldBounds(true);
             this.sprite.body.allowGravity = false;
+            this.sprite.scaleX = this.bodySize;
+            this.sprite.scaleY = this.bodySize;
 
             /* Ervoor zorgen dat de player sprite
              niet de heletijd verandert */
@@ -207,7 +210,7 @@ class Player{
             // reload game na 3 seconden
             setTimeout(function(){ 
                 location.reload();
-            }, 3000);
+            }, 4000);
         }
     }
 }

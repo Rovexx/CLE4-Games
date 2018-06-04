@@ -42,6 +42,7 @@ function preload() {
 
     this.load.image("ai", "assets/img/ai.png");
     this.load.image("fish_tmp", "assets/img/fish_tmp.png");
+    this.load.image("fish_dead", "assets/img/fish_dead.png");
     this.load.image("net", "assets/img/net.png");
     background = new Background(this);
 
