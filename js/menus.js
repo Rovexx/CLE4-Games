@@ -124,6 +124,10 @@ function openStartMenu() {
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
     game.loop.wake()
+
+    setTimeout(function () {
+        game.loop.wake()
+    }, 1000)
 }
 
 function showUI() {
