@@ -25,13 +25,6 @@ function startGame() {
 function backToGame(){
     closeGameMenu();
 }
-function stopGame(){
-    closeUI();
-    closeGameMenu();
-    closeEvolveMenu();
-    openStartMenu();
-    location.reload()
-}
 function gameMenu(){
     openGameMenu();
 }
@@ -40,22 +33,21 @@ function evolveMenu(){
 }
 
 // health bar
-function modifyHealth(increase){
+function modifyHealth(state, value){
     let element = document.getElementById("health");
     let style = window.getComputedStyle(element);
     let currentValue = (parseInt(style.width)/250)*100;
-    if (increase){
+    if (state == "increase"){
         if (currentValue < 100) {
-            element.style.width = currentValue + 10 + "%";
+            element.style.width = currentValue + value + "%";
         }
     }
-    else{
+    if (state == "decrease"){
         if (currentValue > 10) {
-            element.style.width = currentValue - 10 + "%";
+            element.style.width = currentValue - value + "%";
         }
         else{
             element.style.width = "100%"
-            stopGame();
         }
     }
 }
@@ -73,7 +65,6 @@ function increaseFood(){
         element.style.width = "0%";
     }
 }
-
 
 // Evolving actions
 function evolveSpeed(el){
@@ -177,6 +168,5 @@ function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
     game.loop.wake()
-
     sound.music.volume = 0.5
 }

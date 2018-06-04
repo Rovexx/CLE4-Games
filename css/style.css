@@ -197,7 +197,7 @@ canvas {
 }
 /* inside bar style */
 .bar {
-    text-align: right;
+    transition: all 400ms;
     line-height: 40px;
     color: white;
     border-radius: 10px;
