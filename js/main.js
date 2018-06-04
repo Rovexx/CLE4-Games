@@ -74,7 +74,7 @@ function spawnRandomFish(initializer){
         }
     }
 
-    if (numOfFish < 2){
+    if (numOfFish < 5){
         //generate random spawn coordinates:
         let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
         let spawnY = Math.random() * (maxPosY - minPosY) + minPosY;
@@ -110,7 +110,7 @@ function update() {
     if (!tmpNet) {
         tmpNet = true
         setTimeout(() => {
-            net.spawn(this)
+            // net.spawn(this)
         }, 7000)
     }
 

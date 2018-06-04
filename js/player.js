@@ -30,6 +30,13 @@ class Player{
         this.depth = 1;
         this.dead = false // player default status is niet dood
 
+         // max variabelen:
+        this.maxSpeed = 800;
+        this.maxSight = 5;
+        this.maxBodySize = 5;
+        this.maxTemperature = 5;
+        this.maxDepth = 5;
+
         //destination coords:
         this.dest = {
             x : posX,
@@ -57,7 +64,7 @@ class Player{
     pointerMovehandler(pointer){
         if (this.dead === false) {
             this.pointerX = pointer.x;
-            this.pointerY = pointer.y;            
+            this.pointerY = pointer.y;
         }
     }
 
@@ -66,13 +73,13 @@ class Player{
     }
 
     swim(){
-        if (this.pointerDown && this.dead === false){
+        if (this.pointerDown){
             let minDifference = 50;
             let newDestX = this.pointerX + this.cameraX;
             let newDestY = this.pointerY + this.cameraY;
             this.dest.x = newDestX;
             this.dest.y = newDestY;
-            
+
         }
     }
 
@@ -153,10 +160,8 @@ class Player{
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
-        if (this.dead === false) {
-            //move the fish:
-            this.swim();            
-        }
+        //move the fish:
+        this.swim();
 
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
@@ -182,12 +187,16 @@ class Player{
     }
 
     eatFish() {
-        // food verhogen 
+        // food verhogen
         increaseFood();
 
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
-        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
+        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, "+1", {
+            fontSize: "32px",
+            fontWeight: "bold",
+            fill: "#0f0"
+        })
 
         /* delete text na 3 seconden */
         setTimeout(function(){
@@ -209,23 +218,10 @@ class Player{
              niet de heletijd verandert */
             this.dead = true;
 
-            // stop de vis
-            this.dest.x = this.sprite.x;
-            this.dest.y = this.sprite.y;
-            this.sprite.rotation = this.calcAngle(this.difY, this.difX);
-
-            // reload game na x seconden
-            setTimeout(function(){ 
-                // reload button showen
-                document.getElementById('overlayrestart').classList.remove("hide");
-                document.getElementById('overlaybuttons').classList.add("hide");
-                document.getElementById('startMenu').classList.remove("hide");
-
-                // reload button functioneel maken
-                document.getElementById('buttonRestartGame').addEventListener('click', function(){
-                    location.reload();
-                });
-            }, 3000);
+            // reload game na 3 seconden
+            setTimeout(function(){
+                location.reload();
+            }, 4000);
         }
     }
 }
