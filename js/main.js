@@ -44,6 +44,10 @@ function preload() {
     this.load.image("fish_tmp", "assets/img/fish_tmp.png");
     this.load.image("fish_dead", "assets/img/fish_dead.png");
     this.load.image("net", "assets/img/net.png");
+    this.load.spritesheet('player', 
+        'assets/img/player.png',
+        { frameWidth: 480, frameHeight: 200 }
+    );
     background = new Background(this);
 
     sound.load(this)

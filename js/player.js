@@ -4,7 +4,7 @@ class Player{
         this.init = initializer;
 
         // setup player sprite:
-        this.sprite = initializer.physics.add.sprite(posX, posY, 'fish_tmp');
+        this.sprite = initializer.physics.add.sprite(posX, posY, 'player');
         this.sprite.setCollideWorldBounds(true);
         this.sprite.body.allowGravity = false;
         this.sprite.scaleX = 0.5;
@@ -53,6 +53,28 @@ class Player{
         //camera offset:
         this.cameraX = 0;
         this.cameraY = 0;
+
+        //setup animations:
+
+        initializer.anims.create({
+            key: 'stop',
+            frames: [ { key: 'player', frame: 0 } ],
+            frameRate: 8,
+        });
+
+        initializer.anims.create({
+            key: 'swim',
+            frames: initializer.anims.generateFrameNumbers('player', { start: 0, end: 7 }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        initializer.anims.create({
+            key: 'eat',
+            frames: initializer.anims.generateFrameNumbers('player', { start: 8, end: 15 }),
+            frameRate: 8,
+            repeat: 0
+        });
 
     }
 
@@ -142,6 +164,14 @@ class Player{
         let absDifY = Math.abs(this.difY);
         let difTotal = absDifX + absDifY;
 
+        //if the fish is swimming and the swim animation is not playing yet, play the swimming animation:
+        if(difTotal != 0 && !this.sprite.anims.isPlaying){
+            this.sprite.anims.play("swim");
+        }
+        else if(difTotal == 0){
+            this.sprite.anims.play("stop");
+        }
+
         //calculate horizontal and vertical speed:
         this.speedX = this.calcSpeed(absDifX, difTotal, this.speed);
         this.speedY = this.calcSpeed(absDifY, difTotal, this.speed);
@@ -197,6 +227,9 @@ class Player{
             fontWeight: "bold",
             fill: "#0f0"
         })
+
+        //play eat animation:
+        this.sprite.anims.play("eat");
 
         /* delete text na 3 seconden */
         setTimeout(function(){
