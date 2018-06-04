@@ -18,10 +18,10 @@ function startGame(){
     showUI();
 
     // Request full screen
-    if (document.body.requestFullscreen)             document.body.requestFullscreen()
-    else if (document.body.mozRequestFullScreen)     document.body.mozRequestFullScreen()
-    else if (document.body.webkitRequestFullscreen)  document.body.webkitRequestFullscreen()
-    else if (document.body.msRequestFullscreen)      document.body.msRequestFullscreen()
+    // if (document.body.requestFullscreen)             document.body.requestFullscreen()
+    // else if (document.body.mozRequestFullScreen)     document.body.mozRequestFullScreen()
+    // else if (document.body.webkitRequestFullscreen)  document.body.webkitRequestFullscreen()
+    // else if (document.body.msRequestFullscreen)      document.body.msRequestFullscreen()
 }
 function backToGame(){
     closeGameMenu();
