@@ -83,17 +83,18 @@ function evolveSpeed(el){
         if (player.speed <= player.maxSpeed){
             el.srcElement.value ++;
             player.speed += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
 }
 function evolveSight(el){
     if (!clicked) {
-        console.log("sight")
         // current value not more then the max
         if (player.sight <= player.maxSight){
             el.srcElement.value ++;
             player.sight += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -105,6 +106,7 @@ function evolveBodySize(el){
         if (player.bodySize <= player.maxBodySize){
             el.srcElement.value ++;
             player.bodySize += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -116,6 +118,7 @@ function evolveTemperature(el){
         if (player.temperature <= player.maxTemperature){
             el.srcElement.value ++;
             player.temperature += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -128,6 +131,7 @@ function evolveDepth(el){
         if (player.depth <= player.maxDepth){
             el.srcElement.value ++;
             player.depth += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -138,14 +142,12 @@ function evolveDepth(el){
 function openStartMenu() {
     document.getElementById("startMenu").classList.remove("hide");
     game.loop.sleep()
+    sound.play("click")
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
     game.loop.wake()
-
-    setTimeout(function () {
-        game.loop.wake()
-    }, 1000)
+    sound.play("click")
 }
 
 function showUI() {
@@ -158,10 +160,12 @@ function closeUI() {
 function openGameMenu() {
     document.getElementById("gameMenu").classList.remove("hide");
     game.loop.sleep()
+    sound.play("click")
 }
 function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide");
     game.loop.wake()
+    sound.play("click")
 }
 
 function openEvolveMenu() {
@@ -169,7 +173,6 @@ function openEvolveMenu() {
     game.loop.sleep()
 
     sound.music.volume = 0.3
-    sound.play("upgrade")
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
