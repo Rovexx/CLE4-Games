@@ -22,25 +22,13 @@ class Player{
         this.speed = 400;
         //default sight:
         this.sight = 1;
-        //default camouflage
-        this.camouflage = 1;
         //default size
         this.bodySize = 1;
         //default temperature Resistance
-        this.temperatureResistance = 1;
+        this.temperature = 1;
         //default max Depth
-        this.maxDepth = 1;
-
+        this.depth = 1;
         this.dead = false // player default status is niet dood
-
-        // evolutie punten
-        this.evolutionPointDivider = 5;
-        this.evolutionPoints = 0;
-        this.fishEat = 0;
-
-        // max variabelen:
-        this.maxSpeed = 700;
-        this.maxSize = 1;
 
         //destination coords:
         this.dest = {
@@ -127,6 +115,7 @@ class Player{
 
    calcAngle(opposite, adjacent) {
         let angle = Math.atan(opposite / adjacent);
+
         if (isNaN(angle) || this.totalDif < this.minDifference  ) {
             return 0;
         } else {
@@ -157,8 +146,7 @@ class Player{
         //set direction of the sprite
         if (this.difX >  0 && this.totalDif > this.minDifference) {
             this.sprite.scaleX = Math.abs(this.sprite.scaleX);
-        }
-        else if (this.difX < 0 && this.totalDif > this.minDifference) {
+        } else if (this.difX < 0 && this.totalDif > this.minDifference) {
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
@@ -174,33 +162,23 @@ class Player{
     }
 
     increaseSize() {
-        // Als je minimaal 1 evolution punt hebt
-        // if (this.evolutionPoints > 0) {
-            // groote van de player aanpassen
-            this.sprite.scaleX = (this.sprite.scaleX * 1.1);
-            this.sprite.scaleY = (this.sprite.scaleY * 1.1);
+        this.sprite.scaleX = (this.sprite.scaleX * 1.1);
+        this.sprite.scaleY = (this.sprite.scaleY * 1.1);
 
-            // evolutie punten -1
-            // this.evolutionPoints--;
-
-            if (this.sprite.scaleY > this.maxSize) {
-                if (this.sprite.scaleX < 0){
-                    // naar links zwemmen
-                    this.sprite.scaleX = -this.maxSize;
-                } else {
-                    // naar rechts zwemmen
-                    this.sprite.scaleX = this.maxSize;
-                }
-
-                this.sprite.scaleY = this.maxSize;
+        if (this.sprite.scaleY > this.maxSize) {
+            if (this.sprite.scaleX < 0){
+                // naar links zwemmen
+                this.sprite.scaleX = -this.maxSize;
+            } else {
+                // naar rechts zwemmen
+                this.sprite.scaleX = this.maxSize;
             }
-        // }
+
+            this.sprite.scaleY = this.maxSize;
+        }
     }
 
     eatFish() {
-        // fish eat verhogen
-        // this.fishEat++;
-
         // food verhogen 
         increaseFood();
 
@@ -212,34 +190,6 @@ class Player{
         setTimeout(function(){
             tmpScoreText.setText("");
         }, 3000);
-
-        // // als de fisheat gelijk is aan 5,10,15,20 etc
-        // if ((this.fishEat % this.evolutionPointDivider) == 0) {
-        //     // aantal punten bijhouden
-        //     this.evolutionPoints++;
-        // }
-
-        // // Als je minimaal 1 evolution punt hebt
-        // if (this.evolutionPoints > 0) {
-        //     // groote van de player aanpassen
-        //     this.sprite.scaleX = (this.sprite.scaleX * 1.1);
-        //     this.sprite.scaleY = (this.sprite.scaleY * 1.1);
-
-        //     // evolutie punten -1
-        //     this.evolutionPoints--;
-
-        //     if (this.sprite.scaleY > this.maxSize) {
-        //         if (this.sprite.scaleX < 0){
-        //             // naar links zwemmen
-        //             this.sprite.scaleX = -this.maxSize;
-        //         } else {
-        //             // naar rechts zwemmen
-        //             this.sprite.scaleX = this.maxSize;
-        //         }
-
-        //         this.sprite.scaleY = this.maxSize;
-        //     }
-        // }
     }
 
     die() {
