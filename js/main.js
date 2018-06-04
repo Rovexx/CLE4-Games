@@ -132,7 +132,7 @@ function update() {
         ai.update();
 
         // colission
-        if (coll(player, ai, 40)) {
+        if (coll(player, ai)) {
             // destroy spri;e
             ai.sprite.destroy(true);
             ai = null;
@@ -152,22 +152,18 @@ function update() {
 /**
  * Detect collision between 2 objects
  */
-function coll(n1, n2, collisionWidth) {
+function coll(n1, n2) {
     // Get the raw sprites from the objects
     s1 = n1.sprite
     s2 = n2.sprite
 
     // checken of de sprite nog levend is
     if (s1.active == true && s2.active == true) {
-        // Do the maths
-        // if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
-        //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
-        //     return true
-        // }
-        if (s1.x <= s2.x + collisionWidth && s1.x >= s2.x - collisionWidth &&
-            s1.y <= s2.y + collisionWidth && s1.y >= s2.y - collisionWidth) {
-            return true
-        }
+        if (s1.x + (s1.width / 3) >= s2.x - (s2.width / 3) &&
+            s1.x - (s1.width / 3) <= s2.x + (s2.width / 3) &&
+            s1.y + (s1.height / 3) >= s2.y - (s2.height / 3) &&
+            s1.y - (s1.height / 3) <= s2.y + (s2.height / 3)) {
+                return true;
     }
 
     // Return false if collision has not been detected
