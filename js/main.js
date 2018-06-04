@@ -101,6 +101,9 @@ function create() {
 
     // Sleep on start
     game.loop.sleep()
+
+    document.getElementById("buttonStartGame").classList.remove("loading")
+    document.getElementById("buttonStartGame").innerHTML = "Start Game"
 }
 
 let tmpNet = false

@@ -77,6 +77,13 @@ canvas {
     color: rgba(255, 255, 255, 0.6);
 }
 
+.btn.loading {
+    cursor: auto;
+    animation-name: none;
+    background-color: rgba(27,27,27,.34);
+    pointer-events: none;
+}
+
 @keyframes hover {
     50% {
         transform: translateY(-3px);
