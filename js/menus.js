@@ -17,10 +17,10 @@ function startGame(){
     showUI();
 
     // Request full screen
-    if (document.body.requestFullscreen)             document.body.requestFullscreen()
-    else if (document.body.mozRequestFullScreen)     document.body.mozRequestFullScreen()
-    else if (document.body.webkitRequestFullscreen)  document.body.webkitRequestFullscreen()
-    else if (document.body.msRequestFullscreen)      document.body.msRequestFullscreen()
+    // if (document.body.requestFullscreen)             document.body.requestFullscreen()
+    // else if (document.body.mozRequestFullScreen)     document.body.mozRequestFullScreen()
+    // else if (document.body.webkitRequestFullscreen)  document.body.webkitRequestFullscreen()
+    // else if (document.body.msRequestFullscreen)      document.body.msRequestFullscreen()
 }
 function backToGame(){
     closeGameMenu();
@@ -81,19 +81,20 @@ function evolveSpeed(el){
         clicked = true;
         // current value not more then the max
         if (player.speed <= player.maxSpeed){
-            el.srcElement.value ++;
+            el.target.value++;
             player.speed += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
 }
 function evolveSight(el){
     if (!clicked) {
-        console.log("sight")
         // current value not more then the max
         if (player.sight <= player.maxSight){
-            el.srcElement.value ++;
+            el.target.value ++;
             player.sight += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -105,6 +106,7 @@ function evolveBodySize(el){
         if (player.bodySize <= player.maxBodySize){
             el.srcElement.value ++;
             player.bodySize += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -116,6 +118,7 @@ function evolveTemperature(el){
         if (player.temperature <= player.maxTemperature){
             el.srcElement.value ++;
             player.temperature += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -128,6 +131,7 @@ function evolveDepth(el){
         if (player.depth <= player.maxDepth){
             el.srcElement.value ++;
             player.depth += 100;
+            sound.play("upgrade")
         }
     }
     setTimeout(closeEvolveMenu, 1000);
@@ -138,10 +142,12 @@ function evolveDepth(el){
 function openStartMenu() {
     document.getElementById("startMenu").classList.remove("hide");
     game.loop.sleep()
+    sound.play("click")
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
     game.loop.wake()
+    sound.play("click")
 }
 
 function showUI() {
@@ -154,18 +160,24 @@ function closeUI() {
 function openGameMenu() {
     document.getElementById("gameMenu").classList.remove("hide");
     game.loop.sleep()
+    sound.play("click")
 }
 function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide");
     game.loop.wake()
+    sound.play("click")
 }
 
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
     game.loop.sleep()
+
+    sound.music.volume = 0.3
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
     game.loop.wake()
+
+    sound.music.volume = 0.5
 }

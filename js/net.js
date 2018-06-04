@@ -3,7 +3,7 @@ let net = {
 	_sprite: false,
 	// The speed without player movement
 	_baseSpeed: 0,
-	
+
 	/**
 	 * Spwan a new net
 	 * @param  {object} context The game context
@@ -68,7 +68,6 @@ let net = {
 
 		// Game over if the player is 600px in the net
 		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 600) {
-			//alert("Je bent dood");
 			player.die();
 		}
 	}

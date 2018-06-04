@@ -30,6 +30,13 @@ class Player{
         this.depth = 1;
         this.dead = false // player default status is niet dood
 
+         // max variabelen:
+        this.maxSpeed = 800;
+        this.maxSight = 5;
+        this.maxBodySize = 5;
+        this.maxTemperature = 5;
+        this.maxDepth = 5;
+
         //destination coords:
         this.dest = {
             x : posX,
@@ -57,7 +64,7 @@ class Player{
     pointerMovehandler(pointer){
         if (this.dead === false) {
             this.pointerX = pointer.x;
-            this.pointerY = pointer.y;            
+            this.pointerY = pointer.y;
         }
     }
 
@@ -72,7 +79,7 @@ class Player{
             let newDestY = this.pointerY + this.cameraY;
             this.dest.x = newDestX;
             this.dest.y = newDestY;
-            
+
         }
     }
 
@@ -180,12 +187,16 @@ class Player{
     }
 
     eatFish() {
-        // food verhogen 
+        // food verhogen
         increaseFood();
 
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
-        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
+        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, "+1", {
+            fontSize: "32px",
+            fontWeight: "bold",
+            fill: "#0f0"
+        })
 
         /* delete text na 3 seconden */
         setTimeout(function(){
@@ -208,7 +219,7 @@ class Player{
             this.dead = true;
 
             // reload game na 3 seconden
-            setTimeout(function(){ 
+            setTimeout(function(){
                 location.reload();
             }, 4000);
         }
