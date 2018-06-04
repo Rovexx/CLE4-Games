@@ -1,7 +1,7 @@
 let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
-    document.getElementById("buttonStartGame").addEventListener("click", startGame);
+    document.getElementById("buttonStartGame").addEventListener("click", obd.show);
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
     document.getElementById("buttonStoppen").addEventListener("click", stopGame);
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("depth").addEventListener("click", evolveDepth);
 })
 // Menu actions (opening and closing menus)
-function startGame(){
-    closeStartMenu();
+function startGame() {
     showUI();
+    game.loop.wake()
 
     // Request full screen
     // if (document.body.requestFullscreen)             document.body.requestFullscreen()
@@ -146,7 +146,6 @@ function openStartMenu() {
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
-    game.loop.wake()
     sound.play("click")
 }
 

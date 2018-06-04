@@ -16,7 +16,7 @@
             </div>
             <div class="overlay-content" id="overlaybuttons">
                 <img src="assets/img/logo.png" alt="katvis Evolutie">
-                <a id="buttonStartGame" class="btn">Start Game</a>
+                <a id="buttonStartGame" class="btn loading">Loading</a>
             </div>
         </div>
         <!-- game menu overlay -->
@@ -68,10 +68,24 @@
             <div class="barContainer" id="healthBar">
                 <div class="bar" id="health">Levens</div>
             </div>
+
         </div>
+
+		<!-- Uitleg -->
+		<div id="obd">
+			<p id="obdText"></p>
+
+			<img id="obdScAi" src="assets/img/ai.png">
+			<img id="obdScPlayer" src="assets/img/fish_tmp.png">
+			<img id="obdScEnemy" src="assets/img/enemy.png">
+
+			<a id="obdBtn" class="btn">Volgende</a>
+			<span id="obdSkip">Sla uitleg over</span>
+		</div>
         <script src="js/phaser.min.js"></script>
         <script src="js/sound.js"></script>
         <script src="js/menus.js"></script>
+  	    <script src="js/obd.js"></script>
   	    <script src="js/net.js"></script>
   	    <script src="js/background.js"></script>
   	    <script src="js/player.js"></script>
