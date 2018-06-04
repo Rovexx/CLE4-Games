@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
     document.getElementById("speed").addEventListener("click", evolveSpeed);
     document.getElementById("sight").addEventListener("click", evolveSight);
-    document.getElementById("camouflage").addEventListener("click", evolveCamouflage);
-    document.getElementById("size").addEventListener("click", evolveSize);
+    document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
 })
@@ -75,43 +74,62 @@ function increaseFood(){
     }
 }
 
+
 // Evolving actions
 function evolveSpeed(el){
-    clicked = true
-    if (clicked) {
-        el.srcElement.value++;
-        player.speed += 100;
-        // Dont go faster then the max speed
-        if (player.speed >= player.maxSpeed) {
-            player.speed = player.maxSpeed;
+    if (!clicked) {
+        clicked = true;
+        // current value not more then the max
+        if (player.speed <= player.maxSpeed){
+            el.srcElement.value ++;
+            player.speed += 100;
         }
     }
     setTimeout(closeEvolveMenu, 1000);
-    clicked = false;
 }
 function evolveSight(el){
-    el.srcElement.value ++;
-    player.sight += 1;
+    if (!clicked) {
+        console.log("sight")
+        // current value not more then the max
+        if (player.sight <= player.maxSight){
+            el.srcElement.value ++;
+            player.sight += 100;
+        }
+    }
     setTimeout(closeEvolveMenu, 1000);
+    clicked = true;
 }
-function evolveCamouflage(el){
-    el.srcElement.value ++;
-    player.camouflage += 1;
+function evolveBodySize(el){
+    if (!clicked) {
+        // current value not more then the max
+        if (player.bodySize <= player.maxBodySize){
+            el.srcElement.value ++;
+            player.bodySize += 100;
+        }
+    }
     setTimeout(closeEvolveMenu, 1000);
-}
-function evolveSize(el){
-    el.srcElement.value ++;
-    player.bodySize += 1
-    setTimeout(closeEvolveMenu, 1000);
+    clicked = true;
 }
 function evolveTemperature(el){
-    el.srcElement.value ++;
-    player.temperatureResistance += 1;
+    if (!clicked) {
+        // current value not more then the max
+        if (player.temperature <= player.maxTemperature){
+            el.srcElement.value ++;
+            player.temperature += 100;
+        }
+    }
     setTimeout(closeEvolveMenu, 1000);
+    clicked = true;
 }
 function evolveDepth(el){
-    el.srcElement.value ++;
-    player.maxDepth += 1;
+    if (!clicked) {
+        clicked = true;
+        // current value not more then the max
+        if (player.depth <= player.maxDepth){
+            el.srcElement.value ++;
+            player.depth += 100;
+        }
+    }
     setTimeout(closeEvolveMenu, 1000);
 }
 
@@ -155,6 +173,7 @@ function openEvolveMenu() {
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
+    clicked = false;
     game.loop.wake()
 
     sound.music.volume = 0.5
