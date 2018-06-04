@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStoppen").addEventListener("click", stopGame);
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
     document.getElementById("speed").addEventListener("click", evolveSpeed);
-    document.getElementById("sight").addEventListener("click", evolveSight);
     document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
@@ -93,7 +92,7 @@ function evolveBodySize(el){
     if (!clicked) {
         // current value not more then the max
         if (player.bodySize <= player.maxBodySize){
-            el.srcElement.value ++;
+            el.target.value ++;
             player.bodySize += 100;
             sound.play("upgrade")
         }
@@ -105,7 +104,7 @@ function evolveTemperature(el){
     if (!clicked) {
         // current value not more then the max
         if (player.temperature <= player.maxTemperature){
-            el.srcElement.value ++;
+            el.target.value ++;
             player.temperature += 100;
             sound.play("upgrade")
         }
@@ -114,11 +113,12 @@ function evolveTemperature(el){
     clicked = true;
 }
 function evolveDepth(el){
+    console.log("depth")
     if (!clicked) {
         clicked = true;
         // current value not more then the max
         if (player.depth <= player.maxDepth){
-            el.srcElement.value ++;
+            el.target.value ++;
             player.depth += 100;
             sound.play("upgrade")
         }

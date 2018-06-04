@@ -27,7 +27,7 @@ class Player{
         //default temperature Resistance
         this.temperature = 1;
         //default max Depth
-        this.depth = 1;
+        this.depth = 500;
         this.dead = false // player default status is niet dood
 
          // max variabelen:
@@ -165,6 +165,16 @@ class Player{
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
         this.cameraY = initializer.cameras.main.scrollY;
+
+        // If too deep do beep beep
+        if (player.sprite.y > player.depth) {
+            document.getElementById("alertDepth").style.transform = "translateY(0%)"
+            
+            if (!sound.alert.isPlaying) sound.play("alert")
+        }
+        else {
+            document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+        }
     }
 
     increaseSize() {
