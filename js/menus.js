@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
-
-    document.getElementById("buttonEvolveMenu").addEventListener("click", evolveMenu);//temporary
 })
 // Menu actions (opening and closing menus)
 function startGame(){
@@ -66,7 +64,6 @@ function increaseFood(){
     }
     else {
         evolveMenu();
-        clicked = false
         element.style.width = "0%";
     }
 }

@@ -8,7 +8,6 @@ var config = {
         arcade: {
             gravity: { y: 300 },
             debug: false
-            // debug: true
         }
     },
     scene: {
@@ -107,7 +106,7 @@ function update() {
     if (!tmpNet) {
         tmpNet = true
         setTimeout(() => {
-            //net.spawn(this)
+            net.spawn(this)
         }, 7000)
     }
 
