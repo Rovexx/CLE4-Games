@@ -81,7 +81,7 @@ class Player{
             let newDestY = this.pointerY + this.cameraY;
             this.dest.x = newDestX;
             this.dest.y = newDestY;
-            
+
         }
     }
 
@@ -198,12 +198,16 @@ class Player{
         // fish eat verhogen
         this.fishEat++;
 
-        // food verhogen 
+        // food verhogen
         increaseFood();
 
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
-        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, '+1', { fontSize: '32px', fill: 'green' });
+        let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, "+1", {
+            fontSize: "32px",
+            fontWeight: "bold",
+            fill: "#0f0" 
+        })
 
         /* delete text na 3 seconden */
         setTimeout(function(){
