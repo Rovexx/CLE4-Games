@@ -57,8 +57,10 @@ class Player{
     }
 
     pointerDownHandler(pointer){
-        this.pointerDown = true;
-        this.pointerMovehandler(pointer);
+        if (this.dead === false) {
+            this.pointerDown = true;
+            this.pointerMovehandler(pointer);            
+        }
     }
 
     pointerMovehandler(pointer){
