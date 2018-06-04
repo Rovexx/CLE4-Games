@@ -81,7 +81,7 @@ function evolveSpeed(el){
         clicked = true;
         // current value not more then the max
         if (player.speed <= player.maxSpeed){
-            el.srcElement.value ++;
+            el.target.value++;
             player.speed += 100;
             sound.play("upgrade")
         }
@@ -92,7 +92,7 @@ function evolveSight(el){
     if (!clicked) {
         // current value not more then the max
         if (player.sight <= player.maxSight){
-            el.srcElement.value ++;
+            el.target.value ++;
             player.sight += 100;
             sound.play("upgrade")
         }

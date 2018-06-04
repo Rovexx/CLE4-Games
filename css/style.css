@@ -148,17 +148,6 @@ canvas {
     pointer-events: all;
     box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
 }
-#buttonEvolveMenu {
-    right: 0;
-    height: 30px;
-    width: 150px;
-    border-radius: 10px;
-    background-color: rgb(56, 199, 255);
-    color: white;
-    position: absolute;
-    pointer-events: all;
-    box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
-}
 /* evolve feature bars */
 .evolveBars {
     width: 500px;

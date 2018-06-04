@@ -73,7 +73,7 @@ function spawnRandomFish(initializer){
         }
     }
 
-    if (numOfFish < 2){
+    if (numOfFish < 5){
         //generate random spawn coordinates:
         let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
         let spawnY = Math.random() * (maxPosY - minPosY) + minPosY;
