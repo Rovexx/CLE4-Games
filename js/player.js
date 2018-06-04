@@ -31,9 +31,9 @@ class Player{
         this.dead = false // player default status is niet dood
 
          // max variabelen:
-        this.maxSpeed = 800;
+        this.maxSpeed = 700;
         this.maxSight = 5;
-        this.maxBodySize = 5;
+        this.maxBodySize = 0.73;
         this.maxTemperature = 5;
         this.maxDepth = 5;
 
@@ -173,16 +173,16 @@ class Player{
         this.sprite.scaleY = (this.sprite.scaleY * 1.1);
         this.bodySize = this.sprite.scaleX;
 
-        if (this.sprite.scaleY > this.maxSize) {
+        if (this.sprite.scaleY > this.maxBodySize) {
             if (this.sprite.scaleX < 0){
                 // naar links zwemmen
-                this.sprite.scaleX = -this.maxSize;
+                this.sprite.scaleX = -this.maxBodySize;
             } else {
                 // naar rechts zwemmen
-                this.sprite.scaleX = this.maxSize;
+                this.sprite.scaleX = this.maxBodySize;
             }
 
-            this.sprite.scaleY = this.maxSize;
+            this.sprite.scaleY = this.maxBodySize;
         }
     }
 

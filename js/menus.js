@@ -77,7 +77,7 @@ function increaseFood(){
 
 // Evolving actions
 function evolveSpeed(el){
-    if (!clicked) {
+    if (!clicked && player.speed <= player.maxSpeed) {
         clicked = true;
         // current value not more then the max
         if (player.speed <= player.maxSpeed){
@@ -101,11 +101,11 @@ function evolveSight(el){
     clicked = true;
 }
 function evolveBodySize(el){
-    if (!clicked) {
+    if (!clicked && player.bodySize <= player.maxBodySize) {
         // current value not more then the max
         if (player.bodySize <= player.maxBodySize){
-            el.srcElement.value ++;
-            player.bodySize += 100;
+            el.srcElement.value++;
+            player.increaseSize();
             sound.play("upgrade")
         }
     }
