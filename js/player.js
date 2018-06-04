@@ -22,24 +22,24 @@ class Player{
         this.speed = 400;
         //default sight:
         this.sight = 1;
-        //default camouflage
-        this.camouflage = 1;
         //default size
         this.bodySize = 1;
         //default temperature Resistance
-        this.temperatureResistance = 1;
+        this.temperature = 1;
         //default max Depth
-        this.maxDepth = 1;
+        this.depth = 1;
 
+        // max variabelen:
+        this.maxSpeed = 800;
+        this.maxSight = 5;
+        this.maxBodySize = 5;
+        this.maxTemperature = 5;
+        this.maxDepth = 5;
 
         // evolutie punten
         this.evolutionPointDivider = 5;
         this.evolutionPoints = 0;
         this.fishEat = 0;
-
-        // max variabelen:
-        this.maxSpeed = 700;
-        this.maxSize = 1;
 
         //destination coords:
         this.dest = {
