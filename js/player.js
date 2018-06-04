@@ -66,7 +66,7 @@ class Player{
     }
 
     swim(){
-        if (this.pointerDown){
+        if (this.pointerDown && this.dead === false){
             let minDifference = 50;
             let newDestX = this.pointerX + this.cameraX;
             let newDestY = this.pointerY + this.cameraY;
@@ -153,8 +153,10 @@ class Player{
         //set rotation of fish
         this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
-        //move the fish:
-        this.swim();
+        if (this.dead === false) {
+            //move the fish:
+            this.swim();            
+        }
 
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
@@ -207,10 +209,23 @@ class Player{
              niet de heletijd verandert */
             this.dead = true;
 
-            // reload game na 3 seconden
+            // stop de vis
+            this.dest.x = this.sprite.x;
+            this.dest.y = this.sprite.y;
+            this.sprite.rotation = this.calcAngle(this.difY, this.difX);
+
+            // reload game na x seconden
             setTimeout(function(){ 
-                location.reload();
-            }, 4000);
+                // reload button showen
+                document.getElementById('overlayrestart').classList.remove("hide");
+                document.getElementById('overlaybuttons').classList.add("hide");
+                document.getElementById('startMenu').classList.remove("hide");
+
+                // reload button functioneel maken
+                document.getElementById('buttonRestartGame').addEventListener('click', function(){
+                    location.reload();
+                });
+            }, 3000);
         }
     }
 }
