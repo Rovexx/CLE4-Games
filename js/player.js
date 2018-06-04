@@ -218,10 +218,23 @@ class Player{
              niet de heletijd verandert */
             this.dead = true;
 
-            // reload game na 3 seconden
-            setTimeout(function(){
-                location.reload();
-            }, 4000);
+            // stop de vis
+            this.dest.x = this.sprite.x;
+            this.dest.y = this.sprite.y;
+            this.sprite.rotation = this.calcAngle(this.difY, this.difX);
+
+            // reload game na x seconden
+            setTimeout(function(){ 
+                // reload button showen
+                document.getElementById('overlayrestart').classList.remove("hide");
+                document.getElementById('overlaybuttons').classList.add("hide");
+                document.getElementById('startMenu').classList.remove("hide");
+
+                // reload button functioneel maken
+                document.getElementById('buttonRestartGame').addEventListener('click', function(){
+                    location.reload();
+                });
+            }, 3000);
         }
     }
 }
