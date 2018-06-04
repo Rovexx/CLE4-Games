@@ -9,6 +9,9 @@ class Player{
         this.sprite.body.allowGravity = false;
         this.sprite.scaleX = 0.5;
         this.sprite.scaleY = 0.5;
+        //minimum difference before the direction of the fish flips:
+        this.totalDif = 0;
+        this.minDifference = 10;
 
         //mouse variables used to determine if the swim function has to be fired every update loop:
         this.pointerDown = false;
@@ -74,8 +77,12 @@ class Player{
 
     swim(){
         if (this.pointerDown){
-            this.dest.x = this.pointerX + this.cameraX;
-            this.dest.y = this.pointerY + this.cameraY;
+            let minDifference = 50;
+            let newDestX = this.pointerX + this.cameraX;
+            let newDestY = this.pointerY + this.cameraY;
+            this.dest.x = newDestX;
+            this.dest.y = newDestY;
+            
         }
     }
 
@@ -86,7 +93,7 @@ class Player{
 
             let dir;
 
-            if (dif > 0) {
+            if (dif >= 0) {
                 //right
                 dir = 1;
             } else {
@@ -118,7 +125,7 @@ class Player{
 
    calcAngle(opposite, adjacent) {
         let angle = Math.atan(opposite / adjacent);
-        if (isNaN(angle)) {
+        if (isNaN(angle) || this.totalDif < this.minDifference  ) {
             return 0;
         } else {
             return angle;
@@ -132,6 +139,7 @@ class Player{
         //calculate speed:
         this.difX = this.dif(this.dest.x, this.sprite.x);
         this.difY = this.dif(this.dest.y, this.sprite.y);
+        this.totalDif = Math.sqrt( Math.pow(this.difX, 2) + Math.pow(this.difY, 2) )
         let absDifX = Math.abs(this.difX);
         let absDifY = Math.abs(this.difY);
         let difTotal = absDifX + absDifY;
@@ -145,10 +153,10 @@ class Player{
         this.stepAxis("y", delta, this.speedY);
 
         //set direction of the sprite
-        if (this.difX > 0) {
+        if (this.difX >  0 && this.totalDif > this.minDifference) {
             this.sprite.scaleX = Math.abs(this.sprite.scaleX);
         }
-        else if (this.difX < 0) {
+        else if (this.difX < 0 && this.totalDif > this.minDifference) {
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 

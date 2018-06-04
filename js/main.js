@@ -3,6 +3,8 @@ var config = {
     width: 800,
     height: 600,
     parent: "game",
+    disableContextMenu: true,
+    transparent: true,
     physics: {
         default: 'arcade',
         arcade: {
@@ -41,7 +43,6 @@ function preload() {
 
     this.load.image("ai", "assets/img/ai.png");
     this.load.image("fish_tmp", "assets/img/fish_tmp.png");
-    this.load.image("fish_dead", "assets/img/fish_dead.png");
     this.load.image("net", "assets/img/net.png");
     background = new Background(this);
 
@@ -97,12 +98,13 @@ function create() {
     AIs.push(new Ai(this, 500, 200));
 
     sound.create(this)
+
+    // Sleep on start
+    game.loop.sleep()
 }
 
 let tmpNet = false
 function update() {
-    if (!hasStarted) return
-
     background.update(this);
 
     if (!tmpNet) {
@@ -130,11 +132,12 @@ function update() {
         ai.update();
 
         // colission
-        if (coll(player, ai)) {
+        if (coll(player, ai, 40)) {
             // destroy spri;e
             ai.sprite.destroy(true);
             ai = null;
 
+            increaseFood()
             sound.play("eat")
 
             // snelheid toevoegen aan player
@@ -143,23 +146,26 @@ function update() {
     }
 
     sound.update()
-    net.update(this, player)
+    net.update(this)
 }
 
 /**
  * Detect collision between 2 objects
  */
-function coll(n1, n2) {
+function coll(n1, n2, collisionWidth) {
     // Get the raw sprites from the objects
     s1 = n1.sprite
     s2 = n2.sprite
 
     // checken of de sprite nog levend is
     if (s1.active == true && s2.active == true) {
-        if (s1.x + (s1.width / 3) >= s2.x - (s2.width / 3) &&
-            s1.x - (s1.width / 3) <= s2.x + (s2.width / 3) &&
-            s1.y + (s1.height / 3) >= s2.y - (s2.height / 3) &&
-            s1.y - (s1.height / 3) <= s2.y + (s2.height / 3)) {
+        // Do the maths
+        // if (s1.y - s1.width  / 2 * s1.scaleX < s2.x + s2.width  / 2 * s2.scaleX && s1.x + s1.width  / 2 * s1.scaleX > s2.x - s2.width  / 2 * s2.scaleX &&
+        //     s1.y - s1.height / 2 * s1.scaleY < s2.y + s2.height / 2 * s2.scaleY && s1.y + s1.height / 2 * s1.scaleY > s2.y - s2.height / 2 * s2.scaleY ) {
+        //     return true
+        // }
+        if (s1.x <= s2.x + collisionWidth && s1.x >= s2.x - collisionWidth &&
+            s1.y <= s2.y + collisionWidth && s1.y >= s2.y - collisionWidth) {
             return true
         }
     }
