@@ -67,8 +67,10 @@ class Player{
     }
 
     pointerMovehandler(pointer){
-        this.pointerX = pointer.x;
-        this.pointerY = pointer.y;
+        if (this.dead === false) {
+            this.pointerX = pointer.x;
+            this.pointerY = pointer.y;            
+        }
     }
 
     pointerUpHandler(){
@@ -241,15 +243,21 @@ class Player{
     }
 
     die() {
-        // if (this.dead === false) {
-        //     // sprite veranderen naar dead sprite
-        //     this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
-        //     this.sprite.setCollideWorldBounds(true);
-        //     this.sprite.body.allowGravity = false;
+        if (this.dead === false) {
+            // sprite veranderen naar dead sprite
+            this.sprite.destroy(true);
+            this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
+            this.sprite.setCollideWorldBounds(true);
+            this.sprite.body.allowGravity = false;
 
-        //     /* Ervoor zorgen dat de player sprite
-        //      niet de heletijd verandert */
-        //     this.dead = true;
-        // }
+            /* Ervoor zorgen dat de player sprite
+             niet de heletijd verandert */
+            this.dead = true;
+
+            // reload game na 3 seconden
+            setTimeout(function(){ 
+                location.reload();
+            }, 3000);
+        }
     }
 }

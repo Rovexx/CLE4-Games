@@ -164,6 +164,7 @@ function coll(n1, n2) {
             s1.y + (s1.height / 3) >= s2.y - (s2.height / 3) &&
             s1.y - (s1.height / 3) <= s2.y + (s2.height / 3)) {
                 return true;
+        }
     }
 
     // Return false if collision has not been detected
