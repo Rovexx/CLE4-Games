@@ -32,7 +32,6 @@ class Player{
 
          // max variabelen:
         this.maxSpeed = 800;
-        this.maxSight = 5;
         this.maxBodySize = 5;
         this.maxTemperature = 5;
         this.maxDepth = 5;
@@ -224,7 +223,7 @@ class Player{
             this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
             // reload game na x seconden
-            setTimeout(function(){ 
+            setTimeout(function(){
                 // reload button showen
                 document.getElementById('overlayrestart').classList.remove("hide");
                 document.getElementById('overlaybuttons').classList.add("hide");

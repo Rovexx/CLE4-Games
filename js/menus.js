@@ -88,18 +88,7 @@ function evolveSpeed(el){
     }
     setTimeout(closeEvolveMenu, 1000);
 }
-function evolveSight(el){
-    if (!clicked) {
-        // current value not more then the max
-        if (player.sight <= player.maxSight){
-            el.target.value ++;
-            player.sight += 100;
-            sound.play("upgrade")
-        }
-    }
-    setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
-}
+
 function evolveBodySize(el){
     if (!clicked) {
         // current value not more then the max
