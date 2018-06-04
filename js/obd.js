@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			}, 1300)
 		},
 		() => {
-			sound.play("upgrade")
 			document.getElementById("obdScEnemy").style.left = "12%"
 			document.getElementById("obdScAi").style.right = "-15%"
 
@@ -63,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("obdBtn").addEventListener("click", () => {
 		if (clicked) return
 		clicked = true
+
+		sound.play("click")
 
 		document.getElementById("obdText").style.opacity = "0"
 
