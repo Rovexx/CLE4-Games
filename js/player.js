@@ -223,7 +223,10 @@ class Player{
             this.dest.y = this.sprite.y;
             this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
-            // reload game na x seconden
+            // health bar 2%
+            document.getElementById('health').style.width = 2 + "%";
+
+            // button showen na x seconden
             setTimeout(function(){ 
                 // reload button showen
                 document.getElementById('overlayrestart').classList.remove("hide");
