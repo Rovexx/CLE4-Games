@@ -27,12 +27,11 @@ class Player{
         //default temperature Resistance
         this.temperature = 1;
         //default max Depth
-        this.depth = 1;
+        this.depth = 500;
         this.dead = false // player default status is niet dood
 
          // max variabelen:
         this.maxSpeed = 800;
-        this.maxSight = 5;
         this.maxBodySize = 5;
         this.maxTemperature = 5;
         this.maxDepth = 5;
@@ -196,6 +195,16 @@ class Player{
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
         this.cameraY = initializer.cameras.main.scrollY;
+
+        // If too deep do beep beep
+        if (player.sprite.y > player.depth) {
+            document.getElementById("alertDepth").style.transform = "translateY(0%)"
+            
+            if (!sound.alert.isPlaying) sound.play("alert")
+        }
+        else {
+            document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+        }
     }
 
     increaseSize() {
@@ -257,7 +266,7 @@ class Player{
             this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
             // reload game na x seconden
-            setTimeout(function(){ 
+            setTimeout(function(){
                 // reload button showen
                 document.getElementById('overlayrestart').classList.remove("hide");
                 document.getElementById('overlaybuttons').classList.add("hide");

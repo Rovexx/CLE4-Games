@@ -43,6 +43,7 @@ class SoundEngine {
 		context.load.audio("net", ["assets/sound/net.mp3"])
 		context.load.audio("upgrade", ["assets/sound/upgrade.mp3"])
 		context.load.audio("click", ["assets/sound/click.mp3"])
+		context.load.audio("alert", ["assets/sound/alert.mp3"])
 	}
 
 	create(context) {
@@ -70,6 +71,7 @@ class SoundEngine {
 		this.net = context.sound.add("net")
 		this.upgrade = context.sound.add("upgrade")
 		this.click = context.sound.add("click")
+		this.alert = context.sound.add("alert")
 	}
 
 	update(context) {

@@ -184,7 +184,42 @@ canvas {
     height: 20vh;
 }
 
+/* Alerts */
 
+#alert {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#alert > div {
+    transform: translateY(-150%);
+    padding: 1vh 3vh;
+    font-size: 7vh;
+    color: #f00;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation-name: alert;
+    animation-duration: .3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    text-shadow: 0px 0px .3vh #f00;
+    transition: transform .3s;
+}
+
+@keyframes alert {
+    50% {
+        color: #f00;
+        text-shadow: 0px 0px .3vh #f00;
+    }
+
+    100% {
+        color: #C20C0C;
+        text-shadow: 0px 0px .8vh #f00;
+    }
+}
 
 /* Healt/food bars background */
 .barContainer {
