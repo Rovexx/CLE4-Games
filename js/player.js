@@ -23,18 +23,18 @@ class Player{
         //default sight:
         this.sight = 1;
         //default size
-        this.bodySize = this.sprite.scaleX;
+        this.bodySize = 0;
         //default temperature Resistance
-        this.temperature = 1;
+        this.temperature = 800;
         //default max Depth
-        this.depth = 500;
+        this.depth = 950;
         this.dead = false // player default status is niet dood
 
          // max variabelen:
         this.maxSpeed = 800;
-        this.maxBodySize = 5;
-        this.maxTemperature = 5;
-        this.maxDepth = 5;
+        this.maxBodySize = 3;
+        this.maxTemperature = 1800;
+        this.maxDepth = 1800;
 
         //destination coords:
         this.dest = {
@@ -192,6 +192,9 @@ class Player{
         //move the fish:
         this.swim();
 
+        this.sprite.scaleX = 0.5 + this.bodySize / 16
+        this.sprite.scaleY = 0.5 + this.bodySize / 16
+
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
         this.cameraY = initializer.cameras.main.scrollY;
@@ -199,11 +202,20 @@ class Player{
         // If too deep do beep beep
         if (player.sprite.y > player.depth) {
             document.getElementById("alertDepth").style.transform = "translateY(0%)"
-            
+            document.getElementById("alertThemp").style.transform = "translateY(-150%)"
+
+            if (!sound.alert.isPlaying) sound.play("alert")
+        }
+        // If too cold do bolt bolt
+        else if (player.sprite.y > player.temperature) {
+            document.getElementById("alertThemp").style.transform = "translateY(0%)"
+            document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+
             if (!sound.alert.isPlaying) sound.play("alert")
         }
         else {
             document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+            document.getElementById("alertThemp").style.transform = "translateY(-150%)"
         }
     }
 
@@ -253,8 +265,8 @@ class Player{
             this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
             this.sprite.setCollideWorldBounds(true);
             this.sprite.body.allowGravity = false;
-            this.sprite.scaleX = this.bodySize;
-            this.sprite.scaleY = this.bodySize;
+            this.sprite.scaleX = 0.5 + this.bodySize / 165;
+            this.sprite.scaleY = 0.5 + this.bodySize / 16;
 
             /* Ervoor zorgen dat de player sprite
              niet de heletijd verandert */
@@ -264,6 +276,8 @@ class Player{
             this.dest.x = this.sprite.x;
             this.dest.y = this.sprite.y;
             this.sprite.rotation = this.calcAngle(this.difY, this.difX);
+
+            sound.net.stop()
 
             // reload game na x seconden
             setTimeout(function(){
@@ -277,6 +291,11 @@ class Player{
                     location.reload();
                 });
             }, 3000);
+
+            gameOver = true
+
+            document.getElementById("restartTimer").innerHTML = timer.formatted
+            document.getElementById("restartPerc").innerHTML = Math.round(timer.time / 220 * 100) + "%"
         }
     }
 }

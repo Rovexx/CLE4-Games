@@ -12,11 +12,17 @@
         <div id="startMenu" class="overlay">
             <!-- Buttons -->
             <div class="overlay-content hide" id="overlayrestart">
+				<p>
+					Je hebt het <span id="restartTimer"></span> volgehouden.
+				</p>
+				<p>
+					Dat is beter dan <span id="restartPerc"></span> van alle spelers!
+				</p>
                 <a id="buttonRestartGame" class="btn">Opnieuw <i class="fa fa-restart"></i></a>
             </div>
             <div class="overlay-content" id="overlaybuttons">
                 <img src="assets/img/logo.png" alt="katvis Evolutie">
-                <a id="buttonStartGame" class="btn loading">Loading</a>
+                <a id="buttonStartGame" class="btn loading">Laden...</a>
             </div>
         </div>
         <!-- game menu overlay -->
@@ -37,18 +43,30 @@
                 <div class="evolveBar">
                     <a>Snelheid</a>
                     <progress id="speed" value="1" max="5"></progress>
+					<p>
+						Maakt je sneller zodat je weg kunt zwemmen voor de roofvissen en de netten.
+					</p>
                 </div>
                 <div class="evolveBar">
-                    <a>grootte</a>
-                    <progress id="bodySize" value="1" max="5"></progress>
+                    <a>Grootte</a>
+                    <progress id="bodySize" value="1" max="4"></progress>
+					<p>
+						Als je groter bent durven roofvissen je minder snel aan te vallen.
+					</p>
                 </div>
                 <div class="evolveBar">
-                    <a>Weerstand</a>
-                    <progress id="temperature" value="1" max="5"></progress>
+                    <a>Temperatuurbestendigheid</a>
+                    <progress id="temperature" value="1" max="3"></progress>
+					<p>
+						Als je beter tegen temperatuur verschillen kan mag je dieper zwemmen.
+					</p>
                 </div>
                 <div class="evolveBar">
                     <a>Max Diepte</a>
-                    <progress id="depth" value="1" max="5"></progress>
+                    <progress id="depth" value="1" max="4"></progress>
+					<p>
+						Zorgt er voor dat je beter tegen de druk van het water kan als je dieper zwemt.
+					</p>
                 </div>
             </div>
         </div>
@@ -65,9 +83,21 @@
                 <div class="bar" id="health">Levens</div>
             </div>
 
+			<div id="timer">
+				00:00
+			</div>
+
+			<div id="hint">
+				Zwem weg!
+				<span>⟶</span>
+			</div>
+
 			<div id="alert">
 				<div id="alertDepth">
 					Te diep
+				</div>
+				<div id="alertThemp">
+					Te koud
 				</div>
 			</div>
         </div>
@@ -86,6 +116,7 @@
         <script src="js/phaser.min.js"></script>
         <script src="js/sound.js"></script>
         <script src="js/menus.js"></script>
+        <script src="js/timer.js"></script>
   	    <script src="js/obd.js"></script>
   	    <script src="js/net.js"></script>
   	    <script src="js/background.js"></script>

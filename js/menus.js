@@ -3,12 +3,12 @@ let clicked = false;
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show);
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
-    document.getElementById("buttonStoppen").addEventListener("click", stopGame);
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
     document.getElementById("speed").addEventListener("click", evolveSpeed);
     document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
+    document.getElementById("buttonStoppen").addEventListener("click", location.reload);
 })
 // Menu actions (opening and closing menus)
 function startGame() {
@@ -84,7 +84,7 @@ function evolveBodySize(el){
         // current value not more then the max
         if (player.bodySize <= player.maxBodySize){
             el.target.value ++;
-            player.bodySize += 100;
+            player.bodySize += 1;
             sound.play("upgrade")
         }
     }
@@ -96,7 +96,7 @@ function evolveTemperature(el){
         // current value not more then the max
         if (player.temperature <= player.maxTemperature){
             el.target.value ++;
-            player.temperature += 100;
+            player.temperature += 500;
             sound.play("upgrade")
         }
     }
@@ -104,13 +104,12 @@ function evolveTemperature(el){
     clicked = true;
 }
 function evolveDepth(el){
-    console.log("depth")
     if (!clicked) {
         clicked = true;
         // current value not more then the max
         if (player.depth <= player.maxDepth){
-            el.target.value ++;
-            player.depth += 100;
+            el.target.value++;
+            player.depth += 250;
             sound.play("upgrade")
         }
     }
@@ -150,12 +149,46 @@ function closeGameMenu() {
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
     game.loop.sleep()
+    // Force a stop in updates
+    gameOver = true
+
+    if (enemy !== false && enemy !== true) {
+        sound.net.pause()
+
+        enemy.sprite.body.velocity.xOld = enemy.sprite.body.velocity.x
+        enemy.sprite.body.velocity.yOld = enemy.sprite.body.velocity.y
+
+        enemy.sprite.body.velocity.x = 0
+        enemy.sprite.body.velocity.y = 0
+    }
+    else if (net._sprite !== false) {
+        sound.net.pause()
+
+        net._sprite.body.velocity.xOld = net._sprite.body.velocity.x
+
+        net._sprite.body.velocity.x = 0
+    }
+    else {
+        sound.net.stop()
+    }
 
     sound.music.volume = 0.3
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
+    gameOver = false
     game.loop.wake()
     sound.music.volume = 0.5
+
+    if (enemy !== false && enemy !== true) {
+        sound.net.pause()
+
+        enemy.sprite.body.velocity.x = enemy.sprite.body.velocity.xOld
+        enemy.sprite.body.velocity.y = enemy.sprite.body.velocity.yOld
+    }
+    else if (net._sprite !== false) {
+        sound.net.resume()
+        net._sprite.body.velocity.x = net._sprite.body.velocity.xOld
+    }
 }

@@ -13,7 +13,7 @@ let net = {
 		if (net._sprite !== false) return
 
 		// Spawn a net off screen and pin it to the camera
-		net._sprite = context.physics.add.sprite(-1000, 0, "net").setScrollFactor(0)
+		net._sprite = context.physics.add.sprite(-1800, 0, "net").setScrollFactor(0)
 		net._sprite.body.allowGravity = false;
 		net._sprite.setScrollFactor(0)
 		net._sprite.setOrigin(0, 0)
@@ -26,12 +26,12 @@ let net = {
 
 		// Start fast
 		setTimeout(() => {
-			net._baseSpeed = 40
+			net._baseSpeed = 12 * (makeLose * 4)
 		}, 4500)
 
 		// Slow down a little
 		setTimeout(() => {
-			net._baseSpeed = 25
+			net._baseSpeed = 6 * (makeLose * 4)
 		}, 6000)
 
 		// Go back to the starting position
@@ -67,7 +67,7 @@ let net = {
 		net._sprite.body.velocity.x = net._baseSpeed + (150 - playerSpeed / 3)
 
 		// Game over if the player is 600px in the net
-		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 600) {
+		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 1600) {
 			player.die();
 		}
 	}
