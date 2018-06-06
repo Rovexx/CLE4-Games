@@ -3,7 +3,7 @@ let clicked = false;
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame)
-    document.getElementById("buttonGameMenu").addEventListener("click", evolveMenu)
+    document.getElementById("buttonGameMenu").addEventListener("click", gameMenu)
     document.getElementById("speed").addEventListener("click", evolveSpeed)
     document.getElementById("bodySize").addEventListener("click", evolveBodySize)
     document.getElementById("temperature").addEventListener("click", evolveTemperature)
@@ -30,39 +30,35 @@ function increaseHealth(value){
     let element = document.getElementById("health")
     if (player.health >= player.maxHealth){
         element.style.width = "100%"
-        console.log("max")
     }
     else{
         element.style.width = (player.health + value) + "%"
         player.health += value
     }
-    console.log(element.style.width)
 }
 function decreaseHealth(value){
     let element = document.getElementById("health")
     if (player.health <= 0){
         element.style.width = "0%"
-        console.log("min")
         player.die()
     }
     else{
         element.style.width = (player.health - value) + "%"
         player.health -= value
     }
-    console.log(element.style.width)
 }
 
 // food bar
 function increaseFood(){
     let element = document.getElementById("food");
-    let style = window.getComputedStyle(element);
-    let currentValue = (parseInt(style.width)/250)*100
-    if (currentValue < 90) {
-        element.style.width = currentValue + 10 + "%"
+    if (player.food < player.maxFood){
+        element.style.width = player.food + 10 + "%"
+        player.food += 10
     }
-    else {
-        evolveMenu();
-        element.style.width = "0%";
+    else{
+        element.style.width = "0%"
+        player.food = 0
+        evolveMenu()
     }
 }
 

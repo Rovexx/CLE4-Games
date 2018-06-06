@@ -23,6 +23,8 @@ class Player{
 
         // default health
         this.health = 100;
+        // default food
+        this.food = 10;
         // default player speed
         this.speed = 400;
         //default sight:
@@ -36,6 +38,7 @@ class Player{
 
          // max variabelen:
         this.maxHealth = 100;
+        this.maxFood = 100;
         this.maxSpeed = 700;
         this.maxBodySize = 3;
         this.maxTemperature = 1800;
