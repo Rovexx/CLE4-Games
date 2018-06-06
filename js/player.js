@@ -192,8 +192,8 @@ class Player{
         //move the fish:
         this.swim();
 
-        this.sprite.scaleX = 0.5 + this.bodySize / 16
-        this.sprite.scaleY = 0.5 + this.bodySize / 16
+        this.sprite.scaleX = ( this.sprite.scaleX / Math.abs(this.sprite.scaleX) ) * ( 0.5 + this.bodySize / 16 );
+        this.sprite.scaleY = 0.5 + this.bodySize / 16;
 
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
