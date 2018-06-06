@@ -75,6 +75,12 @@ class Player{
             repeat: 0
         });
 
+        initializer.anims.create({
+            key: 'dead',
+            frames: [ { key: 'player', frame: 16 } ],
+            frameRate: 8,
+        });
+
     }
 
     pointerDownHandler(pointer){
@@ -261,12 +267,7 @@ class Player{
     die() {
         if (this.dead === false) {
             // sprite veranderen naar dead sprite
-            this.sprite.destroy(true);
-            this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
-            this.sprite.setCollideWorldBounds(true);
-            this.sprite.body.allowGravity = false;
-            this.sprite.scaleX = 0.5 + this.bodySize / 165;
-            this.sprite.scaleY = 0.5 + this.bodySize / 16;
+            this.sprite.anims.play("dead");
 
             /* Ervoor zorgen dat de player sprite
              niet de heletijd verandert */
