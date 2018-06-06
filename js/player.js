@@ -4,7 +4,7 @@ class Player{
         this.init = initializer;
 
         // setup player sprite:
-        this.sprite = initializer.physics.add.sprite(posX, posY, 'fish_tmp');
+        this.sprite = initializer.physics.add.sprite(posX, posY, 'player');
         this.sprite.setCollideWorldBounds(true);
         this.sprite.body.allowGravity = false;
         this.sprite.scaleX = 0.5;
@@ -23,19 +23,18 @@ class Player{
         //default sight:
         this.sight = 1;
         //default size
-        this.bodySize = this.sprite.scaleX;
+        this.bodySize = 0;
         //default temperature Resistance
-        this.temperature = 1;
+        this.temperature = 800;
         //default max Depth
-        this.depth = 1;
+        this.depth = 950;
         this.dead = false // player default status is niet dood
 
          // max variabelen:
-        this.maxSpeed = 700;
-        this.maxSight = 5;
-        this.maxBodySize = 0.73;
-        this.maxTemperature = 5;
-        this.maxDepth = 5;
+        this.maxSpeed = 800;
+        this.maxBodySize = 3;
+        this.maxTemperature = 1800;
+        this.maxDepth = 1800;
 
         //destination coords:
         this.dest = {
@@ -54,13 +53,33 @@ class Player{
         this.cameraX = 0;
         this.cameraY = 0;
 
+        //setup animations:
+
+        initializer.anims.create({
+            key: 'stop',
+            frames: [ { key: 'player', frame: 0 } ],
+            frameRate: 8,
+        });
+
+        initializer.anims.create({
+            key: 'swim',
+            frames: initializer.anims.generateFrameNumbers('player', { start: 0, end: 7 }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        initializer.anims.create({
+            key: 'eat',
+            frames: initializer.anims.generateFrameNumbers('player', { start: 8, end: 15 }),
+            frameRate: 8,
+            repeat: 0
+        });
+
     }
 
     pointerDownHandler(pointer){
-        if (this.dead === false) {
-            this.pointerDown = true;
-            this.pointerMovehandler(pointer);            
-        }
+        this.pointerDown = true;
+        this.pointerMovehandler(pointer);
     }
 
     pointerMovehandler(pointer){
@@ -144,6 +163,14 @@ class Player{
         let absDifY = Math.abs(this.difY);
         let difTotal = absDifX + absDifY;
 
+        //if the fish is swimming and the swim animation is not playing yet, play the swimming animation:
+        if(difTotal != 0 && !this.sprite.anims.isPlaying){
+            this.sprite.anims.play("swim");
+        }
+        else if(difTotal == 0){
+            this.sprite.anims.play("stop");
+        }
+
         //calculate horizontal and vertical speed:
         this.speedX = this.calcSpeed(absDifX, difTotal, this.speed);
         this.speedY = this.calcSpeed(absDifY, difTotal, this.speed);
@@ -165,9 +192,31 @@ class Player{
         //move the fish:
         this.swim();
 
+        this.sprite.scaleX = ( this.sprite.scaleX / Math.abs(this.sprite.scaleX) ) * ( 0.5 + this.bodySize / 16 );
+        this.sprite.scaleY = 0.5 + this.bodySize / 16;
+
         //offset for pointer input:
         this.cameraX = initializer.cameras.main.scrollX;
         this.cameraY = initializer.cameras.main.scrollY;
+
+        // If too deep do beep beep
+        if (player.sprite.y > player.depth) {
+            document.getElementById("alertDepth").style.transform = "translateY(0%)"
+            document.getElementById("alertThemp").style.transform = "translateY(-150%)"
+
+            if (!sound.alert.isPlaying) sound.play("alert")
+        }
+        // If too cold do bolt bolt
+        else if (player.sprite.y > player.temperature) {
+            document.getElementById("alertThemp").style.transform = "translateY(0%)"
+            document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+
+            if (!sound.alert.isPlaying) sound.play("alert")
+        }
+        else {
+            document.getElementById("alertDepth").style.transform = "translateY(-150%)"
+            document.getElementById("alertThemp").style.transform = "translateY(-150%)"
+        }
     }
 
     increaseSize() {
@@ -175,16 +224,16 @@ class Player{
         this.sprite.scaleY = (this.sprite.scaleY * 1.1);
         this.bodySize = this.sprite.scaleX;
 
-        if (this.sprite.scaleY > this.maxBodySize) {
+        if (this.sprite.scaleY > this.maxSize) {
             if (this.sprite.scaleX < 0){
                 // naar links zwemmen
-                this.sprite.scaleX = -this.maxBodySize;
+                this.sprite.scaleX = -this.maxSize;
             } else {
                 // naar rechts zwemmen
-                this.sprite.scaleX = this.maxBodySize;
+                this.sprite.scaleX = this.maxSize;
             }
 
-            this.sprite.scaleY = this.maxBodySize;
+            this.sprite.scaleY = this.maxSize;
         }
     }
 
@@ -200,6 +249,9 @@ class Player{
             fill: "#0f0"
         })
 
+        //play eat animation:
+        this.sprite.anims.play("eat");
+
         /* delete text na 3 seconden */
         setTimeout(function(){
             tmpScoreText.setText("");
@@ -213,8 +265,8 @@ class Player{
             this.sprite = this.init.physics.add.sprite(this.sprite.x, this.sprite.y, 'fish_dead');
             this.sprite.setCollideWorldBounds(true);
             this.sprite.body.allowGravity = false;
-            this.sprite.scaleX = this.bodySize;
-            this.sprite.scaleY = this.bodySize;
+            this.sprite.scaleX = 0.5 + this.bodySize / 165;
+            this.sprite.scaleY = 0.5 + this.bodySize / 16;
 
             /* Ervoor zorgen dat de player sprite
              niet de heletijd verandert */
@@ -225,11 +277,10 @@ class Player{
             this.dest.y = this.sprite.y;
             this.sprite.rotation = this.calcAngle(this.difY, this.difX);
 
-            // health bar 2%
-            document.getElementById('health').style.width = 2 + "%";
+            sound.net.stop()
 
-            // button showen na x seconden
-            setTimeout(function(){ 
+            // reload game na x seconden
+            setTimeout(function(){
                 // reload button showen
                 document.getElementById('overlayrestart').classList.remove("hide");
                 document.getElementById('overlaybuttons').classList.add("hide");
@@ -240,6 +291,11 @@ class Player{
                     location.reload();
                 });
             }, 3000);
+
+            gameOver = true
+
+            document.getElementById("restartTimer").innerHTML = timer.formatted
+            document.getElementById("restartPerc").innerHTML = Math.round(timer.time / 220 * 100) + "%"
         }
     }
 }

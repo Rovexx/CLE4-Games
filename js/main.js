@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 900,
     parent: "game",
     disableContextMenu: true,
     transparent: true,
@@ -29,7 +29,12 @@ var camera;
 var gameOver = false;
 var background;
 
-var aiCount = 4;
+var enemy = false;
+
+// maximum amount of ai fish at one time
+const aiCount = 4;
+// chance of an net/enemy event
+const enemyRate = 0.002
 
 var AIs = [];
 
@@ -41,9 +46,14 @@ function preload() {
     }
 
     this.load.image("ai", "assets/img/ai.png");
+    this.load.image("enemy", "assets/img/enemy.png");
     this.load.image("fish_tmp", "assets/img/fish_tmp.png");
     this.load.image("fish_dead", "assets/img/fish_dead.png");
     this.load.image("net", "assets/img/net.png");
+    this.load.spritesheet('player',
+        'assets/img/player.png',
+        { frameWidth: 480, frameHeight: 200 }
+    );
     background = new Background(this);
 
     sound.load(this)
@@ -55,7 +65,7 @@ function spawnRandomFish(initializer){
     let playerY = player.sprite.y;
 
     //minimum and maximum x distance a fish can spawn from the player:
-    let minDistanceX = 400;
+    let minDistanceX = 650;
     let maxDistanceX = 2000;
 
     let minPosX = playerX + minDistanceX;
@@ -74,7 +84,7 @@ function spawnRandomFish(initializer){
         }
     }
 
-    if (numOfFish < 5){
+    if (numOfFish < aiCount){
         //generate random spawn coordinates:
         let spawnX = Math.random() * (maxPosX - minPosX) + minPosX;
         let spawnY = Math.random() * (maxPosY - minPosY) + minPosY;
@@ -83,6 +93,7 @@ function spawnRandomFish(initializer){
     }
 }
 
+let makeLose = 1
 function create() {
     this.input.setPollAlways();
 
@@ -90,57 +101,115 @@ function create() {
     background.create(this);
 
     // Create the player:
-    player = new Player(this, 200, 100);
+    player = new Player(this, 450, 350);
 
     // Create the camera
     camera = new Camera(this);
-
-    AIs.push(new Ai(this, 500, 200));
+    //spawnRandomEnemy(this);
+    AIs.push(new Ai(this, 650, 380));
 
     sound.create(this)
 
     // Sleep on start
     game.loop.sleep()
+
+    document.getElementById("buttonStartGame").classList.remove("loading")
+    document.getElementById("buttonStartGame").innerHTML = "Start Game"
+
+    // Make it impossible after around 3 minutes
+    setTimeout(function () {
+        console.log("losin")
+        makeLose = 1.5
+    }, 100000 + (100000 * Math.random()))
 }
 
-let tmpNet = false
+let slowStart = 600
+let hintShown = false
+
 function update() {
-    background.update(this);
-
-    if (!tmpNet) {
-        tmpNet = true
-        setTimeout(() => {
-            // net.spawn(this)
-        }, 7000)
-    }
-
-  // Reset the sound distance
-    sound.distance = Infinity
-
-    spawnRandomFish(this);
-
+    //stops update function when the game is over
     if (gameOver) {
         return;
     }
 
+    background.update(this);
+
+    if (slowStart > 0) {
+        slowStart--
+    }
+    else if (Math.random() < enemyRate && enemy == false && net._sprite === false) {
+        if (Math.random() > 0.6) {
+            net.spawn(this)
+        }
+        else {
+            sound.play("net")
+
+            setTimeout(() => {
+                enemy = new Enemy(this)
+            }, 2000)
+        }
+
+        slowStart = 5000
+
+        if (!hintShown) {
+            document.getElementById("hint").style.display = "block"
+
+            setTimeout(function () {
+                document.getElementById("hint").style.opacity = 0.7
+            }, 500)
+
+            setTimeout(function () {
+                document.getElementById("hint").style.opacity = 0
+            }, 4500)
+
+            setTimeout(function () {
+                document.getElementById("hint").style.display = "none"
+            }, 5000)
+
+            hintShown = true
+        }
+    }
+
+    timer.update()
+
+    // Reset the sound distance
+    sound.distance = Infinity
+
+    spawnRandomFish(this);
+
     // player update
     player.update(this);
 
-    /* loopen door de AIs om te updaten
-     en dolission te detecten */
+    /* Update ai fishes */
     for (var ai of AIs) {
         ai.update();
 
         // colission
         if (coll(player, ai)) {
-            // destroy spri;e
+            // destroy sprite
             ai.sprite.destroy(true);
             ai = null;
 
             sound.play("eat");
 
-            // snelheid toevoegen aan player
+            // increase food bar
             player.eatFish();
+        }
+    }
+
+    // update the enemy fish
+    if (enemy) {
+        enemy.update(this);
+
+        // colission
+        if (coll(player, enemy)) {
+            gameOver = true;
+            player.die();
+            if (!sound.dead.isPlaying){
+                sound.play("dead");
+                modifyHealth("decrease", 100);
+            }
+
         }
     }
 

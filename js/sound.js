@@ -39,9 +39,12 @@ class SoundEngine {
 		context.load.audio("music", ["assets/sound/music.mp3"])
 		context.load.audio("pitch", ["assets/sound/pitch.mp3"])
 		context.load.audio("eat", ["assets/sound/eat.mp3"])
+		context.load.audio("dead", ["assets/sound/dead.mp3"])
 		context.load.audio("net", ["assets/sound/net.mp3"])
 		context.load.audio("upgrade", ["assets/sound/upgrade.mp3"])
 		context.load.audio("click", ["assets/sound/click.mp3"])
+		context.load.audio("alert", ["assets/sound/alert.mp3"])
+		context.load.audio("timer", ["assets/sound/timer.mp3"])
 	}
 
 	create(context) {
@@ -65,9 +68,12 @@ class SoundEngine {
 		// Ready putch and eat effects
 		this.pitch = context.sound.add("pitch")
 		this.eat = context.sound.add("eat")
+		this.dead = context.sound.add("dead")
 		this.net = context.sound.add("net")
 		this.upgrade = context.sound.add("upgrade")
 		this.click = context.sound.add("click")
+		this.alert = context.sound.add("alert")
+		this.timer = context.sound.add("timer")
 	}
 
 	update(context) {
@@ -86,6 +92,8 @@ class SoundEngine {
 	 * @param  {string} fx The ID of the sound to play
 	 */
 	play(fx) {
+		if (!this[fx]) return console.error("Sound missing: " + fx)
+
 		this[fx].play()
 	}
 }

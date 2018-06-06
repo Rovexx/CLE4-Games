@@ -12,11 +12,17 @@
         <div id="startMenu" class="overlay">
             <!-- Buttons -->
             <div class="overlay-content hide" id="overlayrestart">
+				<p>
+					Je hebt het <span id="restartTimer"></span> volgehouden.
+				</p>
+				<p>
+					Dat is beter dan <span id="restartPerc"></span> van alle spelers!
+				</p>
                 <a id="buttonRestartGame" class="btn">Opnieuw <i class="fa fa-restart"></i></a>
             </div>
             <div class="overlay-content" id="overlaybuttons">
                 <img src="assets/img/logo.png" alt="katvis Evolutie">
-                <a id="buttonStartGame" class="btn">Start Game</a>
+                <a id="buttonStartGame" class="btn loading">Laden...</a>
             </div>
         </div>
         <!-- game menu overlay -->
@@ -37,22 +43,30 @@
                 <div class="evolveBar">
                     <a>Snelheid</a>
                     <progress id="speed" value="1" max="5"></progress>
+					<p>
+						Maakt je sneller zodat je weg kunt zwemmen voor de roofvissen en de netten.
+					</p>
                 </div>
                 <div class="evolveBar">
-                    <a>Zicht</a>
-                    <progress id="sight" value="1" max="5"></progress>
+                    <a>Grootte</a>
+                    <progress id="bodySize" value="1" max="4"></progress>
+					<p>
+						Als je groter bent durven roofvissen je minder snel aan te vallen.
+					</p>
                 </div>
                 <div class="evolveBar">
-                    <a>grootte</a>
-                    <progress id="bodySize" value="1" max="5"></progress>
-                </div>
-                <div class="evolveBar">
-                    <a>Weerstand</a>
-                    <progress id="temperature" value="1" max="5"></progress>
+                    <a>Temperatuurbestendigheid</a>
+                    <progress id="temperature" value="1" max="3"></progress>
+					<p>
+						Als je beter tegen temperatuur verschillen kan mag je dieper zwemmen.
+					</p>
                 </div>
                 <div class="evolveBar">
                     <a>Max Diepte</a>
-                    <progress id="depth" value="1" max="5"></progress>
+                    <progress id="depth" value="1" max="4"></progress>
+					<p>
+						Zorgt er voor dat je beter tegen de druk van het water kan als je dieper zwemt.
+					</p>
                 </div>
             </div>
         </div>
@@ -61,21 +75,54 @@
         <div id="UI" class="hide">
             <!-- UI elementen -->
             <a id="buttonGameMenu">Menu</a>
-            <div class="barContainer" id="foodBar" >
+            <div class="barContainer" id="foodBar">
                 <div class="bar" id="food">Voedsel</div>
             </div>
 
             <div class="barContainer" id="healthBar">
                 <div class="bar" id="health">Levens</div>
             </div>
+
+			<div id="timer">
+				00:00
+			</div>
+
+			<div id="hint">
+				Zwem weg!
+				<span>⟶</span>
+			</div>
+
+			<div id="alert">
+				<div id="alertDepth">
+					Te diep
+				</div>
+				<div id="alertThemp">
+					Te koud
+				</div>
+			</div>
         </div>
+
+		<!-- Uitleg -->
+		<div id="obd">
+			<p id="obdText"></p>
+
+			<img id="obdScAi" src="assets/img/ai.png">
+			<img id="obdScPlayer" src="assets/img/fish_tmp.png">
+			<img id="obdScEnemy" src="assets/img/enemy.png">
+
+			<a id="obdBtn" class="btn">Volgende</a>
+			<span id="obdSkip">Sla uitleg over</span>
+		</div>
         <script src="js/phaser.min.js"></script>
         <script src="js/sound.js"></script>
         <script src="js/menus.js"></script>
+        <script src="js/timer.js"></script>
+  	    <script src="js/obd.js"></script>
   	    <script src="js/net.js"></script>
   	    <script src="js/background.js"></script>
   	    <script src="js/player.js"></script>
   	    <script src="js/ai.js"></script>
+        <script src="js/enemy.js"></script>
   	    <script src="js/camera.js"></script>
   	    <script src="js/main.js"></script>
     </div>

@@ -1,20 +1,19 @@
 let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
-    document.getElementById("buttonStartGame").addEventListener("click", startGame);
+    document.getElementById("buttonStartGame").addEventListener("click", obd.show);
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
-    document.getElementById("buttonStoppen").addEventListener("click", stopGame);
     document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
     document.getElementById("speed").addEventListener("click", evolveSpeed);
-    document.getElementById("sight").addEventListener("click", evolveSight);
     document.getElementById("bodySize").addEventListener("click", evolveBodySize);
     document.getElementById("temperature").addEventListener("click", evolveTemperature);
     document.getElementById("depth").addEventListener("click", evolveDepth);
+    document.getElementById("buttonStoppen").addEventListener("click", location.reload);
 })
 // Menu actions (opening and closing menus)
-function startGame(){
-    closeStartMenu();
+function startGame() {
     showUI();
+    game.loop.wake()
 
     // Request full screen
     // if (document.body.requestFullscreen)             document.body.requestFullscreen()
@@ -25,13 +24,6 @@ function startGame(){
 function backToGame(){
     closeGameMenu();
 }
-function stopGame(){
-    closeUI();
-    closeGameMenu();
-    closeEvolveMenu();
-    openStartMenu();
-    location.reload()
-}
 function gameMenu(){
     openGameMenu();
 }
@@ -40,22 +32,21 @@ function evolveMenu(){
 }
 
 // health bar
-function modifyHealth(increase){
+function modifyHealth(state, value){
     let element = document.getElementById("health");
     let style = window.getComputedStyle(element);
     let currentValue = (parseInt(style.width)/250)*100;
-    if (increase){
+    if (state == "increase"){
         if (currentValue < 100) {
-            element.style.width = currentValue + 10 + "%";
+            element.style.width = currentValue + value + "%";
         }
     }
-    else{
+    if (state == "decrease"){
         if (currentValue > 10) {
-            element.style.width = currentValue - 10 + "%";
+            element.style.width = currentValue - value + "%";
         }
         else{
             element.style.width = "100%"
-            stopGame();
         }
     }
 }
@@ -74,10 +65,9 @@ function increaseFood(){
     }
 }
 
-
 // Evolving actions
 function evolveSpeed(el){
-    if (!clicked && player.speed <= player.maxSpeed) {
+    if (!clicked) {
         clicked = true;
         // current value not more then the max
         if (player.speed <= player.maxSpeed){
@@ -88,24 +78,13 @@ function evolveSpeed(el){
     }
     setTimeout(closeEvolveMenu, 1000);
 }
-function evolveSight(el){
+
+function evolveBodySize(el){
     if (!clicked) {
         // current value not more then the max
-        if (player.sight <= player.maxSight){
-            el.target.value ++;
-            player.sight += 100;
-            sound.play("upgrade")
-        }
-    }
-    setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
-}
-function evolveBodySize(el){
-    if (!clicked && player.bodySize <= player.maxBodySize) {
-        // current value not more then the max
         if (player.bodySize <= player.maxBodySize){
-            el.srcElement.value++;
-            player.increaseSize();
+            el.target.value ++;
+            player.bodySize += 1;
             sound.play("upgrade")
         }
     }
@@ -116,8 +95,8 @@ function evolveTemperature(el){
     if (!clicked) {
         // current value not more then the max
         if (player.temperature <= player.maxTemperature){
-            el.srcElement.value ++;
-            player.temperature += 100;
+            el.target.value ++;
+            player.temperature += 500;
             sound.play("upgrade")
         }
     }
@@ -129,8 +108,8 @@ function evolveDepth(el){
         clicked = true;
         // current value not more then the max
         if (player.depth <= player.maxDepth){
-            el.srcElement.value ++;
-            player.depth += 100;
+            el.target.value++;
+            player.depth += 250;
             sound.play("upgrade")
         }
     }
@@ -146,7 +125,6 @@ function openStartMenu() {
 }
 function closeStartMenu() {
     document.getElementById("startMenu").classList.add("hide");
-    game.loop.wake()
     sound.play("click")
 }
 
@@ -171,13 +149,46 @@ function closeGameMenu() {
 function openEvolveMenu() {
     document.getElementById("evolveMenu").classList.remove("hide");
     game.loop.sleep()
+    // Force a stop in updates
+    gameOver = true
+
+    if (enemy !== false && enemy !== true) {
+        sound.net.pause()
+
+        enemy.sprite.body.velocity.xOld = enemy.sprite.body.velocity.x
+        enemy.sprite.body.velocity.yOld = enemy.sprite.body.velocity.y
+
+        enemy.sprite.body.velocity.x = 0
+        enemy.sprite.body.velocity.y = 0
+    }
+    else if (net._sprite !== false) {
+        sound.net.pause()
+
+        net._sprite.body.velocity.xOld = net._sprite.body.velocity.x
+
+        net._sprite.body.velocity.x = 0
+    }
+    else {
+        sound.net.stop()
+    }
 
     sound.music.volume = 0.3
 }
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
+    gameOver = false
     game.loop.wake()
-
     sound.music.volume = 0.5
+
+    if (enemy !== false && enemy !== true) {
+        sound.net.pause()
+
+        enemy.sprite.body.velocity.x = enemy.sprite.body.velocity.xOld
+        enemy.sprite.body.velocity.y = enemy.sprite.body.velocity.yOld
+    }
+    else if (net._sprite !== false) {
+        sound.net.resume()
+        net._sprite.body.velocity.x = net._sprite.body.velocity.xOld
+    }
 }
