@@ -2,8 +2,8 @@ let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
-    document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame)
-    document.getElementById("buttonGameMenu").addEventListener("click", gameMenu)
+    document.getElementById("buttonTerugNaarSpel").addEventListener("click", closeGameMenu)
+    document.getElementById("buttonGameMenu").addEventListener("click", openGameMenu)
     document.getElementById("speed").addEventListener("click", evolveSpeed)
     document.getElementById("bodySize").addEventListener("click", evolveBodySize)
     document.getElementById("temperature").addEventListener("click", evolveTemperature)
@@ -14,15 +14,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function startGame() {
     showUI()
     game.loop.wake()
-}
-function backToGame(){
-    closeGameMenu()
-}
-function gameMenu(){
-    openGameMenu()
-}
-function evolveMenu(){
-    openEvolveMenu()
 }
 
 // health bar
@@ -58,7 +49,7 @@ function increaseFood(){
     else{
         element.style.width = "0%"
         player.food = 0
-        evolveMenu()
+        openEvolveMenu()
     }
 }
 
