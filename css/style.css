@@ -302,7 +302,7 @@ canvas {
 
 /* Healt/food bars background */
 .barContainer {
-    width: 250px;
+    width: 35vh;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     position: absolute;
@@ -383,24 +383,4 @@ progress[value]::-webkit-progress-value {
     background-color: red;
     border-radius: 2px;
     background-size: 35px 20px, 100% 100%, 100% 100%;
-}
-
-/* individual styling */
-#speed {
-
-}
-#sight {
-
-}
-#camouflage {
-
-}
-#size {
-
-}
-#temperature {
-
-}
-#depth {
-
 }
