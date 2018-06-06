@@ -36,6 +36,18 @@ class Enemy {
 
 			enemy = false
 		}, 22000)
+
+		//setup animations:
+		if(typeof context.anims.anims.entries["enemy_swim"] === 'undefined'){
+			context.anims.create({
+				key: 'enemy_swim',
+				frames: context.anims.generateFrameNumbers('enemy', { start: 0, end: 7 }),
+				frameRate: 12,
+				repeat: -1
+			});
+		}
+		this.sprite.anims.play("enemy_swim");
+
 	}
 
 	update() {
