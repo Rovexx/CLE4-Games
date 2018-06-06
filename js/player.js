@@ -18,6 +18,13 @@ class Player{
         this.pointerX = 0;
         this.pointerY = 0;
 
+        // player default status is niet dood
+        this.dead = false
+
+        // default health
+        this.health = 100;
+        // default food
+        this.food = 10;
         // default player speed
         this.speed = 400;
         //default sight:
@@ -27,11 +34,12 @@ class Player{
         //default temperature Resistance
         this.temperature = 800;
         //default max Depth
-        this.depth = 950;
-        this.dead = false // player default status is niet dood
+        this.depth = 1000;
 
          // max variabelen:
-        this.maxSpeed = 800;
+        this.maxHealth = 100;
+        this.maxFood = 100;
+        this.maxSpeed = 700;
         this.maxBodySize = 3;
         this.maxTemperature = 1800;
         this.maxDepth = 1800;
@@ -210,14 +218,20 @@ class Player{
             document.getElementById("alertDepth").style.transform = "translateY(0%)"
             document.getElementById("alertThemp").style.transform = "translateY(-150%)"
 
-            if (!sound.alert.isPlaying) sound.play("alert")
+            if (!sound.alert.isPlaying) {
+                sound.play("alert")
+                decreaseHealth(20)
+            }
         }
         // If too cold do bolt bolt
         else if (player.sprite.y > player.temperature) {
             document.getElementById("alertThemp").style.transform = "translateY(0%)"
             document.getElementById("alertDepth").style.transform = "translateY(-150%)"
 
-            if (!sound.alert.isPlaying) sound.play("alert")
+            if (!sound.alert.isPlaying) {
+                sound.play("alert")
+                decreaseHealth(20)
+            }
         }
         else {
             document.getElementById("alertDepth").style.transform = "translateY(-150%)"
@@ -225,28 +239,10 @@ class Player{
         }
     }
 
-    increaseSize() {
-        this.sprite.scaleX = (this.sprite.scaleX * 1.1);
-        this.sprite.scaleY = (this.sprite.scaleY * 1.1);
-        this.bodySize = this.sprite.scaleX;
-
-        if (this.sprite.scaleY > this.maxSize) {
-            if (this.sprite.scaleX < 0){
-                // naar links zwemmen
-                this.sprite.scaleX = -this.maxSize;
-            } else {
-                // naar rechts zwemmen
-                this.sprite.scaleX = this.maxSize;
-            }
-
-            this.sprite.scaleY = this.maxSize;
-        }
-    }
-
     eatFish() {
         // food verhogen
         increaseFood();
-
+        increaseHealth(5);
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
         let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, "+1", {
@@ -266,6 +262,8 @@ class Player{
 
     die() {
         if (this.dead === false) {
+            // play the dead sound
+            sound.play("dead");
             // sprite veranderen naar dead sprite
             this.sprite.anims.play("dead");
 

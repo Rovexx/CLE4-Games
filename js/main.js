@@ -207,16 +207,9 @@ function update() {
     // update the enemy fish
     if (enemy) {
         enemy.update(this);
-
         // colission
         if (coll(player, enemy)) {
-            gameOver = true;
-            player.die();
-            if (!sound.dead.isPlaying){
-                sound.play("dead");
-                modifyHealth("decrease", 100);
-            }
-
+            decreaseHealth(100);
         }
     }
 
