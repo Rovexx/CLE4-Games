@@ -1,54 +1,55 @@
 let clicked = false;
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
-    document.getElementById("buttonStartGame").addEventListener("click", obd.show);
-    document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame);
-    document.getElementById("buttonGameMenu").addEventListener("click", gameMenu);
-    document.getElementById("speed").addEventListener("click", evolveSpeed);
-    document.getElementById("bodySize").addEventListener("click", evolveBodySize);
-    document.getElementById("temperature").addEventListener("click", evolveTemperature);
-    document.getElementById("depth").addEventListener("click", evolveDepth);
-    document.getElementById("buttonStoppen").addEventListener("click", location.reload);
+    document.getElementById("buttonStartGame").addEventListener("click", obd.show)
+    document.getElementById("buttonTerugNaarSpel").addEventListener("click", backToGame)
+    document.getElementById("buttonGameMenu").addEventListener("click", evolveMenu)
+    document.getElementById("speed").addEventListener("click", evolveSpeed)
+    document.getElementById("bodySize").addEventListener("click", evolveBodySize)
+    document.getElementById("temperature").addEventListener("click", evolveTemperature)
+    document.getElementById("depth").addEventListener("click", evolveDepth)
+    document.getElementById("buttonStoppen").addEventListener("click", location.reload)
 })
 // Menu actions (opening and closing menus)
 function startGame() {
-    showUI();
+    showUI()
     game.loop.wake()
-
-    // Request full screen
-    // if (document.body.requestFullscreen)             document.body.requestFullscreen()
-    // else if (document.body.mozRequestFullScreen)     document.body.mozRequestFullScreen()
-    // else if (document.body.webkitRequestFullscreen)  document.body.webkitRequestFullscreen()
-    // else if (document.body.msRequestFullscreen)      document.body.msRequestFullscreen()
 }
 function backToGame(){
-    closeGameMenu();
+    closeGameMenu()
 }
 function gameMenu(){
-    openGameMenu();
+    openGameMenu()
 }
 function evolveMenu(){
-    openEvolveMenu();
+    openEvolveMenu()
 }
 
 // health bar
-function modifyHealth(state, value){
-    let element = document.getElementById("health");
-    let style = window.getComputedStyle(element);
-    let currentValue = (parseInt(style.width)/250)*100;
-    if (state == "increase"){
-        if (currentValue < 100) {
-            element.style.width = currentValue + value + "%";
-        }
+function increaseHealth(value){
+    let element = document.getElementById("health")
+    if (player.health >= player.maxHealth){
+        element.style.width = "100%"
+        console.log("max")
     }
-    if (state == "decrease"){
-        if (currentValue > 10) {
-            element.style.width = currentValue - value + "%";
-        }
-        else{
-            element.style.width = "100%"
-        }
+    else{
+        element.style.width = (player.health + value) + "%"
+        player.health += value
     }
+    console.log(element.style.width)
+}
+function decreaseHealth(value){
+    let element = document.getElementById("health")
+    if (player.health <= 0){
+        element.style.width = "0%"
+        console.log("min")
+        player.die()
+    }
+    else{
+        element.style.width = (player.health - value) + "%"
+        player.health -= value
+    }
+    console.log(element.style.width)
 }
 
 // food bar
@@ -68,52 +69,76 @@ function increaseFood(){
 // Evolving actions
 function evolveSpeed(el){
     if (!clicked) {
-        clicked = true;
+
         // current value not more then the max
-        if (player.speed <= player.maxSpeed){
+        if (player.speed < player.maxSpeed){
+            // increase evolve bar
             el.target.value++;
+            // increase value op attribute
             player.speed += 100;
             sound.play("upgrade")
+            // the evolve is done, you can no longer click a bar
+            clicked = true;
+            setTimeout(closeEvolveMenu, 1000);
+        }
+        // if the maximum is already reached
+        else{
+            sound.play("max")
         }
     }
-    setTimeout(closeEvolveMenu, 1000);
 }
-
 function evolveBodySize(el){
     if (!clicked) {
+
         // current value not more then the max
-        if (player.bodySize <= player.maxBodySize){
+        if (player.bodySize < player.maxBodySize){
             el.target.value ++;
             player.bodySize += 1;
             sound.play("upgrade")
+            // the evolve is done, you can no longer click a bar
+            clicked = true;
+            setTimeout(closeEvolveMenu, 1000);
+        }
+        // if the maximum is already reached
+        else{
+            sound.play("max")
         }
     }
-    setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
 }
 function evolveTemperature(el){
     if (!clicked) {
         // current value not more then the max
-        if (player.temperature <= player.maxTemperature){
+        if (player.temperature < player.maxTemperature){
             el.target.value ++;
             player.temperature += 500;
             sound.play("upgrade")
+            // the evolve is done, you can no longer click a bar
+            clicked = true;
+            setTimeout(closeEvolveMenu, 1000);
+        }
+        // if the maximum is already reached
+        else{
+            sound.play("max")
         }
     }
-    setTimeout(closeEvolveMenu, 1000);
-    clicked = true;
 }
 function evolveDepth(el){
     if (!clicked) {
-        clicked = true;
+
         // current value not more then the max
-        if (player.depth <= player.maxDepth){
+        if (player.depth < player.maxDepth){
             el.target.value++;
-            player.depth += 250;
+            player.depth += 200;
             sound.play("upgrade")
+            // the evolve is done, you can no longer click a bar
+            clicked = true;
+            setTimeout(closeEvolveMenu, 1000);
+        }
+        // if the maximum is already reached
+        else{
+            sound.play("max")
         }
     }
-    setTimeout(closeEvolveMenu, 1000);
 }
 
 
