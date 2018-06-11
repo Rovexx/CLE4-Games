@@ -1,14 +1,16 @@
 let clicked = false;
+
+
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
     document.getElementById("buttonTerugNaarSpel").addEventListener("click", closeGameMenu)
     document.getElementById("buttonGameMenu").addEventListener("click", openGameMenu)
-    document.getElementById("speed").addEventListener("click", evolveSpeed)
-    document.getElementById("bodySize").addEventListener("click", evolveBodySize)
-    document.getElementById("temperature").addEventListener("click", evolveTemperature)
-    document.getElementById("depth").addEventListener("click", evolveDepth)
-    document.getElementById("buttonStoppen").addEventListener("click", location.reload)
+    document.getElementById("speedBar").addEventListener("click", evolveSpeed)
+    document.getElementById("bodySizeBar").addEventListener("click", evolveBodySize)
+    document.getElementById("temperatureBar").addEventListener("click", evolveTemperature)
+    document.getElementById("depthBar").addEventListener("click", evolveDepth)
+    document.getElementById("buttonStoppen").addEventListener("click", function(){location.reload()})
 })
 // Menu actions (opening and closing menus)
 function startGame() {
@@ -46,13 +48,18 @@ function increaseFood(){
         element.style.width = player.food + 10 + "%"
         player.food += 10
     }
+    // If you are not fully evolved, this happens
+    else if(player.speed == player.maxSpeed && player.bodySize == player.maxBodySize && player.temperature == player.maxTemperature && player.depth == player.maxDepth){
+        element.style.width = "0"
+        player.food = 0
+    }
+    // If you are fully evolved
     else{
         element.style.width = "0%"
         player.food = 0
         openEvolveMenu()
     }
 }
-
 // Evolving actions
 function evolveSpeed(el){
     if (!clicked) {
@@ -60,13 +67,15 @@ function evolveSpeed(el){
         // current value not more then the max
         if (player.speed < player.maxSpeed){
             // increase evolve bar
-            el.target.value++;
+	        el.target.lastElementChild.style.width = player.speedPercent + 20 + "%"
+	        player.speedPercent += 20
+
             // increase value op attribute
-            player.speed += 100;
+            player.speed += 100
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
-            clicked = true;
-            setTimeout(closeEvolveMenu, 1000);
+            clicked = true
+            setTimeout(closeEvolveMenu, 1000)
         }
         // if the maximum is already reached
         else{
@@ -79,12 +88,14 @@ function evolveBodySize(el){
 
         // current value not more then the max
         if (player.bodySize < player.maxBodySize){
-            el.target.value ++;
-            player.bodySize += 1;
+	        el.target.lastElementChild.style.width = player.bodySizePercent + 25 + "%"
+	        player.speedPercent += 25
+
+            player.bodySize += 1
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
-            clicked = true;
-            setTimeout(closeEvolveMenu, 1000);
+            clicked = true
+            setTimeout(closeEvolveMenu, 1000)
         }
         // if the maximum is already reached
         else{
@@ -96,8 +107,10 @@ function evolveTemperature(el){
     if (!clicked) {
         // current value not more then the max
         if (player.temperature < player.maxTemperature){
-            el.target.value ++;
-            player.temperature += 500;
+	        el.target.lastElementChild.style.width = player.temperaturePercent + 33.3 + "%"
+	        player.temperaturePercent += 33.3
+
+            player.temperature += 400
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true;
@@ -114,12 +127,14 @@ function evolveDepth(el){
 
         // current value not more then the max
         if (player.depth < player.maxDepth){
-            el.target.value++;
-            player.depth += 200;
+	        el.target.lastElementChild.style.width = player.depthPercent + 25 + "%"
+	        player.depthPercent += 25
+
+            player.depth += 200
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
-            clicked = true;
-            setTimeout(closeEvolveMenu, 1000);
+            clicked = true
+            setTimeout(closeEvolveMenu, 1000)
         }
         // if the maximum is already reached
         else{
@@ -128,38 +143,29 @@ function evolveDepth(el){
     }
 }
 
-
 // Opening and closing menu's
-function openStartMenu() {
-    document.getElementById("startMenu").classList.remove("hide");
-    game.loop.sleep()
-    sound.play("click")
-}
 function closeStartMenu() {
-    document.getElementById("startMenu").classList.add("hide");
+    document.getElementById("startMenu").classList.add("hide")
     sound.play("click")
 }
 
 function showUI() {
-    document.getElementById("UI").classList.remove("hide");
-}
-function closeUI() {
-    document.getElementById("UI").classList.add("hide");
+    document.getElementById("UI").classList.remove("hide")
 }
 
 function openGameMenu() {
-    document.getElementById("gameMenu").classList.remove("hide");
+    document.getElementById("gameMenu").classList.remove("hide")
     game.loop.sleep()
     sound.play("click")
 }
 function closeGameMenu() {
-    document.getElementById("gameMenu").classList.add("hide");
+    document.getElementById("gameMenu").classList.add("hide")
     game.loop.wake()
     sound.play("click")
 }
 
 function openEvolveMenu() {
-    document.getElementById("evolveMenu").classList.remove("hide");
+    document.getElementById("evolveMenu").classList.remove("hide")
     game.loop.sleep()
     // Force a stop in updates
     gameOver = true
@@ -187,8 +193,8 @@ function openEvolveMenu() {
     sound.music.volume = 0.3
 }
 function closeEvolveMenu() {
-    document.getElementById("evolveMenu").classList.add("hide");
-    clicked = false;
+    document.getElementById("evolveMenu").classList.add("hide")
+    clicked = false
     gameOver = false
     game.loop.wake()
     sound.music.volume = 0.5

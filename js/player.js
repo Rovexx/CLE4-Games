@@ -27,19 +27,21 @@ class Player{
         this.food = 10;
         // default player speed
         this.speed = 400;
-        //default sight:
-        this.sight = 1;
+        this.speedPercent = 20
         //default size
         this.bodySize = 0;
+        this.bodySizePercent = 25
         //default temperature Resistance
         this.temperature = 800;
+        this.temperaturePercent = 33.3
         //default max Depth
         this.depth = 1000;
+        this.depthPercent = 25
 
          // max variabelen:
         this.maxHealth = 100;
         this.maxFood = 100;
-        this.maxSpeed = 700;
+        this.maxSpeed = 800;
         this.maxBodySize = 3;
         this.maxTemperature = 1800;
         this.maxDepth = 1800;
@@ -286,9 +288,8 @@ class Player{
                 document.getElementById('startMenu').classList.remove("hide");
 
                 // reload button functioneel maken
-                document.getElementById('buttonRestartGame').addEventListener('click', function(){
-                    location.reload();
-                });
+                document.getElementById('buttonRestartGame').addEventListener('click', function(){location.reload()});
+                //document.getElementById("buttonStoppen").addEventListener("click", location.reload)
             }, 3000);
 
             gameOver = true
