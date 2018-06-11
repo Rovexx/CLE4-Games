@@ -136,7 +136,11 @@ let hintShown = false
 function update() {
     //stops update function when the game is over
     if (gameOver) {
+        this.anims.pauseAll()
         return;
+    }
+    else {
+        this.anims.resumeAll()
     }
 
     background.update(this);
@@ -147,7 +151,6 @@ function update() {
     else if (Math.random() < enemyRate && enemy == false && net._sprite === false) {
         if (Math.random() > 0.6) {
             net.spawn(this)
-
         }
         else {
             sound.play("net")
