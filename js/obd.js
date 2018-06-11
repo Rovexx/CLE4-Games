@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	let scText = [
 		"Zoek en eet vissen in de zee om evolutie punten te verdienen",
-		"Als je genoeg vissen gegeten hebt kun je evolueren. Je kan bijvoorbeeld kiezen om sneller te zwemmen of om grotere vissen te kunnen eten",
-		"Pas op voor de roofvissen die jou proberen te eten en de netten die jou proberen te vangen. Alleen door de evolueren kan je deze de baas blijven",
+		"Als je genoeg vissen gegeten hebt kun je evolueren. Je kan bijvoorbeeld kiezen om sneller te zwemmen of om groter te worden",
+		"Pas op voor de roofvissen die jou proberen te eten en de netten die jou proberen te vangen. Alleen door te evolueren kan je deze ontwijken",
 		"De roofvissen en kleine vissen evolueren zelf ook, dus blijf je evolutiepunten goed besteden om niet achter gelaten te worden",
-		"Probeer het zo lang mogelijk vol te houden en al je taits te maximalieseren!"
+		"Probeer het zo lang mogelijk vol te houden en al je evolutiepunten te besteden!"
 	]
 
 	document.getElementById("obdBtn").addEventListener("click", () => {
