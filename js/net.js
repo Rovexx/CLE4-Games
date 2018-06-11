@@ -24,6 +24,15 @@ let net = {
 		// Counts the amount of updates run
 		net.loop = 0
 
+		// Net animation:
+		context.anims.create({
+			key: 'net_waves',
+			frames: context.anims.generateFrameNumbers('net', { start: 0, end: 15 }),
+			frameRate: 16,
+			repeat: -1
+		});
+		net._sprite.anims.play("net_waves");
+
 		// Start jaws
 		sound.play("net")
 
