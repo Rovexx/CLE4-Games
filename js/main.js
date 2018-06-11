@@ -45,10 +45,10 @@ function preload() {
         height: 3600
     }
 
-    this.load.image("ai", "assets/img/ai.png");
-    this.load.image("fish_tmp", "assets/img/fish_tmp.png");
-    this.load.image("fish_dead", "assets/img/fish_dead.png");
-    this.load.image("net", "assets/img/net.png");
+    this.load.spritesheet('net',
+        'assets/img/net.png',
+        { frameWidth: 1920, frameHeight: 1080 }
+    );
     this.load.spritesheet('enemy',
         'assets/img/enemy.png',
         { frameWidth: 480, frameHeight: 250 }
@@ -147,6 +147,7 @@ function update() {
     else if (Math.random() < enemyRate && enemy == false && net._sprite === false) {
         if (Math.random() > 0.6) {
             net.spawn(this)
+
         }
         else {
             sound.play("net")
