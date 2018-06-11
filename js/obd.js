@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			setTimeout(() => {
 				sound.play("eat")
+				document.getElementById("obdScCursor").remove()
 			}, 1050)
 
 			setTimeout(() => {
@@ -20,8 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		() => {
 			document.getElementById("obdScEnemy").style.left = "12%"
 			document.getElementById("obdScAi").style.right = "-15%"
-
-			document.getElementById("obdScCursor").remove()
 
 			setTimeout(() => {
 				document.getElementById("obdScAi").style.display = "block"
