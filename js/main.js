@@ -46,13 +46,20 @@ function preload() {
     }
 
     this.load.image("ai", "assets/img/ai.png");
-    this.load.image("enemy", "assets/img/enemy.png");
     this.load.image("fish_tmp", "assets/img/fish_tmp.png");
     this.load.image("fish_dead", "assets/img/fish_dead.png");
     this.load.image("net", "assets/img/net.png");
+    this.load.spritesheet('enemy',
+        'assets/img/enemy.png',
+        { frameWidth: 480, frameHeight: 250 }
+    );
     this.load.spritesheet('player',
         'assets/img/player.png',
         { frameWidth: 480, frameHeight: 200 }
+    );
+    this.load.spritesheet('ai_fish',
+        'assets/img/ai_fish.png',
+        { frameWidth: 96, frameHeight: 44 }
     );
     background = new Background(this);
 

@@ -13,9 +13,23 @@ class Ai {
 		this.context = context
 
 		// Spawn the fish and set the origin
-		this.sprite = context.physics.add.sprite(top, left, "ai");
+		this.sprite = context.physics.add.sprite(top, left, "ai_fish");
 		this.sprite.body.allowGravity = false;
 		this.sprite.setOrigin(0.5, 0.5)
+		//change color:
+		let minColorVal = 7 * 1000000;
+		this.sprite.setTint(Math.random() * (16777215-minColorVal) + minColorVal );
+
+		//setup animations:
+		if(typeof context.anims.anims.entries["ai_swim"] === 'undefined'){
+			context.anims.create({
+				key: 'ai_swim',
+				frames: context.anims.generateFrameNumbers('ai_fish', { start: 0, end: 7 }),
+				frameRate: 8,
+				repeat: -1
+			});
+		}
+		this.sprite.anims.play("ai_swim");
 	}
 
 	update() {
