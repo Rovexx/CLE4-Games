@@ -21,8 +21,6 @@ class Enemy {
 		this._catchUpSpeed = 0
 		this._escapeAngle = false
 
-		// console.log(this.sprite)
-
 		//setup animations:
 		if (typeof context.anims.anims.entries.enemy_swim === 'undefined'){
 			context.anims.create({
