@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById("obdScPlayer").style.left = "60%"
 			document.getElementById("obdText").style.opacity = "0"
 
+   			document.getElementById("obdScCursor").style.left = "75vw"
+   			document.getElementById("obdScCursor").style.transition = "none"
+
 			setTimeout(() => {
 				sound.play("eat")
 			}, 1050)
@@ -17,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		() => {
 			document.getElementById("obdScEnemy").style.left = "12%"
 			document.getElementById("obdScAi").style.right = "-15%"
+
+			document.getElementById("obdScCursor").remove()
 
 			setTimeout(() => {
 				document.getElementById("obdScAi").style.display = "block"
