@@ -67,7 +67,7 @@ let net = {
 		}
 
 		// Destroy net sprite and reset
-		else if (net.loop == 1440) {
+		else if (net.loop == 1440 && typeof net._sprite !== 'boolean' ) {
 			net._sprite.destroy()
 			net._sprite = false
 			net._baseSpeed = 0
