@@ -173,15 +173,12 @@ function openEvolveMenu() {
         savedVelo.x = enemy.sprite.body.velocity.x
         savedVelo.y = enemy.sprite.body.velocity.y
         enemy.sprite.setVelocity(0, 0)
-
-        console.log(savedVelo)
     }
     else if (net._sprite !== false) {
         sound.net.pause()
 
-        net._sprite.body.velocity.xOld = net._sprite.body.velocity.x
-
-        net._sprite.body.velocity.x = 0
+        savedVelo.x = net._sprite.body.velocity.x
+        net._sprite.body.sprite.setVelocity(0, 0)
     }
     else {
         sound.net.stop()
@@ -189,6 +186,7 @@ function openEvolveMenu() {
 
     sound.music.volume = 0.3
 }
+
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
@@ -202,6 +200,6 @@ function closeEvolveMenu() {
     }
     else if (net._sprite !== false) {
         sound.net.resume()
-        net._sprite.setVelocity(savedVelo.x)
+        net._sprite.setVelocity(savedVelo.x, 0)
     }
 }

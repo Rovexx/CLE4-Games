@@ -150,14 +150,14 @@ function update() {
     }
     else if (Math.random() < enemyRate && enemy == false && net._sprite === false) {
         // if (Math.random() > 0.6) {
-        //     net.spawn(this)
+            net.spawn(this)
         // }
         // else {
-            sound.play("net")
-
-            setTimeout(() => {
-                enemy = new Enemy(this)
-            }, 2000)
+        //     sound.play("net")
+        //
+        //     setTimeout(() => {
+        //         enemy = new Enemy(this)
+        //     }, 2000)
         // }
 
         slowStart = 5000

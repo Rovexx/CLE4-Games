@@ -42,7 +42,7 @@ class SoundEngine {
 		context.load.audio("dead", ["assets/sound/dead.mp3"])
 		context.load.audio("net", ["assets/sound/net.mp3"])
 		context.load.audio("upgrade", ["assets/sound/upgrade.mp3"])
-        context.load.audio("max", ["assets/sound/max.wav"])
+        context.load.audio("max", ["assets/sound/max.mp3"])
 		context.load.audio("click", ["assets/sound/click.mp3"])
 		context.load.audio("alert", ["assets/sound/alert.mp3"])
 		context.load.audio("timer", ["assets/sound/timer.mp3"])
