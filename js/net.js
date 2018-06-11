@@ -51,8 +51,6 @@ let net = {
 		// Increment the updates count
 		net.loop++
 
-		console.log(net.loop)
-
 		// Start fast
 		if (net.loop == 270) {
 			net._baseSpeed = 12 * (makeLose * 4)
@@ -93,7 +91,5 @@ let net = {
 		if (context.cameras.cameras[0].scrollX + net._sprite.x > player.sprite.x - 1600) {
 			player.die();
 		}
-
-		console.log(net.loop)
 	}
 }
