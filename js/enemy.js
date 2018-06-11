@@ -14,19 +14,20 @@ class Enemy {
 		this.sprite.body.allowGravity = false;
 		this.sprite.setOrigin(0.5, 0.5)
 
-		this._baseSpeed = 1.1 * makeLose
+		this._baseSpeed = 1 * makeLose
+		this._catchUpSpeed = 0
 		this._escapeAngle = false
 
 		setTimeout(() => {
-			this._baseSpeed = 0.8 * makeLose
+			this._baseSpeed = 0.7 * makeLose
 		}, 2500)
 
 		setTimeout(() => {
-			net._baseSpeed = 0.9 * makeLose
+			net._baseSpeed = 0.8 * makeLose
 		}, 4000)
 
 		setTimeout(() => {
-			this._baseSpeed = -0.4
+			this._baseSpeed = -4
 			this._escapeAngle = true
 		}, 16000)
 
@@ -38,7 +39,7 @@ class Enemy {
 		}, 22000)
 
 		//setup animations:
-		if(typeof context.anims.anims.entries["enemy_swim"] === 'undefined'){
+		if (typeof context.anims.anims.entries.enemy_swim === 'undefined'){
 			context.anims.create({
 				key: 'enemy_swim',
 				frames: context.anims.generateFrameNumbers('enemy', { start: 0, end: 7 }),
@@ -68,6 +69,17 @@ class Enemy {
 				playerAngle -= 180
 			}
 
+			// Don't catch up if we're escaping
+			if (this._baseSpeed > 0) {
+				// If the enemy is almost off the screen
+				if (camera.main.scrollX > this.sprite.x + this.sprite.width / 3) {
+					this._catchUpSpeed += 2.5
+				}
+				else if (this._catchUpSpeed > 0) {
+					this._catchUpSpeed -= 4
+				}
+			}
+
 			// Angle the enemy towards from the player
 			this.sprite.angle = playerAngle
 
@@ -75,7 +87,7 @@ class Enemy {
 				this.sprite.angle = 180
 			}
 
-			var speed = player.speed * this._baseSpeed
+			var speed = player.speed * this._baseSpeed + this._catchUpSpeed
 
 			// Move to a target that's towards the player
 			var moveTarget = this.context.physics.velocityFromAngle(playerAngle, speed, this.sprite.velocity)
