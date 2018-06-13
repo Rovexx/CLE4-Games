@@ -48,7 +48,7 @@ function decreaseHealth(value){
         camera.main.shake(100, 0.005)
     }
 
-    let painValue = 20 - (player.health / 100 * 80)
+    let painValue = 20 - (player.health > 0 ? player.health : 0 / 100 * 80)
     document.getElementById("UI").style.boxShadow = "inset 0px 0px 50vh " + painValue + "vh rgba(255, 0, 0, .8)"
 }
 
