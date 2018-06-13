@@ -49,12 +49,12 @@ function increaseFood(){
         element.style.width = player.food + 10 + "%"
         player.food += 10
     }
-    // If you are not fully evolved, this happens
+    // If you are fully evolved
     else if(player.speed == player.maxSpeed && player.bodySize == player.maxBodySize && player.temperature == player.maxTemperature && player.depth == player.maxDepth){
         element.style.width = "0"
         player.food = 0
     }
-    // If you are fully evolved
+    // If you are not fully evolved, this happens
     else{
         element.style.width = "0%"
         player.food = 0

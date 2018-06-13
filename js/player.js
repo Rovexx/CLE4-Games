@@ -289,7 +289,6 @@ class Player{
 
                 // reload button functioneel maken
                 document.getElementById('buttonRestartGame').addEventListener('click', function(){location.reload()});
-                //document.getElementById("buttonStoppen").addEventListener("click", location.reload)
             }, 3000);
 
             gameOver = true
