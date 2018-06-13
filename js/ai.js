@@ -21,7 +21,7 @@ class Ai {
 		this.sprite.setTint(Math.random() * (16777215-minColorVal) + minColorVal );
 
 		//setup animations:
-		if(typeof context.anims.anims.entries["ai_swim"] === 'undefined'){
+		if(typeof context.anims.anims.entries.ai_swim === 'undefined'){
 			context.anims.create({
 				key: 'ai_swim',
 				frames: context.anims.generateFrameNumbers('ai_fish', { start: 0, end: 7 }),
