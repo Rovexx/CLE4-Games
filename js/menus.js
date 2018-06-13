@@ -115,8 +115,6 @@ function evolveBodySize(){
 }
 function evolveTemperature(){
     if (!clicked) {
-    	console.log(player.temperature)
-	    console.log(player.maxTemperature)
         // current value not more then the max
         if (player.temperature < player.maxTemperature){
 	        let element = document.getElementById("temperature")
