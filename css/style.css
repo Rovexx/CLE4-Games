@@ -475,3 +475,37 @@ canvas {
 #buttonTerugNaarSpel, #buttonStoppen {
     font-size: 5vh;
 }
+
+#plsRotate {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 9999999999;
+    top: 0;
+    left: 0;
+    background: #4BA3E3;
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#plsRotate svg {
+    fill: white;
+    height: 25vh;
+    max-height: 40vw;
+    display: block;
+}
+
+#plsRotate h1 {
+    font-weight: normal;
+    margin: 2vh 0 0 0;
+    font-size: 6vmin;
+}
+
+@media screen and (orientation:portrait) {
+    #plsRotate {
+        display: flex;
+    }
+}
