@@ -1,4 +1,6 @@
-let clicked = false;
+let clicked = false
+let savedVelo = {x: -1, y: -1}
+
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
@@ -10,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("depth").addEventListener("click", evolveDepth)
     document.getElementById("buttonStoppen").addEventListener("click", location.reload)
 })
+
 // Menu actions (opening and closing menus)
 function startGame() {
     showUI()
@@ -167,18 +170,15 @@ function openEvolveMenu() {
     if (enemy !== false && enemy !== true) {
         sound.net.pause()
 
-        enemy.sprite.body.velocity.xOld = enemy.sprite.body.velocity.x
-        enemy.sprite.body.velocity.yOld = enemy.sprite.body.velocity.y
-
-        enemy.sprite.body.velocity.x = 0
-        enemy.sprite.body.velocity.y = 0
+        savedVelo.x = enemy.sprite.body.velocity.x
+        savedVelo.y = enemy.sprite.body.velocity.y
+        enemy.sprite.setVelocity(0, 0)
     }
     else if (net._sprite !== false) {
         sound.net.pause()
 
-        net._sprite.body.velocity.xOld = net._sprite.body.velocity.x
-
-        net._sprite.body.velocity.x = 0
+        savedVelo.x = net._sprite.body.velocity.x
+        net._sprite.body.sprite.setVelocity(0, 0)
     }
     else {
         sound.net.stop()
@@ -186,6 +186,7 @@ function openEvolveMenu() {
 
     sound.music.volume = 0.3
 }
+
 function closeEvolveMenu() {
     document.getElementById("evolveMenu").classList.add("hide");
     clicked = false;
@@ -194,13 +195,11 @@ function closeEvolveMenu() {
     sound.music.volume = 0.5
 
     if (enemy !== false && enemy !== true) {
-        sound.net.pause()
-
-        enemy.sprite.body.velocity.x = enemy.sprite.body.velocity.xOld
-        enemy.sprite.body.velocity.y = enemy.sprite.body.velocity.yOld
+        sound.net.resume()
+        enemy.sprite.setVelocity(savedVelo.x, savedVelo.y)
     }
     else if (net._sprite !== false) {
         sound.net.resume()
-        net._sprite.body.velocity.x = net._sprite.body.velocity.xOld
+        net._sprite.setVelocity(savedVelo.x, 0)
     }
 }
