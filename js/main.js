@@ -215,11 +215,12 @@ function update() {
 
     // update the enemy fish
     if (enemy) {
-        enemy.update(this);
         // colission
         if (coll(player, enemy)) {
             decreaseHealth(100);
         }
+
+        enemy.update(this);
     }
 
     sound.update()
