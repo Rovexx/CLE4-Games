@@ -233,7 +233,7 @@ function coll(n1, n2) {
     s2 = n2.sprite
 
     // checken of de sprite nog levend is
-    if ((s1.active == true) && (s2.active == true)) {
+    if (s1.active == true && s2.active == true) {
         if (s1.x + (s1.width / 3) >= s2.x - (s2.width / 3) &&
             s1.x - (s1.width / 3) <= s2.x + (s2.width / 3) &&
             s1.y + (s1.height / 3) >= s2.y - (s2.height / 3) &&
