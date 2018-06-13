@@ -176,9 +176,8 @@ canvas {
 
 #obdScCursor {
     left: -40%;
-    top: 55% !important;
     width: 5vw;
-    height: auto !important;
+    height: auto;
 }
 
 #obdScAi {

@@ -245,7 +245,6 @@ function coll(n1, n2) {
 function breakCanvasClick(event) {
     // console.log(event)
     if (event.target.tagName != 'CANVAS') {
-        console.log("outside canvas click")
         player.pointerDown = true
         player.swim()
         player.pointerDown = false

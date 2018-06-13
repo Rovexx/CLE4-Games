@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById("obdScPlayer").style.left = "60%"
 			document.getElementById("obdText").style.opacity = "0"
 
-   			document.getElementById("obdScCursor").style.left = "75vw"
+   			document.getElementById("obdScCursor").style.left = "75%"
+   			document.getElementById("obdScCursor").style.top = "57%"
    			document.getElementById("obdScCursor").style.transition = "none"
 
 			setTimeout(() => {
