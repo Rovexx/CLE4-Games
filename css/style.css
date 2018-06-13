@@ -40,6 +40,18 @@ canvas {
     -ms-interpolation-mode: nearest-neighbor;
 }
 
+/* Start menu */
+
+#startMenu img {
+    max-width: 100vh;
+}
+
+#buttonStartGame {
+    font-size: calc(20px + 4vh);
+    width: auto;
+    padding: 1vh 6vh;
+}
+
 /* Menu overlay background */
 .overlay {
     display: flex;
@@ -73,7 +85,6 @@ canvas {
     border-radius: 0 10px 10px 0;
 	color: white;
 	pointer-events: all;
-    /* transform: scale(1); */
 	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
     background-color: rgb(56, 199, 255);
     transition: all .15s;
@@ -81,7 +92,6 @@ canvas {
 
 .evolveButton:hover {
 	background-color: rgb(42,147,191);
-	/* transform: scale(1.1); */
 }
 
 .evolveBars {
@@ -393,7 +403,7 @@ canvas {
 /* inside bar style */
 .bar {
     transition: all 400ms;
-    line-height: 40px;
+    line-height: 5vh;
 	height: 5vh;
     color: white;
     border-radius: 10px;
@@ -450,12 +460,18 @@ canvas {
 /* in-game menu button */
 #buttonGameMenu {
     left: 0;
-    height: 30px;
+    height: 5vh;
+    line-height: 5vh;
     width: 150px;
     border-radius: 10px;
     background-color: rgb(56, 199, 255);
     color: white;
     position: absolute;
     pointer-events: all;
+    margin: 5px 0 0 5px;
     box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+
+#buttonTerugNaarSpel, #buttonStoppen {
+    font-size: 5vh;
 }
