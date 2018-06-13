@@ -1,6 +1,5 @@
 let clicked = false;
 
-
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
@@ -61,13 +60,14 @@ function increaseFood(){
     }
 }
 // Evolving actions
-function evolveSpeed(el){
+function evolveSpeed(){
     if (!clicked) {
 
         // current value not more then the max
         if (player.speed < player.maxSpeed){
             // increase evolve bar
-	        el.target.lastElementChild.style.width = player.speedPercent + 20 + "%"
+	        let element = document.getElementById("speed")
+	        element.style.width = player.speedPercent + 20 + "%"
 	        player.speedPercent += 20
 
             // increase value op attribute
@@ -83,12 +83,13 @@ function evolveSpeed(el){
         }
     }
 }
-function evolveBodySize(el){
+function evolveBodySize(){
     if (!clicked) {
 
         // current value not more then the max
         if (player.bodySize < player.maxBodySize){
-	        el.target.lastElementChild.style.width = player.bodySizePercent + 25 + "%"
+	        let element = document.getElementById("bodySize")
+	        element.style.width = player.bodySizePercent + 25 + "%"
 	        player.speedPercent += 25
 
             player.bodySize += 1
@@ -103,11 +104,12 @@ function evolveBodySize(el){
         }
     }
 }
-function evolveTemperature(el){
+function evolveTemperature(){
     if (!clicked) {
         // current value not more then the max
         if (player.temperature < player.maxTemperature){
-	        el.target.lastElementChild.style.width = player.temperaturePercent + 33.3 + "%"
+	        let element = document.getElementById("temperature")
+	        element.style.width = player.temperaturePercent + 33.3 + "%"
 	        player.temperaturePercent += 33.3
 
             player.temperature += 400
@@ -122,12 +124,13 @@ function evolveTemperature(el){
         }
     }
 }
-function evolveDepth(el){
+function evolveDepth(){
     if (!clicked) {
 
         // current value not more then the max
         if (player.depth < player.maxDepth){
-	        el.target.lastElementChild.style.width = player.depthPercent + 25 + "%"
+	        let element = document.getElementById("depth")
+	        element.style.width = player.depthPercent + 25 + "%"
 	        player.depthPercent += 25
 
             player.depth += 200
