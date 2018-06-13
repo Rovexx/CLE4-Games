@@ -110,6 +110,8 @@ canvas {
     height: 100vh;
     width: 133.333vh;
     pointer-events: none;
+    box-shadow: inset 0px 0px 50vh -60vh rgba(255, 54, 54, .6);
+    transition: box-shadow .15s;
 }
 
 /* Onboarding */
