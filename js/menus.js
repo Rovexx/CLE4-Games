@@ -56,8 +56,8 @@ function decreaseHealth(value){
 function increaseFood(){
     let element = document.getElementById("food")
     if (player.food < player.maxFood){
-        element.style.width = player.food + 100 + "%"
-        player.food += 100
+        element.style.width = player.food + 10 + "%"
+        player.food += 10
     }
     // If you are fully evolved
     else if(player.speed === player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
