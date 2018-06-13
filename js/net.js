@@ -4,6 +4,9 @@ let net = {
 	// The speed without player movement
 	_baseSpeed: 0,
 
+	// The update frame we're on
+	loop: 0,
+
 	/**
 	 * Spwan a new net
 	 * @param  {object} context The game context
@@ -18,33 +21,23 @@ let net = {
 		net._sprite.setScrollFactor(0)
 		net._sprite.setOrigin(0, 0)
 
+		// Counts the amount of updates run
+		net.loop = 0
+
+		// Net animation:
+		context.anims.create({
+			key: 'net_waves',
+			frames: context.anims.generateFrameNumbers('net', { start: 0, end: 15 }),
+			frameRate: 16,
+			repeat: -1
+		});
+		net._sprite.anims.play("net_waves");
+
 		// Start jaws
 		sound.play("net")
 
 		// Don't move in the first few seconds
 		net._baseSpeed = 0
-
-		// Start fast
-		setTimeout(() => {
-			net._baseSpeed = 12 * (makeLose * 4)
-		}, 4500)
-
-		// Slow down a little
-		setTimeout(() => {
-			net._baseSpeed = 6 * (makeLose * 4)
-		}, 6000)
-
-		// Go back to the starting position
-		setTimeout(() => {
-			net._baseSpeed = -400
-		}, 18000)
-
-		// Destroy net sprite and reset
-		setTimeout(() => {
-			net._sprite.destroy()
-			net._sprite = false
-			net._baseSpeed = 0
-		}, 24000)
 	},
 
 	/**
@@ -52,6 +45,34 @@ let net = {
 	 * @param  {object} context The game context
 	 */
 	update: (context) => {
+		// Don't update if game is paused
+		if (gameOver) return
+
+		// Increment the updates count
+		net.loop++
+
+		// Start fast
+		if (net.loop == 270) {
+			net._baseSpeed = 12 * (makeLose * 4)
+		}
+
+		// Slow down a little
+		else if (net.loop == 360) {
+			net._baseSpeed = 5 * (makeLose * 4)
+		}
+
+		// Go back to the starting position
+		else if (net.loop == 1080) {
+			net._baseSpeed = -400
+		}
+
+		// Destroy net sprite and reset
+		else if (net.loop == 1440 && typeof net._sprite !== 'boolean' ) {
+			net._sprite.destroy()
+			net._sprite = false
+			net._baseSpeed = 0
+		}
+
 		// Don't update if no net is spawned
 		if (net._sprite === false || net._baseSpeed == 0) return
 
