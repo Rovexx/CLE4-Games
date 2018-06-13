@@ -33,9 +33,9 @@ class Player{
         this.bodySizePercent = 25
         //default temperature Resistance
         this.temperature = 800;
-        this.temperaturePercent = 33.3
+        this.temperaturePercent = 33
         //default max Depth
-        this.depth = 1000;
+        this.depth = 1200;
         this.depthPercent = 25
 
          // max variabelen:
