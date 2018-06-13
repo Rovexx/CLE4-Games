@@ -54,13 +54,13 @@ function decreaseHealth(value){
 
 // food bar
 function increaseFood(){
-    let element = document.getElementById("food");
+    let element = document.getElementById("food")
     if (player.food < player.maxFood){
-        element.style.width = player.food + 10 + "%"
-        player.food += 10
+        element.style.width = player.food + 100 + "%"
+        player.food += 100
     }
     // If you are fully evolved
-    else if(player.speed == player.maxSpeed && player.bodySize == player.maxBodySize && player.temperature == player.maxTemperature && player.depth == player.maxDepth){
+    else if(player.speed === player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
         element.style.width = "0"
         player.food = 0
     }
@@ -81,8 +81,6 @@ function evolveSpeed(){
 	        let element = document.getElementById("speed")
 	        element.style.width = player.speedPercent + 20 + "%"
 	        player.speedPercent += 20
-
-            // increase value op attribute
             player.speed += 100
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
@@ -102,8 +100,7 @@ function evolveBodySize(){
         if (player.bodySize < player.maxBodySize){
 	        let element = document.getElementById("bodySize")
 	        element.style.width = player.bodySizePercent + 25 + "%"
-	        player.speedPercent += 25
-
+	        player.bodySizePercent += 25
             player.bodySize += 1
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
@@ -118,17 +115,18 @@ function evolveBodySize(){
 }
 function evolveTemperature(){
     if (!clicked) {
+    	console.log(player.temperature)
+	    console.log(player.maxTemperature)
         // current value not more then the max
         if (player.temperature < player.maxTemperature){
 	        let element = document.getElementById("temperature")
-	        element.style.width = player.temperaturePercent + 33.3 + "%"
-	        player.temperaturePercent += 33.3
-
-            player.temperature += 400
+	        element.style.width = player.temperaturePercent + 33.5 + "%"
+	        player.temperaturePercent += 33.5
+            player.temperature += 500
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
-            clicked = true;
-            setTimeout(closeEvolveMenu, 1000);
+            clicked = true
+            setTimeout(closeEvolveMenu, 1000)
         }
         // if the maximum is already reached
         else{
@@ -144,7 +142,6 @@ function evolveDepth(){
 	        let element = document.getElementById("depth")
 	        element.style.width = player.depthPercent + 25 + "%"
 	        player.depthPercent += 25
-
             player.depth += 200
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
