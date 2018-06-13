@@ -52,9 +52,19 @@ canvas {
 .overlay-content {
     position: relative;
     display: inline-block;
-    width: 100vh;
     top: 30vh;
+    width: 100vh;
 }
+
+#evolveMenu .overlay-content {
+	top: 15vh;
+}
+
+#evolveMenu .overlay-content a {
+	line-height: 0;
+	font-size: 1.5em;
+}
+
 /* Menu buttons */
 .btn {
     cursor: pointer;
@@ -151,17 +161,17 @@ canvas {
 }
 
 #obdSkip {
-    font-size: 2.5vh;
+    font-size: 3vh;
     position: absolute;
-    bottom: 7%;
-    color: #000;
+    bottom: 3%;
+    color: #fff;
     cursor: pointer;
     pointer-events: all;
     width: 100%;
     text-transform: uppercase;
     text-shadow: rgba(255,255,255,.28) .05vh 0.05vh .5vh;
     left: 0;
-    opacity: .5;
+    opacity: .7;
     transition: opacity .2s;
 }
 
@@ -179,6 +189,12 @@ canvas {
 #obdScPlayer {
     left: 14%;
     height: 15vh;
+}
+
+#obdScCursor {
+    left: -40%;
+    width: 5vw;
+    height: auto;
 }
 
 #obdScAi {
@@ -255,7 +271,6 @@ canvas {
 }
 
 /* Alerts */
-
 #alert, #alert > div {
     position: absolute;
     top: 0;
@@ -310,16 +325,18 @@ canvas {
 /* Healt/food bars background */
 .barContainer {
     width: 35vh;
+	height: 5vh;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-    position: absolute;
     display: inline-block;
+	position: inherit;
     bottom: 5px;
 }
 /* inside bar style */
 .bar {
     transition: all 400ms;
     line-height: 40px;
+	height: 5vh;
     color: white;
     border-radius: 10px;
     box-sizing: border-box;
@@ -344,6 +361,34 @@ canvas {
     left: 5px;
 }
 
+#EvolveMenu .barContainer {
+	height: 3vh
+}
+
+#EvolveMenu .bar {
+	height: 3vh;
+}
+#speed {
+	width: 20%;
+	background-color: rgba(20, 188, 3, 0.9);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+#bodySize {
+	width: 25%;
+	background-color: rgba(188, 0, 33, 0.9);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+#temperature {
+	width: 33%;
+	background-color: rgba(188, 108, 12, 0.9);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+#depth {
+	width: 25%;
+	background-color: rgba(6, 15, 147, 0.9);
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+
 /* in-game menu button */
 #buttonGameMenu {
     left: 0;
@@ -357,37 +402,45 @@ canvas {
     box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
 }
 /* evolve feature bars */
+.evolveButton {
+	cursor: pointer;
+	position: absolute;
+	margin-top: -8.5%;
+	right: 4vh;
+	height: 5vh;
+	width: 11vh;
+	line-height: 1.9em;
+	border-radius: 10px;
+	background-color: rgb(56, 199, 255);
+	color: white;
+	pointer-events: all;
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+}
+
+.evolveButton:hover {
+	transition: all 100ms;
+	background-color: rgb(38, 127, 165);
+	height: 5.6vh;
+	width: 12vh;
+	margin-top: -8.9%;
+	right: 3.5vh;
+}
+
 .evolveBars {
     width: 640px;
-    padding: 20px 0;
+    padding-top: 20px;
     border-radius: 30px;
     background-color: rgba(56, 199, 255, 0.5);
     box-shadow: 10px 10px 100px 0px rgba(0,0,0,0.5)
 }
 .evolveBar {
     color: white;
-    text-align: right;
     font-size: 1.6em;
-    margin-right: 5%;
+    line-height: 1.1em;
+    margin: 5% 0 0 0;
 }
 .evolveBar p {
-    font-size: 17px;
     text-align: center;
     opacity: .8;
-    margin: 0 0 20px;
-}
-.menuTitle {
-    text-align: center;
-    font-size: 2em;
-}
-/* evolve menu bars */
-progress {
-    background-color: #eee;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-}
-progress[value]::-webkit-progress-value {
-    background-color: red;
-    border-radius: 2px;
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+    margin: 5px 0 20px;
 }

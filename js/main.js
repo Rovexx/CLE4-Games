@@ -123,6 +123,9 @@ function create() {
     document.getElementById("buttonStartGame").classList.remove("loading")
     document.getElementById("buttonStartGame").innerHTML = "Start Game"
 
+    // Als je buiten het canvas klikt
+    document.body.addEventListener('click', breakCanvasClick)
+
     // Make it impossible after around 3 minutes
     setTimeout(function () {
         console.log("losin")
@@ -241,4 +244,14 @@ function coll(n1, n2) {
 
     // Return false if collision has not been detected
     return false
+}
+
+function breakCanvasClick(event) {
+    if (event.target.tagName != 'CANVAS') {
+        player.pointerDown = true
+        player.dest.x = player.sprite.x;
+        player.dest.y = player.sprite.y;
+        player.swim()
+        player.pointerDown = false
+    }
 }
