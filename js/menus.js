@@ -17,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function startGame() {
     showUI()
     game.loop.wake()
+
+    /* delay zodat de eerste game loop 
+     niet gelijk de klik registreerd */
+    setTimeout(function(){
+        isPlaying = true
+    } ,1)
 }
 
 // health bar
@@ -164,6 +170,8 @@ function showUI() {
 }
 
 function openGameMenu() {
+    isPlaying = false
+
     document.getElementById("gameMenu").classList.remove("hide")
     game.loop.sleep()
     sound.play("click")
@@ -172,9 +180,13 @@ function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide")
     game.loop.wake()
     sound.play("click")
+
+    isPlaying = true
 }
 
 function openEvolveMenu() {
+    isPlaying = false
+
     document.getElementById("evolveMenu").classList.remove("hide")
     game.loop.sleep()
     // Force a stop in updates
@@ -215,4 +227,6 @@ function closeEvolveMenu() {
         sound.net.resume()
         net._sprite.setVelocity(savedVelo.x, 0)
     }
+
+    isPlaying = true
 }
