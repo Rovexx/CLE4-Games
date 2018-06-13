@@ -247,9 +247,10 @@ function coll(n1, n2) {
 }
 
 function breakCanvasClick(event) {
-    // console.log(event)
     if (event.target.tagName != 'CANVAS') {
         player.pointerDown = true
+        player.dest.x = player.sprite.x;
+        player.dest.y = player.sprite.y;
         player.swim()
         player.pointerDown = false
     }
