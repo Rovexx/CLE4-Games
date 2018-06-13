@@ -1,6 +1,20 @@
 let clicked = false
 let savedVelo = {x: -1, y: -1}
 
+let hasExplained = {
+    speed: false,
+    size: false,
+    temperature: false,
+    depth: false
+}
+
+const explainerTexts = {
+    speed: "speed",
+    size: "size",
+    temperature: "tmp",
+    depth: "depth"
+}
+
 // if scripts are loaded start UI code
 document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("buttonStartGame").addEventListener("click", obd.show)
@@ -10,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("bodySizeBar").addEventListener("click", evolveBodySize)
     document.getElementById("temperatureBar").addEventListener("click", evolveTemperature)
     document.getElementById("depthBar").addEventListener("click", evolveDepth)
+    document.getElementById("explainerCont").addEventListener("click", closeEvolveMenu)
     document.getElementById("buttonStoppen").addEventListener("click", function(){location.reload()})
 })
 
@@ -17,12 +32,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function startGame() {
     showUI()
     game.loop.wake()
-
-    /* delay zodat de eerste game loop 
-     niet gelijk de klik registreerd */
-    setTimeout(function(){
-        isPlaying = true
-    } ,1)
 }
 
 // health bar
@@ -91,7 +100,10 @@ function evolveSpeed(){
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true
-            setTimeout(closeEvolveMenu, 1000)
+
+            setTimeout(function() {
+                showExplainer("speed")
+            }, 1000)
         }
         // if the maximum is already reached
         else{
@@ -111,7 +123,10 @@ function evolveBodySize(){
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true
-            setTimeout(closeEvolveMenu, 1000)
+
+            setTimeout(function() {
+                showExplainer("size")
+            }, 1000)
         }
         // if the maximum is already reached
         else{
@@ -130,7 +145,10 @@ function evolveTemperature(){
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true
-            setTimeout(closeEvolveMenu, 1000)
+
+            setTimeout(function() {
+                showExplainer("temperature")
+            }, 1000)
         }
         // if the maximum is already reached
         else{
@@ -150,12 +168,51 @@ function evolveDepth(){
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true
-            setTimeout(closeEvolveMenu, 1000)
+
+            setTimeout(function() {
+                showExplainer("depth")
+            }, 1000)
         }
         // if the maximum is already reached
         else{
             sound.play("max")
         }
+    }
+}
+
+function showExplainer(type) {
+    document.getElementById("evolveMenu").classList.add("hide")
+
+    if (hasExplained[type]) {
+        return closeEvolveMenu()
+    }
+
+    hasExplained[type] = true
+
+    document.getElementById("explainer").classList.remove("hide")
+    document.getElementById("explainerText").innerHTML = explainerTexts[type]
+
+    setTimeout(function () {
+        document.getElementById("explainerImg").className = type
+    }, 800)
+}
+
+function closeEvolveMenu() {
+    document.getElementById("explainer").classList.add("hide")
+    document.getElementById("explainerImg").className = ""
+
+    clicked = false
+    gameOver = false
+    game.loop.wake()
+    sound.music.volume = 0.5
+
+    if (enemy !== false && enemy !== true) {
+        sound.net.resume()
+        enemy.sprite.setVelocity(savedVelo.x, savedVelo.y)
+    }
+    else if (net._sprite !== false) {
+        sound.net.resume()
+        net._sprite.setVelocity(savedVelo.x, 0)
     }
 }
 
@@ -170,8 +227,6 @@ function showUI() {
 }
 
 function openGameMenu() {
-    isPlaying = false
-
     document.getElementById("gameMenu").classList.remove("hide")
     game.loop.sleep()
     sound.play("click")
@@ -180,13 +235,9 @@ function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide")
     game.loop.wake()
     sound.play("click")
-
-    isPlaying = true
 }
 
 function openEvolveMenu() {
-    isPlaying = false
-
     document.getElementById("evolveMenu").classList.remove("hide")
     game.loop.sleep()
     // Force a stop in updates
@@ -210,23 +261,4 @@ function openEvolveMenu() {
     }
 
     sound.music.volume = 0.3
-}
-
-function closeEvolveMenu() {
-    document.getElementById("evolveMenu").classList.add("hide")
-    clicked = false
-    gameOver = false
-    game.loop.wake()
-    sound.music.volume = 0.5
-
-    if (enemy !== false && enemy !== true) {
-        sound.net.resume()
-        enemy.sprite.setVelocity(savedVelo.x, savedVelo.y)
-    }
-    else if (net._sprite !== false) {
-        sound.net.resume()
-        net._sprite.setVelocity(savedVelo.x, 0)
-    }
-
-    isPlaying = true
 }

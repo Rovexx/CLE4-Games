@@ -134,6 +134,64 @@ canvas {
     padding-top: 2vh;
 }
 
+#explainer > div {
+    background-color: rgba(56, 199, 255, 0.5);
+    border-radius: 20px;
+}
+
+#explainer p {
+    padding: 0 2vh;
+    margin: 4vh 0 6vh 0;
+    font-size: calc(10px + 3vh);
+    line-height: 1em;
+    text-align: center;
+    color: white;
+}
+
+#explainer .btn {
+    font-size: calc(14px + 3vh);
+}
+
+#explainerImg {
+    position: relative;
+    width: 60vh;
+    height: 25vh;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+#explainerImg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    transition: all 1s ease-out;
+}
+
+#explainerImg img:first-child {
+    transform: scale(1);
+}
+#explainerImg img:last-child {
+    clip-path: inset(100% 100% 100% 100%);
+}
+
+#explainerImg.speed img:last-child {
+    clip-path: inset(0% 76% 0% 0%);
+}
+
+#explainerImg.size img:first-child {
+    transform: scale(1.2);
+}
+
+#explainerImg.temperature img:last-child {
+    clip-path: inset(64% 17% 24% 57%);
+}
+
+#explainerImg.depth img:last-child {
+    clip-path: inset(38% 42% 37% 37%);
+}
+
 /* Menu buttons */
 .btn {
     cursor: pointer;
