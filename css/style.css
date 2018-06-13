@@ -42,6 +42,9 @@ canvas {
 
 /* Menu overlay background */
 .overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
     width: 133.333vh;
     position: absolute;
@@ -52,17 +55,72 @@ canvas {
 .overlay-content {
     position: relative;
     display: inline-block;
-    top: 30vh;
     width: 100vh;
 }
 
-#evolveMenu .overlay-content {
-	top: 15vh;
+#evolveMenu .overlay-content a {
+	line-height: 1em;
+	font-size: calc(20px + 2vh);
 }
 
-#evolveMenu .overlay-content a {
-	line-height: 0;
-	font-size: 1.5em;
+/* evolve feature bars */
+.evolveButton {
+	cursor: pointer;
+	height: 5vh;
+	line-height: 5vh;
+    font-size: 3.5vh;
+    padding: 0 1vh;
+    border-radius: 0 10px 10px 0;
+	color: white;
+	pointer-events: all;
+    /* transform: scale(1); */
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+    background-color: rgb(56, 199, 255);
+    transition: all .15s;
+}
+
+.evolveButton:hover {
+	background-color: rgb(42,147,191);
+	/* transform: scale(1.1); */
+}
+
+.evolveBars {
+    width: 110vh;
+    padding: 1vh 0;
+    border-radius: 30px;
+    background-color: rgba(56, 199, 255, 0.5);
+    box-shadow: 10px 10px 100px 0px rgba(0,0,0,0.5)
+}
+
+.evolveBar {
+    color: white;
+    font-size: calc(10px + 2vh);
+    line-height: 1.1em;
+    margin: 2vh 0 0 0;
+}
+
+.evolveBar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.evolveBar .barContainer {
+    position: relative;
+    border-radius: 10px 0 0 10px;
+    bottom: 0;
+    display: inline-block;
+}
+.evolveBar .barContainer div {
+    border-radius: 10px 0 0 10px;
+    max-width: 100%;
+}
+
+.evolveBar p {
+    text-align: center;
+    opacity: .8;
+    margin: 1vh 0 2vh;
+    padding-top: 2vh;
 }
 
 /* Menu buttons */
@@ -400,47 +458,4 @@ canvas {
     position: absolute;
     pointer-events: all;
     box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
-}
-/* evolve feature bars */
-.evolveButton {
-	cursor: pointer;
-	position: absolute;
-	margin-top: -8.5%;
-	right: 4vh;
-	height: 5vh;
-	width: 11vh;
-	line-height: 1.9em;
-	border-radius: 10px;
-	background-color: rgb(56, 199, 255);
-	color: white;
-	pointer-events: all;
-	box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
-}
-
-.evolveButton:hover {
-	transition: all 100ms;
-	background-color: rgb(38, 127, 165);
-	height: 5.6vh;
-	width: 12vh;
-	margin-top: -8.9%;
-	right: 3.5vh;
-}
-
-.evolveBars {
-    width: 640px;
-    padding-top: 20px;
-    border-radius: 30px;
-    background-color: rgba(56, 199, 255, 0.5);
-    box-shadow: 10px 10px 100px 0px rgba(0,0,0,0.5)
-}
-.evolveBar {
-    color: white;
-    font-size: 1.6em;
-    line-height: 1.1em;
-    margin: 5% 0 0 0;
-}
-.evolveBar p {
-    text-align: center;
-    opacity: .8;
-    margin: 5px 0 20px;
 }
