@@ -326,10 +326,14 @@ class Player{
                 document.getElementById('buttonRestartGame').addEventListener('click', function(){location.reload()});
             }, 3000);
 
+            if (net._sprite) {
+                net._sprite.body.velocity.x = 0
+            }
+
             gameOver = true
 
             document.getElementById("restartTimer").innerHTML = timer.formatted
-            document.getElementById("restartPerc").innerHTML = Math.round(timer.time / 220 * 100) + "%"
+            document.getElementById("restartPerc").innerHTML = (Math.round(timer.time / 240 * 100) <= 98 ? Math.round(timer.time / 240 * 100) : 98) + "%"
         }
     }
 }

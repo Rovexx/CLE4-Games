@@ -48,7 +48,6 @@ let net = {
 		// Don't update if game is paused
 		if (gameOver) return
 
-		console.log(net.loop)
 		// Increment the updates count
 		net.loop++
 
@@ -59,7 +58,7 @@ let net = {
 
 		// Slow down a little
 		else if (net.loop == 360) {
-			net._baseSpeed = 3.6 * (makeLose * 4)
+			net._baseSpeed = 3 * (makeLose * 4)
 		}
 
 		// Go back to the starting position
