@@ -268,7 +268,7 @@ function openEvolveMenu() {
         sound.net.pause()
 
         savedVelo.x = net._sprite.body.velocity.x
-        net._sprite.body.sprite.setVelocity(0, 0)
+        net._sprite.body.setVelocity(0, 0)
     }
     else {
         sound.net.stop()
