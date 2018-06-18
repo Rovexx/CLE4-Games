@@ -82,8 +82,8 @@ class Enemy {
 			else if (this.loop == 240) {
 				net._baseSpeed = 0.8 * makeLose
 			}
-			else if (this.loop == 960) {
-				this._baseSpeed = -4
+			else if (this.loop == 920) {
+				this._baseSpeed = -1.5
 			}
 			else if (this.loop == 1320) {
 				this.sprite.destroy()
