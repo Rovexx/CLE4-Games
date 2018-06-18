@@ -21,7 +21,7 @@ class Ai {
 		this.sprite.setTint(Math.random() * (16777215-minColorVal) + minColorVal );
 
 		//setup animations:
-		if(typeof context.anims.anims.entries["ai_swim"] === 'undefined'){
+		if (typeof context.anims.anims.entries.ai_swim === 'undefined'){
 			context.anims.create({
 				key: 'ai_swim',
 				frames: context.anims.generateFrameNumbers('ai_fish', { start: 0, end: 7 }),
@@ -50,7 +50,7 @@ class Ai {
 			// Angle the fish away from the plaer
 			this.sprite.angle = playerAngle
 
-			var speed = 100
+			var speed = 180
 			speed = speed * (speed / playerDist)
 
 			// Move to a target that's away from the player
