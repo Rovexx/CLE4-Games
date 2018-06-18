@@ -610,3 +610,10 @@ canvas {
         display: flex;
     }
 }
+
+/* End Video */
+#endVideo {
+    display: none;
+    position: fixed;
+    z-index: 99999999999;
+}
