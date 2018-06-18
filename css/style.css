@@ -157,7 +157,10 @@ canvas {
     width: 60vh;
     height: 25vh;
     margin: auto;
+    overflow: hidden;
     margin-top: 5vh;
+    transform: scale(1);
+    transition: transform .7s cubic-bezier(.07, 1.02, .57, 1.36);
 }
 
 #explainerImg img {
@@ -169,27 +172,52 @@ canvas {
     transition: all 1s ease-out;
 }
 
-#explainerImg img:first-child {
-    transform: scale(1);
-}
-#explainerImg img:last-child {
+#explainerImg img:nth-child(2), #explainerImg img:nth-child(3) {
     clip-path: inset(100% 100% 100% 100%);
 }
 
-#explainerImg.speed img:last-child {
+#explainerImg img:nth-child(4), #explainerImg img:nth-child(5) {
+    transform: translateY(-200%);
+    clip-path: inset(0% 0% 0% 0%);
+    transition: transform .4s ease-out, clip-path 1s 1s ease-in-out;
+}
+
+#explainerImg.speed img:nth-child(2), #explainerImg.speed img:nth-child(3) {
     clip-path: inset(0% 76% 0% 0%);
 }
 
-#explainerImg.size img:first-child {
+#explainerImg.size {
     transform: scale(1.2);
 }
 
-#explainerImg.temperature img:last-child {
-    clip-path: inset(64% 17% 24% 57%);
+#explainerImg.temperature img:nth-child(4), #explainerImg.temperature img:nth-child(5) {
+    transform: translateY(0%);
 }
 
-#explainerImg.depth img:last-child {
-    clip-path: inset(38% 42% 37% 37%);
+#explainerImg.temperature img:nth-child(5) {
+    clip-path: inset(30% 0% 0%);
+}
+
+#explainerImg.depth img:nth-child(2), #explainerImg.depth img:nth-child(3) {
+    clip-path: inset(38% 43% 37% 37%);
+}
+
+#explainerImg.depth img:nth-child(3) {
+    animation-name: bubble;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(-2px);
+    }
 }
 
 /* Menu buttons */
