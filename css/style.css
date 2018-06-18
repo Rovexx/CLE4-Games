@@ -615,5 +615,8 @@ canvas {
 #endVideo {
     display: none;
     position: fixed;
+    height: 100vh;
+    width: 100vw;
     z-index: 99999999999;
+    background-color: black;
 }
