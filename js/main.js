@@ -29,6 +29,8 @@ var camera;
 var gameOver = false;
 var background;
 
+let isPlaying = false
+
 var enemy = false;
 
 // maximum amount of ai fish at one time
@@ -213,11 +215,12 @@ function update() {
 
     // update the enemy fish
     if (enemy) {
-        enemy.update(this);
         // colission
         if (coll(player, enemy)) {
             decreaseHealth(100);
         }
+
+        enemy.update(this);
     }
 
     sound.update()
@@ -247,7 +250,11 @@ function coll(n1, n2) {
 }
 
 function breakCanvasClick(event) {
-    if (event.target.tagName != 'CANVAS') {
+    /* niet uitvoeren als je 
+     menu open hebt staan */
+    if (isPlaying === true &&
+          event.target.tagName != 'CANVAS' && 
+          event.target.id != 'buttonTerugNaarSpel') {
         player.pointerDown = true
         player.dest.x = player.sprite.x;
         player.dest.y = player.sprite.y;
