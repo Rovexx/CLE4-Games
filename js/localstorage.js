@@ -64,3 +64,19 @@ function getCompleted(){
 function setCompleted(state){
     storageSave("game_completed", JSON.stringify(state));
 }
+
+// reset game completed state and reload the page
+function hardReload(){
+    setCompleted(false);
+    location.reload();
+}
+
+// detect hard reload key combination
+window.addEventListener("keydown", function(e){
+    if(e.keyCode == 82 && e.shiftKey){
+        hardReload();
+    }
+    if(e.keyCode == 79 && e.shiftKey){
+        player.speed = 2500
+    }
+});

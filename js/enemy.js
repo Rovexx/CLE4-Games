@@ -17,7 +17,7 @@ class Enemy {
 		this.sprite.body.allowGravity = false;
 		this.sprite.setOrigin(0.5, 0.5)
 
-		this._baseSpeed = 1 * makeLose
+		this._baseSpeed = 1
 		this._catchUpSpeed = 0
 		this._escapeAngle = false
 
@@ -77,10 +77,10 @@ class Enemy {
 
 			// Set the base speed depending on the anymation length
 			if (this.loop == 160) {
-				this._baseSpeed = 0.7 * makeLose
+				this._baseSpeed = 0.7
 			}
 			else if (this.loop == 240) {
-				net._baseSpeed = 0.8 * makeLose
+				net._baseSpeed = 0.8
 			}
 			else if (this.loop == 920) {
 				this._baseSpeed = -1.5

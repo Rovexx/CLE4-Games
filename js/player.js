@@ -286,6 +286,7 @@ class Player{
         // food verhogen
         increaseFood();
         increaseHealth(5);
+
         /* +1 op het scherm als indicatie
          dat je iets goeds hebt gedaan */
         let tmpScoreText = this.init.add.text(this.sprite.x, this.sprite.y, "+1", {

@@ -47,20 +47,39 @@ function preload() {
         height: 3600
     }
 
+    // variable sprite files
+    let files;
+    if(getCompleted()){
+        files = {
+            net: 'assets/img/asteroids.png',
+            enemy: 'assets/img/enemy_rockets.png',
+            player: 'assets/img/player_rockets.png',
+            ai: 'assets/img/ai_rocket.png'
+        }
+    }
+    else{
+        files = {
+            net: 'assets/img/net.png',
+            enemy: 'assets/img/enemy.png',
+            player: 'assets/img/player.png',
+            ai: 'assets/img/ai_fish.png'
+        }
+    }
+
     this.load.spritesheet('net',
-        'assets/img/net.png',
+        files.net,
         { frameWidth: 1920, frameHeight: 1080 }
     );
     this.load.spritesheet('enemy',
-        'assets/img/enemy.png',
+        files.enemy,
         { frameWidth: 480, frameHeight: 250 }
     );
     this.load.spritesheet('player',
-        'assets/img/player.png',
+        files.player,
         { frameWidth: 480, frameHeight: 200 }
     );
     this.load.spritesheet('ai_fish',
-        'assets/img/ai_fish.png',
+        files.ai,
         { frameWidth: 96, frameHeight: 44 }
     );
     background = new Background(this);
@@ -102,7 +121,6 @@ function spawnRandomFish(initializer){
     }
 }
 
-let makeLose = 1
 function create() {
     this.input.setPollAlways();
 
@@ -127,12 +145,6 @@ function create() {
 
     // Als je buiten het canvas klikt
     document.body.addEventListener('click', breakCanvasClick)
-
-    // Make it impossible after around 3 minutes
-    setTimeout(function () {
-        console.log("losin")
-        makeLose = 1.5
-    }, 100000 + (100000 * Math.random()))
 }
 
 let slowStart = 600
@@ -250,10 +262,10 @@ function coll(n1, n2) {
 }
 
 function breakCanvasClick(event) {
-    /* niet uitvoeren als je 
+    /* niet uitvoeren als je
      menu open hebt staan */
     if (isPlaying === true &&
-          event.target.tagName != 'CANVAS' && 
+          event.target.tagName != 'CANVAS' &&
           event.target.id != 'buttonTerugNaarSpel') {
         player.pointerDown = true
         player.dest.x = player.sprite.x;
