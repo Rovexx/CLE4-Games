@@ -239,7 +239,6 @@ function closeGameMenu() {
 }
 
 function showWonMenu() {
-	console.log("fjkshgs")
 	document.getElementById("endVideo").style.display = "none"
 	document.getElementById("wonMenu").classList.remove("hide")
 	// add time to the menu
