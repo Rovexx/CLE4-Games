@@ -39,7 +39,12 @@ class SoundEngine {
 		context.load.audio("pitch", ["assets/sound/pitch.mp3"])
 		context.load.audio("eat", ["assets/sound/eat.mp3"])
 		context.load.audio("dead", ["assets/sound/dead.mp3"])
-		context.load.audio("net", ["assets/sound/net.mp3"])
+		if(getCompleted()){
+			context.load.audio("net", ["assets/sound/asteroids.mp3"])
+		}
+		else{
+			context.load.audio("net", ["assets/sound/net.mp3"])
+		}
 		context.load.audio("upgrade", ["assets/sound/upgrade.mp3"])
 		context.load.audio("max", ["assets/sound/max.mp3"])
 		context.load.audio("click", ["assets/sound/click.mp3"])

@@ -72,17 +72,17 @@ class Enemy {
 
 			// Move to a target that's towards the player
 			var moveTarget = this.context.physics.velocityFromAngle(playerAngle, speed, this.sprite.velocity)
-			// Set the velocity towards the target with 20% of randomness
+			// Set the velocity towards the target
 			this.sprite.setVelocity(moveTarget.x, moveTarget.y)
 
-			// Set the base speed depending on the anymation length
+			// Set the base speed depending on the animation length
 			if (this.loop == 160) {
 				this._baseSpeed = 0.7
 			}
 			else if (this.loop == 240) {
 				net._baseSpeed = 0.8
 			}
-			else if (this.loop == 920) {
+			else if (this.loop == 960) {
 				this._baseSpeed = -1.5
 			}
 			else if (this.loop == 1320) {
