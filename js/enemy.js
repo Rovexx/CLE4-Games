@@ -30,7 +30,9 @@ class Enemy {
 				repeat: -1
 			});
 		}
-		this.sprite.anims.play("enemy_swim");
+
+		this.sprite.anims.play("enemy_swim")
+		sound.music.volume = 0
 
 	}
 
@@ -88,6 +90,7 @@ class Enemy {
 			else if (this.loop == 1320) {
 				this.sprite.destroy()
 				this._baseSpeed = 0
+				sound.music.volume = 0.5
 
 				enemy = false
 			}

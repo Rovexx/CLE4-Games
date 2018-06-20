@@ -37,6 +37,7 @@ let net = {
 
 		// Start jaws
 		sound.play("net")
+		sound.music.volume = 0
 
 		// Don't move in the first few seconds
 		net._baseSpeed = 0
@@ -73,6 +74,7 @@ let net = {
 			net._sprite.destroy()
 			net._sprite = false
 			net._baseSpeed = 0
+			sound.music.volume = 0.5
 		}
 
 		// Don't update if no net is spawned
