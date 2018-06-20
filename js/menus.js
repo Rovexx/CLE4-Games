@@ -84,6 +84,8 @@ function increaseFood(){
     else if(player.speed === player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
         element.style.width = "0"
         player.food = 0
+	    setCompleted(true)
+	    playEndVideo()
     }
     // If you are not fully evolved, this happens
     else{
