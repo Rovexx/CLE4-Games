@@ -621,3 +621,16 @@ canvas {
     z-index: 99999999999;
     background-color: black;
 }
+
+#wonMenu
+{
+	position: fixed;
+	z-index: 999999999999;
+	color: white;
+	font-size: 3vh;
+	background-color: black;
+}
+
+#wonMenu p {
+	font-size: 4vh;
+}

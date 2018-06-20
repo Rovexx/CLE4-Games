@@ -46,7 +46,7 @@ class SoundEngine {
 		context.load.audio("alert", ["assets/sound/alert.mp3"])
 		context.load.audio("timer", ["assets/sound/timer.mp3"])
 
-		if (localStorage.itemStars == "1") {
+		if (getCompleted()) {
 			context.load.audio("music", ["assets/sound/music_stars.mp3"])
 		}
 		else {
@@ -66,7 +66,7 @@ class SoundEngine {
 		this.ambient1.play("ambientShort")
 		this.ambient1.volume = 3.2
 
-		if (localStorage.itemStars == "1") {
+		if (getCompleted()) {
 			this.markers.music.duration = 121
 		}
 

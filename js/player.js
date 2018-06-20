@@ -49,7 +49,13 @@ class Player{
         // player default status is niet dood
         this.dead = false
 
-        this.rainbowIndex = 0
+	    if (getCompleted()){
+		    this.rainbowIndex = 0
+	    }
+	    else{
+		    this.rainbowIndex = -1
+	    }
+
 
         // default health
         this.health = 100;
@@ -70,7 +76,7 @@ class Player{
 
          // max variabelen:
         this.maxHealth = 100;
-        this.maxFood = 100;
+        this.maxFood = 90;
         this.maxSpeed = 800;
         this.maxBodySize = 3;
         this.maxTemperature = 1800;
@@ -232,7 +238,7 @@ class Player{
             this.sprite.scaleX = -1 * Math.abs(this.sprite.scaleX);
         }
 
-        if (localStorage.itemRainbow == "1") {
+        if (this.rainbowIndex > -1) {
             this.rainbowIndex = (this.rainbowIndex == 360) ? 0 : this.rainbowIndex + 1
             this.sprite.setTint(hslToHex(this.rainbowIndex, 100, 50))
         }

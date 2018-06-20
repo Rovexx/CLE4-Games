@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("depthBar").addEventListener("click", evolveDepth)
     document.getElementById("explainerCont").addEventListener("click", closeEvolveMenu)
     document.getElementById("buttonStoppen").addEventListener("click", function(){location.reload()})
+	document.getElementById("endVideo").addEventListener("ended", showWonMenu)
+	document.getElementById("wonButtonRestartGame").addEventListener("click", function(){location.reload()})
 })
 
 // Menu actions (opening and closing menus)
@@ -84,6 +86,8 @@ function increaseFood(){
     else if(player.speed === player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
         element.style.width = "0"
         player.food = 0
+	    setCompleted(true)
+	    playEndVideo()
     }
     // If you are not fully evolved, this happens
     else{
@@ -232,6 +236,14 @@ function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide")
     sound.play("click")
     gameResume()
+}
+
+function showWonMenu() {
+	document.getElementById("endVideo").style.display = "none"
+	document.getElementById("wonMenu").classList.remove("hide")
+	// add time to the menu
+	document.getElementById("wonMenuTimer").innerHTML = timer.formatted
+	document.getElementById("wonMenuPerc").innerHTML = (Math.round(timer.time / 240 * 100) <= 98 ? Math.round(timer.time / 240 * 100) : 98) + "%"
 }
 
 function openEvolveMenu() {
