@@ -9,10 +9,10 @@ let hasExplained = {
 }
 
 const explainerTexts = {
-	speed: "Dankzij evolutie hebben vissen meer en sterkere spieren om sneller te zwemmen, zo kunnen zij van hun vijhanden ontsnappen",
-	size: "Vissen die door evolutie groter zijn geworden kunnen meer voedsel eten. Ook hebben zij minder vijhanden dankzij hun formaat",
-	temperature: "Door evolutie zijn vissen koudbloedig, dit zorgt ervoor dat zij beter tegen temperatuur veschillen kunnen",
-	depth: "In tegenstelling tot mensen hebben vissen geen lucht in hun lichaam, hierdoor kunnen zij beter tegen de druk van diepe wateren"
+	speed: "Dankzij evolutie hebben vissen meer en sterkere spieren om sneller te zwemmen, zo kunnen zij van hun vijhanden ontsnappen.",
+	size: "Vissen die door evolutie groter zijn geworden kunnen meer voedsel eten. Ook hebben zij minder vijhanden dankzij hun formaat.",
+	temperature: "Door evolutie zijn vissen koudbloedig, dit zorgt ervoor dat zij beter tegen temperatuur veschillen kunnen.",
+	depth: "In tegenstelling tot mensen hebben vissen geen lucht in hun lichaam, hierdoor kunnen zij beter tegen de druk van diepe wateren."
 }
 
 // if scripts are loaded start UI code
@@ -35,7 +35,7 @@ function startGame() {
     showUI()
     game.loop.wake()
 
-    /* delay zodat de eerste game loop 
+    /* delay zodat de eerste game loop
      niet gelijk de klik registreerd */
     setTimeout(function(){
         isPlaying = true
@@ -83,10 +83,9 @@ function increaseFood(){
         player.food += 10
     }
     // If you are fully evolved
-    else if(player.speed === player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
+    else if(player.speed >= player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
         element.style.width = "0"
         player.food = 0
-	    setCompleted(true)
 	    playEndVideo()
     }
     // If you are not fully evolved, this happens
@@ -214,7 +213,7 @@ function closeEvolveMenu() {
     clicked = false
     sound.music.volume = 0.5
     gameResume()
-    
+
 }
 
 // Opening and closing menu's
@@ -241,9 +240,16 @@ function closeGameMenu() {
 function showWonMenu() {
 	document.getElementById("endVideo").style.display = "none"
 	document.getElementById("wonMenu").classList.remove("hide")
+
 	// add time to the menu
 	document.getElementById("wonMenuTimer").innerHTML = timer.formatted
-	document.getElementById("wonMenuPerc").innerHTML = (Math.round(timer.time / 240 * 100) <= 98 ? Math.round(timer.time / 240 * 100) : 98) + "%"
+	document.getElementById("wonMenuPerc").innerHTML = (Math.round(timer.time / 400 * 100) <= 98 ? Math.round(timer.time / 400 * 100) : 98) + "%"
+
+    if (getCompleted()) {
+        document.getElementById("wonMenuSpecial").style.display = "none"
+    }
+
+    setCompleted(true)
 }
 
 function openEvolveMenu() {
