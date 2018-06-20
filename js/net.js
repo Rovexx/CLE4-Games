@@ -55,12 +55,12 @@ let net = {
 
 		// Start fast
 		if (net.loop == 270) {
-			net._baseSpeed = 11 * (makeLose * 4)
+			net._baseSpeed = 11
 		}
 
 		// Slow down a little
 		else if (net.loop == 360) {
-			net._baseSpeed = 3 * (makeLose * 4)
+			net._baseSpeed = 3
 		}
 
 		// Go back to the starting position
