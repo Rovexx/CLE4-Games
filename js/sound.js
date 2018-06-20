@@ -36,7 +36,6 @@ class SoundEngine {
 		// Load all sounds
 		context.load.audio("ambient0", ["assets/sound/ambient0.mp3"])
 		context.load.audio("ambient1", ["assets/sound/ambient1.mp3"])
-		context.load.audio("music", ["assets/sound/music.mp3"])
 		context.load.audio("pitch", ["assets/sound/pitch.mp3"])
 		context.load.audio("eat", ["assets/sound/eat.mp3"])
 		context.load.audio("dead", ["assets/sound/dead.mp3"])
@@ -46,6 +45,13 @@ class SoundEngine {
 		context.load.audio("click", ["assets/sound/click.mp3"])
 		context.load.audio("alert", ["assets/sound/alert.mp3"])
 		context.load.audio("timer", ["assets/sound/timer.mp3"])
+
+		if (localStorage.itemStars == "1") {
+			context.load.audio("music", ["assets/sound/music_stars.mp3"])
+		}
+		else {
+			context.load.audio("music", ["assets/sound/music.mp3"])
+		}
 	}
 
 	create(context) {
@@ -59,6 +65,10 @@ class SoundEngine {
 		this.ambient1.addMarker(this.markers.ambientShort)
 		this.ambient1.play("ambientShort")
 		this.ambient1.volume = 3.2
+
+		if (localStorage.itemStars == "1") {
+			this.markers.music.duration = 121
+		}
 
 		// Start music in a loop
 		this.music = context.sound.add("music")

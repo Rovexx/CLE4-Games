@@ -9,10 +9,10 @@ let hasExplained = {
 }
 
 const explainerTexts = {
-    speed: "Dankzij evolutie hebben vissen meer en sterkere spieren om sneller te zwemmen, zo kunnen zij van hun vijhanden ontsnappen",
-    size: "Vissen die door evolutie groter zijn geworden kunnen meer voedsel eten. Ook hebben zij minder vijhanden dankzij hun formaat",
-    temperature: "Door evolutie zijn vissen koudbloedig, dit zorgt ervoor dat zij beter tegen temperatuur veschillen kunnen",
-    depth: "In tegenstelling tot mensen hebben vissen geen lucht in hun lichaam, hierdoor kunnen zij beter tegen de druk van diepe wateren"
+    speed: "speed",
+    size: "size",
+    temperature: "tmp",
+    depth: "depth"
 }
 
 // if scripts are loaded start UI code
@@ -208,20 +208,9 @@ function closeEvolveMenu() {
     document.getElementById("explainerImg").className = ""
 
     clicked = false
-    gameOver = false
-    game.loop.wake()
     sound.music.volume = 0.5
-
-    if (enemy !== false && enemy !== true) {
-        sound.net.resume()
-        enemy.sprite.setVelocity(savedVelo.x, savedVelo.y)
-    }
-    else if (net._sprite !== false) {
-        sound.net.resume()
-        net._sprite.setVelocity(savedVelo.x, 0)
-    }
-
-    isPlaying = true
+    gameResume()
+    
 }
 
 // Opening and closing menu's
@@ -235,24 +224,24 @@ function showUI() {
 }
 
 function openGameMenu() {
-    isPlaying = false
-
     document.getElementById("gameMenu").classList.remove("hide")
-    game.loop.sleep()
     sound.play("click")
+    gamePause()
 }
 function closeGameMenu() {
     document.getElementById("gameMenu").classList.add("hide")
-    game.loop.wake()
     sound.play("click")
-
-    isPlaying = true
+    gameResume()
 }
 
 function openEvolveMenu() {
-    isPlaying = false
-
     document.getElementById("evolveMenu").classList.remove("hide")
+    sound.music.volume = 0.3
+    gamePause()
+}
+
+function gamePause(){
+    isPlaying = false
     game.loop.sleep()
     // Force a stop in updates
     gameOver = true
@@ -268,11 +257,23 @@ function openEvolveMenu() {
         sound.net.pause()
 
         savedVelo.x = net._sprite.body.velocity.x
-        net._sprite.body.sprite.setVelocity(0, 0)
+        net._sprite.body.setVelocity(0, 0)
     }
     else {
         sound.net.stop()
     }
+}
 
-    sound.music.volume = 0.3
+function gameResume(){
+    isPlaying = true
+    game.loop.wake()
+    gameOver = false
+    if (enemy !== false && enemy !== true) {
+        sound.net.resume()
+        enemy.sprite.setVelocity(savedVelo.x, savedVelo.y)
+    }
+    else if (net._sprite !== false) {
+        sound.net.resume()
+        net._sprite.setVelocity(savedVelo.x, 0)
+    }
 }

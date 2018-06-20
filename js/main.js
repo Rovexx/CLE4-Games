@@ -262,3 +262,17 @@ function breakCanvasClick(event) {
         player.pointerDown = false
     }
 }
+
+function playEndVideo(){
+    // play end of game video
+    let el = document.getElementById("endVideo");
+    el.style.display = "block";
+    // pause sound
+    sound.ambient0.pause("ambientLong");
+    sound.ambient1.pause("ambientShort");
+    sound.music.pause("music")
+    // pause game
+    gamePause();
+    // play video
+    el.play();
+}
