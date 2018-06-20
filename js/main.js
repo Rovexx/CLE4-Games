@@ -271,6 +271,8 @@ function playEndVideo(){
     sound.ambient0.pause("ambientLong");
     sound.ambient1.pause("ambientShort");
     sound.music.pause("music")
+    // pause game
+    gamePause();
     // play video
     el.play();
 }
