@@ -102,7 +102,6 @@ function spawnRandomFish(initializer){
     }
 }
 
-let makeLose = 1
 function create() {
     this.input.setPollAlways();
 
@@ -127,12 +126,6 @@ function create() {
 
     // Als je buiten het canvas klikt
     document.body.addEventListener('click', breakCanvasClick)
-
-    // Make it impossible after around 3 minutes
-    setTimeout(function () {
-        console.log("losin")
-        makeLose = 1.5
-    }, 100000 + (100000 * Math.random()))
 }
 
 let slowStart = 600
@@ -250,10 +243,10 @@ function coll(n1, n2) {
 }
 
 function breakCanvasClick(event) {
-    /* niet uitvoeren als je 
+    /* niet uitvoeren als je
      menu open hebt staan */
     if (isPlaying === true &&
-          event.target.tagName != 'CANVAS' && 
+          event.target.tagName != 'CANVAS' &&
           event.target.id != 'buttonTerugNaarSpel') {
         player.pointerDown = true
         player.dest.x = player.sprite.x;
