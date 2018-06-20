@@ -79,4 +79,7 @@ window.addEventListener("keydown", function(e){
     if(e.keyCode == 79 && e.shiftKey){
         player.speed = 2500
     }
+    if(e.keyCode == 87 && e.shiftKey){
+        playEndVideo()
+    }
 });
