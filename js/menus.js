@@ -214,6 +214,9 @@ function closeEvolveMenu() {
     sound.music.volume = 0.5
     gameResume()
 
+    if (player.speed >= player.maxSpeed && player.bodySize === player.maxBodySize && player.temperature === player.maxTemperature && player.depth === player.maxDepth){
+	    playEndVideo()
+    }
 }
 
 // Opening and closing menu's
