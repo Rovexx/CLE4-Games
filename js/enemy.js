@@ -92,8 +92,6 @@ class Enemy {
 				enemy = false
 			}
 
-			console.log(this.loop)
-
 			// Increment the updates count
 			this.loop++
 		}
