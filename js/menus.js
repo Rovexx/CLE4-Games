@@ -9,10 +9,10 @@ let hasExplained = {
 }
 
 const explainerTexts = {
-    speed: "Dankzij evolutie hebben vissen meer en sterkere spieren om sneller te zwemmen, zo kunnen zij van hun vijhanden ontsnappen",
-    size: "Vissen die door evolutie groter zijn geworden kunnen meer voedsel eten. Ook hebben zij minder vijhanden dankzij hun formaat",
-    temperature: "Door evolutie zijn vissen koudbloedig, dit zorgt ervoor dat zij beter tegen temperatuur veschillen kunnen",
-    depth: "In tegenstelling tot mensen hebben vissen geen lucht in hun lichaam, hierdoor kunnen zij beter tegen de druk van diepe wateren"
+    speed: "speed",
+    size: "size",
+    temperature: "tmp",
+    depth: "depth"
 }
 
 // if scripts are loaded start UI code

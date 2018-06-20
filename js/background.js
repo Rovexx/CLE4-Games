@@ -2,26 +2,13 @@ class Background{
     constructor(initializer){
         //areas by immage:
         let assetsDir = "assets/img";
-        // check if the game has been won, then the images change
-        if (/*game gewonnen check*/){
-	        let imageFiles = [
-		        "Background_1.png",
-		        "Background_1-2.png",
-		        "Background_2.png",
-		        "Background_3.png",
-		        "Background_4.png"
-	        ]
-        }
-        else {
-	        let imageFiles = [
-		        "Space_Background_1.png",
-		        "Space_Background_2.png",
-		        "Space_Background_3.png",
-		        "Space_Background_4.png",
-		        "Space_Background_5.png"
-	        ]
-        }
-
+        let imageFiles = [
+            "Background_1.png",
+            "Background_1-2.png",
+            "Background_2.png",
+            "Background_3.png",
+            "Background_4.png"
+        ]
 
         //load images:
         let loadedImages = [];
