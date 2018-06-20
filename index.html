@@ -3,6 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Katvis Evolutie</title>
+
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -143,6 +149,23 @@
 			<a id="obdBtn" class="btn">Volgende</a>
 			<span id="obdSkip">Sla uitleg over</span>
 		</div>
+
+	    <!-- Game Won Menu -->
+	    <div id="wonMenu" class="overlay hide">
+		    <!-- Buttons -->
+		    <div class="overlay-content" id="overlayWon">
+			    <h1>Gefeliciteerd Je hebt het overleefd</h1>
+			    <h1 id="wonMenuSpecial">Je hebt nu de speciale modus vrij gespeeld!</h1>
+			    <p>
+				    Je hebt het <span id="wonMenuTimer"></span> volgehouden.
+			    </p>
+			    <p>
+				    Dat is beter dan <span id="wonMenuPerc"></span> van alle spelers!
+			    </p>
+
+			    <a id="wonButtonRestartGame" class="btn">Opnieuw</a>
+		    </div>
+	    </div>
 
 		<div id="plsRotate">
 			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32">

@@ -47,20 +47,39 @@ function preload() {
         height: 3600
     }
 
+    // variable sprite files
+    let files;
+    if(getCompleted()){
+        files = {
+            net: 'assets/img/asteroids.png',
+            enemy: 'assets/img/enemy_rockets.png',
+            player: 'assets/img/player_rockets.png',
+            ai: 'assets/img/ai_rocket.png'
+        }
+    }
+    else{
+        files = {
+            net: 'assets/img/net.png',
+            enemy: 'assets/img/enemy.png',
+            player: 'assets/img/player.png',
+            ai: 'assets/img/ai_fish.png'
+        }
+    }
+
     this.load.spritesheet('net',
-        'assets/img/net.png',
+        files.net,
         { frameWidth: 1920, frameHeight: 1080 }
     );
     this.load.spritesheet('enemy',
-        'assets/img/enemy.png',
+        files.enemy,
         { frameWidth: 480, frameHeight: 250 }
     );
     this.load.spritesheet('player',
-        'assets/img/player.png',
+        files.player,
         { frameWidth: 480, frameHeight: 200 }
     );
     this.load.spritesheet('ai_fish',
-        'assets/img/ai_fish.png',
+        files.ai,
         { frameWidth: 96, frameHeight: 44 }
     );
     background = new Background(this);
