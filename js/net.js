@@ -60,7 +60,7 @@ let net = {
 
 		// Slow down a little
 		else if (net.loop == 360) {
-			net._baseSpeed = 4 * (makeLose * 4)
+			net._baseSpeed = 3 * (makeLose * 4)
 		}
 
 		// Go back to the starting position
@@ -69,7 +69,7 @@ let net = {
 		}
 
 		// Destroy net sprite and reset
-    else if (net.loop == 1440 && typeof net._sprite !== "boolean") {
+		else if (net.loop == 1440 && typeof net._sprite !== "boolean") {
 			net._sprite.destroy()
 			net._sprite = false
 			net._baseSpeed = 0
