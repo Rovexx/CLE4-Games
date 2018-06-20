@@ -123,9 +123,9 @@ function evolveBodySize(){
         // current value not more then the max
         if (player.bodySize < player.maxBodySize){
 	        let element = document.getElementById("bodySize")
-	        element.style.width = player.bodySizePercent + 25 + "%"
-	        player.bodySizePercent += 25
-            player.bodySize += 1
+	        element.style.width = player.bodySizePercent + 40 + "%"
+	        player.bodySizePercent += 40
+            player.bodySize += 1.5
             sound.play("upgrade")
             // the evolve is done, you can no longer click a bar
             clicked = true
