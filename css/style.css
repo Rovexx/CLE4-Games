@@ -187,7 +187,7 @@ canvas {
 }
 
 #explainerImg.size {
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 
 #explainerImg.temperature img:nth-child(4), #explainerImg.temperature img:nth-child(5) {
@@ -391,7 +391,7 @@ canvas {
     position: absolute;
     right: 10%;
     top: 50%;
-    font-family: monospace;
+    font-family: 'Shadows Into Light', cursive;
     font-weight: bold;
     text-transform: uppercase;
     transform: translateY(-50%);
