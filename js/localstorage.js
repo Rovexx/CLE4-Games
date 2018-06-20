@@ -76,4 +76,7 @@ window.addEventListener("keydown", function(e){
     if(e.keyCode == 82 && e.shiftKey){
         hardReload();
     }
+    if(e.keyCode == 79 && e.shiftKey){
+        player.speed = 2500
+    }
 });
